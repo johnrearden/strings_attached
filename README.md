@@ -3,7 +3,7 @@ An online shop and community for music students
 
 Source code can be found [here](https://github.com/johnrearden/strings_attached)
 
-The live project can be viewed [here](https://just-beats.herokuapp.com)
+The live project can be viewed [here](https://strings-attached-jr.herokuapp.com)
 
 ## Purpose of Project
 The aim of the project is to help users on their journey to musical proficency. The website consists
