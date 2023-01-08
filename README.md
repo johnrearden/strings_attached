@@ -77,6 +77,7 @@ clips and comment on their progess.
 ### Colour
 
 ### Wireframes
+![products_display wireframe](/static/doc_images/products_display.png)
 
 [Return to top](#Strings_Attached)
 
