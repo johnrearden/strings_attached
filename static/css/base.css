@@ -1,7 +1,53 @@
+* {
+    box-sizing: border-box;
+    transition: 0.2s all;
+}
+
 .bg-light-grey {
     background-color: #aaaaaa;
 }
 
+.bg-cherry {
+    background-image: linear-gradient(#86424d, #401c20);
+}
+
 body {
-    padding-top: 60px;
+    padding-top: 70px;
+    height: 100vh;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.site-header {
+    height: 70px;
+}
+
+.hero-section {
+    background-image: url('/media/hero_image.webp');
+    background-size: cover;
+    background-position: contain;
+    height: 60% !important;
+}
+
+.card-body a {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    font-size: 1.3rem;
+}
+
+.card-body a:hover {
+    background-color: black;
+    color: white;
+    text-decoration: none;
+}
+
+.card:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
 }

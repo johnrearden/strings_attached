@@ -3,9 +3,49 @@
 {% load static %}
 
 {% block content %}
-    <div>
-        <h1>Welcome to Strings Attached</h1>
-        <p>Learn to play</p>
-    </div>
-{% endblock %}
+<div class="container-fluid h-100">
+    <div class="row hero-section">
+        <div class="col-4 p-4 my-auto text-right">
+            <h1 class="font-weight-bolder">Strings Attached</h1>
+            <h2 class="text-muted">The only place you need to go to start your musical journey.</h2>
+        </div>
+        <div class="col-8 p-3">
 
+        </div>
+    </div>
+    <hr>
+    <div class="row h-25 mt-5 text-center">
+        <div class="col-4 d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <h1 class="mt-3"><i class="fa-solid fa-cart-shopping"></i></h1>
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bolder">Find your Instrument </i></h5>
+                    <p class="card-text">Visit our online music shop.</p>
+                    <a href="#" class="">Shop</i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <h1 class="mt-3"><i class="fa-solid fa-graduation-cap"></i></h1>
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bolder">Learn to Play</h5>
+                    <p class="card-text">Get a lesson plan.</p>
+                    <a href="#" class="">Subscribe</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <h1 class="mt-3"><i class="fa-solid fa-share-nodes"></i></h1>
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bolder">Share your journey</h5>
+                    <p class="card-text">Join our musical community.</p>
+                    <a href="#" class="link-button">Join up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

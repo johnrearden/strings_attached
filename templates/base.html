@@ -42,9 +42,9 @@
 </head>
 
 <body>
-    <header class="container-fluid fixed-top bg-light-grey">
+    <header class="container-fluid fixed-top bg-cherry site-header align-content-center">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#"><strong>Strings Attached</strong></a>
+            <a class="navbar-brand text-white" href="#"><strong>Strings Attached</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,7 +54,7 @@
                 <form class="form-inline my-2 my-lg-0 mx-auto">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn my-2 my-sm-0" type="submit">
-                        <i class="fa-sharp fa-solid fa-q button-icon"></i>
+                        <i class="fa-sharp fa-solid fa-q button-icon text-white"></i>
                     </button>
                 </form>
                 <ul class="navbar-nav ml-auto mr-5 align-items-center">
@@ -66,7 +66,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-regular fa-user"></i>
+                            <i class="fa-regular fa-user text-white"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% if request.user.is_authenticated %}
@@ -79,7 +79,7 @@
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="#">
-                            <i class="fa-solid fa-cart-shopping"></i><span class="sr-only">(current)</span>
+                            <i class="fa-solid fa-cart-shopping text-white"></i><span class="sr-only">(current)</span>
                         </a>
                     </li>
                 </ul>
