@@ -16,6 +16,9 @@
     {% block corecss %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
 
@@ -42,8 +45,8 @@
 </head>
 
 <body>
-    <header class="container-fluid fixed-top bg-cherry site-header align-content-center">
-        <nav class="navbar navbar-expand-lg navbar-light">
+    <header class="container-fluid fixed-top bg-cherry">
+        <nav class="navbar navbar-expand-lg navbar-light my-1">
             <a class="navbar-brand text-white" href="#"><strong>Strings Attached</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

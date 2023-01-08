@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     transition: 0.2s all;
+    font-family: 'Nunito', sans-serif;
 }
 
 .bg-light-grey {
@@ -11,8 +12,12 @@
     background-image: linear-gradient(#86424d, #401c20);
 }
 
+.text-cherry {
+    color: #401c20;
+}
+
 body {
-    padding-top: 70px;
+    padding-top: 56px;
     height: 100vh;
 }
 
