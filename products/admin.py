@@ -4,7 +4,8 @@ from .models import Product, Category, SpecialOffer, ProductAssociation
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'price', 'image', 'image_url',
-                    'audio_url', 'description',)
+                    'audio_url',
+                    'description',)
     list_editable = ('category', 'price', 'image_url', 'audio_url',
                      'description',)
 
