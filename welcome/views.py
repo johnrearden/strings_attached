@@ -7,4 +7,4 @@ class Welcome(View):
     The landing page for the site
     """
     def get(self, request):
-        return render(request, 'welcome.html', {})
+        return render(request, 'welcome/welcome.html', {})

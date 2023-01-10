@@ -249,6 +249,8 @@ Structure of extensible base.html page largely copied from Boutique Ado Walkthro
 https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/250e2c2b8e43cccb56b4721cd8a8bd4de6686546/templates/base.html
 Hero image of guitar on guitar stand - Kelvin Franca on Pexels
 https://www.pexels.com/@kelvinernandi/
+Truncate text in a paragraph tag in html
+https://stackoverflow.com/questions/47761085/how-can-i-set-a-character-limit-for-paragraph
 
 
 # Acknowledgements

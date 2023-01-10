@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'crispy_forms',
+    'welcome',
     'products',
 ]
 
@@ -81,6 +82,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'strings_attached.wsgi.application'
 X_FRAME_OPTIONS = 'SAMEORIGIN'
