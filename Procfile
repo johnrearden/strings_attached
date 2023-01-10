@@ -1,1 +1,1 @@
-web: gunicorn just_beats.wsgi
+web: gunicorn strings_attached.wsgi
