@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row mt-4">
+        <div class="col-8 offset-2 col-lg-4 offset-lg-1 border-dark">
+            <img src="{{ product.image.url }}" class="w-100" alt="Image of {{ product.name }}">
+        </div>
+        <div class="col-10 offset-1 col-lg-6 mt-2">
+            <h2 class="card-title font-weight-bolder">{{ product.name }}</h2>
+            <p class="card-text">{{ product.description }}</p>
+            <h4 class="card-text">&euro;{{ product.price }}</h4>
+            <span class="card-text text-muted">
+                <i class="fas fa-tag mr-2"></i>{{ product.category.friendly_name }}
+            <span>
+        </div>
+    </div>
+    <hr>
+    <div class="row justify-content-center">
+        <div class="col-auto text-center">
+            <h3>Often purchased with</h3>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        {% for prod in associated_products %}
+        <div class="col-6 col-lg-2">
+            <div class="card border-1">
+                <img src="{{ prod.image.url }}" class="card-img-top img-fluid p-1" alt="Image of {{ product.name }}">
+                <div class="card-body">
+                    <span class="card-title font-weight-bolder product-name">{{ prod.name }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

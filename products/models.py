@@ -16,7 +16,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name='products')
     description = models.TextField()
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(upload_to='product_images/', null=True,
                               blank=True)
@@ -37,6 +37,7 @@ class ProductAssociation(models.Model):
                                      related_name='from_product')
     associated_product = models.ForeignKey(Product, on_delete=models.CASCADE,
                                            related_name='associated_products')
+    weight = models.IntegerField(default=1)
 
     def __str__(self):
         return (f'Association : from {self.base_product.name} to '

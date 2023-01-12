@@ -5,18 +5,26 @@
 {% block content %}
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row mt-3">
         {% for product in products %}
+
         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-            <div class="card h-100 border-0" style="width: 18rem;">
-                <img src="{{ product.image.url }}" class="card-img-top img-fluid p-2"
-                    alt="Image of {{ product.name }}">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bolder">{{ product.name }}</i></h5>
-                    <p class="card-text product-description">{{ product.description }}</p>
+            <a href="{% url 'product_detail' product.id %}">
+                <div class="card border-1 w-100">
+                    <img src="{{ product.image.url }}" class="card-img-top img-fluid p-3"
+                        alt="Image of {{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bolder product-name">{{ product.name }}</h5>
+                        <p class="card-text product-description">{{ product.description }}</p>
+                        <span class="card-text float-left">&euro;{{ product.price }}</span>
+                        <span class="card-text text-muted float-right">
+                            <i class="fas fa-tag mr-2"></i>{{ product.category.friendly_name }}
+                        </span>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
+
         {% endfor %}
     </div>
 </div>
