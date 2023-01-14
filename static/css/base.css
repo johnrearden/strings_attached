@@ -22,6 +22,7 @@
 }
 
 .btn-cherry:hover {
+    color: white;
     background-color: #86424d;
 }
 
@@ -84,4 +85,8 @@ a, a:hover {
 
 .decrement-qty {
     border-radius: 50% 0 0 50% !important;
+}
+
+audio {
+    background-color: #401c20;
 }
