@@ -251,6 +251,8 @@ Hero image of guitar on guitar stand - Kelvin Franca on Pexels
 https://www.pexels.com/@kelvinernandi/
 Truncate text in a paragraph tag in html
 https://stackoverflow.com/questions/47761085/how-can-i-set-a-character-limit-for-paragraph
+Remove up and down arrows from number input
+https://www.geeksforgeeks.org/how-to-disable-arrows-from-number-input/
 
 
 # Acknowledgements

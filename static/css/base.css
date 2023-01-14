@@ -16,6 +16,15 @@
     color: #401c20;
 }
 
+.btn-cherry {
+    color: white;
+    background-color: #401c20;
+}
+
+.btn-cherry:hover {
+    background-color: #86424d;
+}
+
 body {
     padding-top: 70px;
     height: 100vh;
@@ -67,4 +76,12 @@ a, a:hover {
 
 .product-name {
     height: 48px;
+}
+
+.increment-qty {
+    border-radius: 0 50% 50% 0 !important;
+}
+
+.decrement-qty {
+    border-radius: 50% 0 0 50% !important;
 }
