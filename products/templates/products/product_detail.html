@@ -60,25 +60,28 @@
     </div>
 
     <hr>
-    {% if associated_products %}
-    <div class="row justify-content-center">
-        <div class="col-auto text-center">
-            <h3>Often purchased with</h3>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        {% for prod in associated_products %}
-        <div class="col-6 col-lg-2">
-            <div class="card border-1">
-                <img src="{{ prod.image.url }}" class="card-img-top img-fluid p-1" alt="Image of {{ product.name }}">
-                <div class="card-body">
-                    <span class="card-title font-weight-bolder product-name">{{ prod.name }}</span>
-                </div>
+    <div class="container associated-products-display p-3">
+        {% if associated_products %}
+        <div class="row justify-content-center">
+            <div class="col-auto text-center">
+                <h3>Often purchased with</h3>
             </div>
         </div>
-        {% endfor %}
+        <div class="row justify-content-center">
+            {% for prod in associated_products %}
+            <div class="col-sm-6 col-md-4 col-lg-2">
+                <div class="card border-1">
+                    <img src="{{ prod.image.url }}" class="card-img-top img-fluid p-1"
+                        alt="Image of {{ product.name }}">
+                    <div class="card-body text-center semi-opaque">
+                        <span class="card-title font-weight-bolder product-name">{{ prod.name }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 
 </div>
 

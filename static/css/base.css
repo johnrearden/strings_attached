@@ -49,7 +49,15 @@ a, a:hover {
     background-image: url('/media/hero_image.webp');
     background-size: cover;
     background-position: contain;
+    background-repeat: no-repeat;
     height: 60% !important;
+}
+
+.associated-products-display {
+    background-image: url('/media/gig_monochrome.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .card-body a {
@@ -70,6 +78,10 @@ a, a:hover {
 
 .card:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+}
+
+.card {
+    background-color: #ffffffcc;
 }
 
 /* These elements style the product display page */
