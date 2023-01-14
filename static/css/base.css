@@ -31,6 +31,11 @@
     background-color: #86424d;
 }
 
+.card:hover a {
+    color: white;
+    background-color: #86424d;
+}
+
 body {
     padding-top: 70px;
     height: 100vh;
@@ -68,12 +73,6 @@ a, a:hover {
     background-color: white;
     color: black;
     font-size: 1.3rem;
-}
-
-.card-body a:hover {
-    background-color: black;
-    color: white;
-    text-decoration: none;
 }
 
 .card:hover {
