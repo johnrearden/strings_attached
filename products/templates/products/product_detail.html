@@ -44,6 +44,9 @@
                             </div>
                         </div>
                     </form>
+                    <a href="{% url 'product_display' %}">
+                        <span class="btn btn-cherry">Back to Shop</span>
+                    </a>
                 </div>
                 {% if product.audio_clip %}
                 <div class="col-6 text-center border p-2 text-cherry">
@@ -57,6 +60,7 @@
     </div>
 
     <hr>
+    {% if associated_products %}
     <div class="row justify-content-center">
         <div class="col-auto text-center">
             <h3>Often purchased with</h3>
@@ -74,6 +78,7 @@
         </div>
         {% endfor %}
     </div>
+    {% endif %}
 
 </div>
 

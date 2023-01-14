@@ -47,7 +47,7 @@
 <body>
     <header class="container-fluid fixed-top bg-cherry">
         <nav class="navbar navbar-expand-lg navbar-light my-1">
-            <a class="navbar-brand text-white" href="#"><strong>Strings Attached</strong></a>
+            <a class="navbar-brand text-white" href="{% url 'home' %}"><strong>Strings Attached</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -55,14 +55,14 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <form class="form-inline my-2 my-lg-0 mx-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search all products" aria-label="Search">
                     <button class="btn my-2 my-sm-0" type="submit">
                         <i class="fa-sharp fa-solid fa-q button-icon text-white"></i>
                     </button>
                 </form>
                 <ul class="navbar-nav ml-auto mr-5 align-items-center">
                     {% if request.user.is_authenticated %}
-                    <li class="nav-item mr-3">
+                    <li class="nav-item mr-3 text-white">
                         Logged in as {{ request.user.username }}
                     </li>
                     {% endif %}

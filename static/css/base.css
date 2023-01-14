@@ -12,6 +12,11 @@
     background-image: linear-gradient(#86424d, #401c20);
 }
 
+.bg-radial-cherry {
+    background-image: radial-gradient(#401c20, #86424d);
+    opacity: 0.8;
+}
+
 .text-cherry {
     color: #401c20;
 }

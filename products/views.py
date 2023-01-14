@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, ProductAssociation
+from .models import Product, ProductAssociation, Category
 from django.views import View
 
 
@@ -8,13 +8,17 @@ class ProductDisplay(View):
     Blah
     """
     def get(self, request):
-        products = Product.objects.all()
-        for product in products:
-            print(product.image.name)
+        categories = Category.objects.all()
+        products = Product.objects.all().order_by('category')
+        if 'category' in request.GET:
+            selection = request.GET['category'].split(',')
+            if 'all' not in selection:
+                products = products.filter(category__name__in=selection)
+        print(f'Products : {products}, selection={selection}')
         context = {
             'products': products,
+            'categories': categories,
         }
-        print(context)
         return render(request, 'products/product_display.html', context)
 
 
