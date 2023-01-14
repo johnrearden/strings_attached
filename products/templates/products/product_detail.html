@@ -60,8 +60,8 @@
     </div>
 
     <hr>
+    {% if associated_products %}
     <div class="container associated-products-display p-3">
-        {% if associated_products %}
         <div class="row justify-content-center">
             <div class="col-auto text-center">
                 <h3>Often purchased with</h3>
@@ -80,8 +80,8 @@
             </div>
             {% endfor %}
         </div>
-        {% endif %}
     </div>
+    {% endif %}
 
 </div>
 
