@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Product, ProductAssociation, Category
 from django.views import View
+from django.db.models import Q
 
 
 class ProductDisplay(View):
@@ -14,7 +15,11 @@ class ProductDisplay(View):
             selection = request.GET['category'].split(',')
             if 'all' not in selection:
                 products = products.filter(category__name__in=selection)
-        print(f'Products : {products}, selection={selection}')
+        if 'search' in request.GET:
+            search_term = request.GET['search']
+            queries = Q(name__icontains=search_term) | \
+                Q(description__icontains=search_term)
+            products = products.filter(queries)
         context = {
             'products': products,
             'categories': categories,

@@ -54,8 +54,9 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="form-inline my-2 my-lg-0 mx-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search all products" aria-label="Search">
+                <form method="GET" action="{% url 'product_display' %}" class="form-inline my-2 my-lg-0 mx-auto">
+                    <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search all products"
+                        aria-label="Search">
                     <button class="btn my-2 my-sm-0" type="submit">
                         <i class="fa-sharp fa-solid fa-q button-icon text-white"></i>
                     </button>
