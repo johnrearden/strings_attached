@@ -6,7 +6,7 @@ class ViewBasket(View):
     """
     A view that shows the contents of the shopping basket.
     """
-    def get(request):
+    def get(self, request):
         return render(request, 'basket/basket.html')
 
 
@@ -14,7 +14,7 @@ class AddToBasket(View):
     """
     Add a given quantity of a product to the shopping basket
     """
-    def post(request, product_id):
+    def post(self, request, product_id):
         quantity = int(request.POST.get('quantity'))
         redirect_url = request.POST.get('redirect_url')
         basket = request.session.get('basket', {})
