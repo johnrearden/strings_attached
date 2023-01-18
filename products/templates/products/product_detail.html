@@ -18,9 +18,9 @@
             <div class="row">
                 <div class="col-6">
                     <p class="mt-3"><strong>Quantity:</strong></p>
-                    <form method="POST" action="">
+                    <form method="POST" action="{% url 'add_to_basket' %}">
                         {% csrf_token %}
-                        <div class="form-group">
+                        <div class="form-group text-center">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <button class="decrement-qty btn btn-cherry rounded-0"
@@ -43,10 +43,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="text-center">
+                            <a href="{% url 'product_display' %}">
+                                <span class="btn btn-cherry">Back to Shop</span>
+                            </a>
+                            <input type="submit" class="btn btn-cherry" value="Add to Basket">
+                        </div>
+                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     </form>
-                    <a href="{% url 'product_display' %}">
-                        <span class="btn btn-cherry">Back to Shop</span>
-                    </a>
+
                 </div>
                 {% if product.audio_clip %}
                 <div class="col-6 text-center border p-2 text-cherry">

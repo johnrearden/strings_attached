@@ -1,0 +1,21 @@
+{% extends base.html %}
+{% load static %}
+
+<div class="container-fluid">
+    {% for item in basket.items %}
+    <div class="row">
+        <div class="col-3">
+            <img src="{{ item.product.image }}" alt="{{ item.product.name }}">
+        </div>
+        <div class="col-5">
+            <span>{{ item.product.name }}</span>
+        </div>
+        <div class="col-2">
+            <span>{{ item.quantity }}</span>
+        </div>
+        <div class="col-2">
+            <span>{{ item.subtotal }}</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>

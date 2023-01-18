@@ -78,6 +78,8 @@ clips and comment on their progess.
 
 ### Wireframes
 ![products_display wireframe](/static/doc_images/products_display.png)
+![products_detail wireframe](/static/doc_images/product_detail_screenshot.png)
+![display_basket wireframe](/static/doc_images/display_basket_screenshot.png)
 
 [Return to top](#Strings_Attached)
 

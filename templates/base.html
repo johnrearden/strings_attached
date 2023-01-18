@@ -46,7 +46,7 @@
 
 <body>
     <header class="container-fluid fixed-top bg-cherry">
-        <nav class="navbar navbar-expand-lg navbar-light my-1">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand text-white" href="{% url 'home' %}"><strong>Strings Attached</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,10 +67,13 @@
                         Logged in as {{ request.user.username }}
                     </li>
                     {% endif %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-regular fa-user text-white"></i>
+                    <li class="list-inline-item dropdown mr-3">
+                        <a class="text-white nav-link" href="#" id="account" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <div class="text-center text-white">
+                                <div><i class="fa-regular fa-user fa-lg text-white"></i></div>
+                                <p class="text-center">Account</p>
+                            </div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% if request.user.is_authenticated %}
@@ -81,9 +84,18 @@
                             {% endif %}
                         </div>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">
-                            <i class="fa-solid fa-cart-shopping text-white"></i><span class="sr-only">(current)</span>
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <div class="text-center text-white">
+                                <div><i class="fa-solid fa-cart-shopping fa-lg"></i></div>
+                                <p>
+                                    {% if grand_total %}
+                                    ${{ grand_total|floatformat:2 }}
+                                    {% else %}
+                                    $0.00
+                                    {% endif %}
+                                </p>
+                            </div>
                         </a>
                     </li>
                 </ul>
