@@ -15,9 +15,9 @@ def basket_contents(request):
     order_includes_instrument = False
 
     for id, quantity in basket.items():
-        product = get_object_or_404(Product, pk=id)
-        subtotal += quantity * product.price
+        product = get_object_or_404(Product, pk=int(id))
         product_count += quantity
+        subtotal += quantity * product.price
         if product.category.name == 'Instrument':
             order_includes_instrument = True
         basket_items.append({

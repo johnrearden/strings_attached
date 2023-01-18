@@ -1,21 +1,55 @@
-{% extends base.html %}
+{% extends 'base.html' %}
 {% load static %}
 
-<div class="container-fluid">
-    {% for item in basket.items %}
+{% block content %}
+
+<div class="container-fluid text-black">
+    {% for item in basket %}
     <div class="row">
-        <div class="col-3">
-            <img src="{{ item.product.image }}" alt="{{ item.product.name }}">
+        <div class="col-1 offset-3">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                 class="img-fluid">
         </div>
-        <div class="col-5">
-            <span>{{ item.product.name }}</span>
+        <div class="col-3 my-auto">
+            <h4>{{ item.product.name }}</h4>
         </div>
-        <div class="col-2">
-            <span>{{ item.quantity }}</span>
+        <div class="col-1 my-auto">
+            <span>Qty : {{ item.quantity }}</span>
         </div>
-        <div class="col-2">
-            <span>{{ item.subtotal }}</span>
+        <div class="col-1 my-auto">
+            <span>&euro;{{ item.subtotal }}</span>
         </div>
     </div>
+    <hr class="w-50">
     {% endfor %}
+    {% if total %}
+    <div class="row">
+        <div class="col-1 offset-7">
+            <span class="font-weight-bolder">Subtotal :</span>
+        </div>
+        <div class="col-1">
+            <span class="font-weight-bolder">${{ subtotal|floatformat:2 }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1 offset-7">
+            <span class="font-weight-bolder">Delivery :</span>
+            <hr>
+        </div>
+        <div class="col-1">
+            <span class="font-weight-bolder">${{ delivery|floatformat:2 }}</span>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1 offset-7">
+            <h5 class="font-weight-bolder">Total :</h5>
+        </div>
+        <div class="col-1">
+            <h5 class="font-weight-bolder">${{ total|floatformat:2 }}</h5>
+        </div>
+    </div>
+    {% endif %}
 </div>
+
+{% endblock %}
