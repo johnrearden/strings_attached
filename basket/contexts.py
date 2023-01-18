@@ -18,7 +18,8 @@ def basket_contents(request):
         product = get_object_or_404(Product, pk=int(id))
         product_count += quantity
         subtotal += quantity * product.price
-        if product.category.name == 'Instrument':
+        print(f'category = {product.category.name}')
+        if product.category.name == 'Instruments':
             order_includes_instrument = True
         basket_items.append({
             'id': id,
@@ -26,7 +27,7 @@ def basket_contents(request):
             'product': product,
         })
 
-    if order_includes_instrument:
+    if not basket or order_includes_instrument:
         delivery = 0
     else:
         delivery = settings.DEFAULT_DELIVERY_CHARGE

@@ -50,6 +50,11 @@ a, a:hover {
     height: 70px;
 }
 
+.bg-subtle {
+    background-color: #e6e3d388;
+    border-radius: 10px;
+}
+
 .hero-section {
     background-image: url('/media/hero_image.webp');
     background-size: cover;

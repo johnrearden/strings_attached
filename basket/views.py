@@ -42,3 +42,12 @@ class AddToBasket(View):
         request.session['basket'] = basket
         return redirect(redirect_url)
 
+
+class EmptyBasket(View):
+    """
+    Removes all items from the basket and returns the user to the main 
+    product display page.
+    """
+    def get(self, request):
+        request.session['basket'] = {}
+        return redirect('product_display')

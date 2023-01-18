@@ -4,11 +4,16 @@
 {% block content %}
 
 <div class="container-fluid text-black">
+    <row>
+        <div class="col-6 offset-3">
+            <h1>Your Basket</h1>
+        </div>
+    </row>
+    <hr>
     {% for item in basket %}
-    <div class="row">
-        <div class="col-1 offset-3">
-            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
-                 class="img-fluid">
+    <div class="row bg-subtle justify-content-center py-2">
+        <div class="col-1">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid">
         </div>
         <div class="col-3 my-auto">
             <h4>{{ item.product.name }}</h4>
@@ -22,34 +27,47 @@
     </div>
     <hr class="w-50">
     {% endfor %}
-    {% if total %}
+
     <div class="row">
-        <div class="col-1 offset-7">
-            <span class="font-weight-bolder">Subtotal :</span>
+        <div class="col-4 offset-3 d-flex justify-content-around align-items-center">
+            <a href="{% url 'product_display' %}">
+                <span class="btn btn-cherry">Back to Shop</span>
+            </a>
+            <a href="#">
+                <span class="btn btn-cherry">Checkout</span>
+            </a>
+            <a href="{% url 'empty_basket' %}">
+                <span class="btn btn-cherry">Empty Basket</span>
+            </a>
         </div>
-        <div class="col-1">
-            <span class="font-weight-bolder">${{ subtotal|floatformat:2 }}</span>
+
+        {% if total %}
+        <div class="col-2">
+            <div class="row">
+                <div class="col-6">
+                    <span class="font-weight-bolder">Subtotal :</span>
+                </div>
+                <div class="col-6">
+                    <span class="font-weight-bolder">${{ subtotal|floatformat:2 }}</span>
+                </div>
+                <div class="col-6">
+                    <span class="font-weight-bolder">Delivery :</span>
+                    <hr>
+                </div>
+                <div class="col-6">
+                    <span class="font-weight-bolder">${{ delivery|floatformat:2 }}</span>
+                    <hr>
+                </div>
+                <div class="col-6">
+                    <h5 class="font-weight-bolder">Total :</h5>
+                </div>
+                <div class="col-6">
+                    <h5 class="font-weight-bolder">${{ total|floatformat:2 }}</h5>
+                </div>
+            </div>
         </div>
+        {% endif %}
     </div>
-    <div class="row">
-        <div class="col-1 offset-7">
-            <span class="font-weight-bolder">Delivery :</span>
-            <hr>
-        </div>
-        <div class="col-1">
-            <span class="font-weight-bolder">${{ delivery|floatformat:2 }}</span>
-            <hr>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-1 offset-7">
-            <h5 class="font-weight-bolder">Total :</h5>
-        </div>
-        <div class="col-1">
-            <h5 class="font-weight-bolder">${{ total|floatformat:2 }}</h5>
-        </div>
-    </div>
-    {% endif %}
 </div>
 
 {% endblock %}
