@@ -18,8 +18,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class SpecialOfferAdmin(admin.ModelAdmin):
-    list_display = ('product', 'reduced_price', 'end_date',)
-    list_editable = ('reduced_price', 'end_date',)
+    list_display = ('product', 'required_product', 'reduced_price',
+                    'start_date', 'end_date',)
+    list_editable = ('required_product', 'reduced_price',
+                     'start_date', 'end_date',)
 
 
 class ProductAssociationAdmin(admin.ModelAdmin):

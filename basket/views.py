@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from products.models import Product
+from products.models import Product, SpecialOffer
+from datetime import datetime
+from django.db.models import Q
 
 
 class ViewBasket(View):
@@ -11,17 +13,24 @@ class ViewBasket(View):
         basket = request.session.get('basket', {})
         items = []
         for id, quantity in basket.items():
-            print(id, quantity)
             item = {}
             product = get_object_or_404(Product, pk=int(id))
             item['product'] = product
             item['quantity'] = quantity
             item['subtotal'] = product.price * quantity
             items.append(item)
+
+            # Check for special offers on each product
+            now = datetime.now()
+            queries = Q(start_date__lte=now) & Q(end_date__gte=now)
+            print(f'Queries on special offers : {queries}')
+            special_offers = SpecialOffer.objects.filter(queries)
+            # special_offers = SpecialOffer.objects.all()
+
         context = {
             'basket': items,
+            'special_offers': special_offers,
         }
-        print(context)
 
         return render(request, 'basket/basket.html', context)
 

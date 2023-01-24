@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import timedelta
 
 
 class Category(models.Model):
@@ -45,11 +46,21 @@ class ProductAssociation(models.Model):
 
 
 class SpecialOffer(models.Model):
-    """ Represents a time-limited price reduction on a product """
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    """ Represents a time-limited price reduction on a product. In some
+        cases, a second product is required """
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name='products')
     reduced_price = models.DecimalField(max_digits=6, decimal_places=2)
+    start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
+    required_product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                         related_name='required_products',
+                                         null=True, blank=True)
 
     def __str__(self):
+        if self.required_product:
+            extra = f' - must be accompanied by {self.required_product.name}'
+        else:
+            extra = ''
         return (f'Offer : {self.product} available at {self.reduced_price} '
-                f'until {self.end_date}')
+                f'until {self.end_date}{extra}')
