@@ -49,19 +49,25 @@
     </row>
     <hr>
     {% for item in basket %}
-    <div class="row bg-subtle justify-content-center py-2">
+    <div class="row bg-subtle justify-content-center py-2 align-items-center">
         <div class="col-1">
             <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid">
         </div>
-        <div class="col-3 my-auto">
+        <div class="col-3">
             <h4>{{ item.product.name }}</h4>
         </div>
-        <div class="col-1 my-auto">
+        <div class="col-1">
             <span>Qty : {{ item.quantity }}</span>
         </div>
-        <div class="col-1 my-auto">
+        <div class="col-1">
             <span>&euro;{{ item.subtotal }}</span>
         </div>
+        <form method="POST" action="{% url 'remove_from_basket' item.product.id %}"
+            class="form-inline d-inline ml-3">
+            {% csrf_token %}
+                <input type="submit" class="btn btn-cherry" value="&#x1F5D1;">
+                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+            </form>
     </div>
     <hr class="w-50">
     {% endfor %}

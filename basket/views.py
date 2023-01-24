@@ -12,6 +12,7 @@ class ViewBasket(View):
     def get(self, request):
         basket = request.session.get('basket', {})
         items = []
+        special_offers = None
         for id, quantity in basket.items():
             item = {}
             product = get_object_or_404(Product, pk=int(id))
@@ -48,6 +49,17 @@ class AddToBasket(View):
         else:
             basket[product_id] = quantity
 
+        request.session['basket'] = basket
+        return redirect(redirect_url)
+
+
+class RemoveFromBasket(View):
+    """ Remove a single product from the basket entirely """
+    def post(self, request, product_id):
+        redirect_url = request.POST.get('redirect_url')
+        basket = request.session.get('basket', {})
+        if (product_id in list(basket.keys())):
+            basket.pop(product_id)
         request.session['basket'] = basket
         return redirect(redirect_url)
 
