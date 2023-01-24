@@ -11,7 +11,14 @@
         <div class="col-10 offset-1 col-lg-5 mt-2">
             <h2 class="card-title font-weight-bolder">{{ product.name }}</h2>
             <p class="card-text">{{ product.description }}</p>
+            {% if offer %}
+            <h5 class="special-offer-banner p-2 text-center">Special Offer! Valid until {{ offer.end_date }}</h5>
+            <h4>Only &euro;{{ offer.reduced_price }}!!</h4>
+            <h6>Reduced from &euro;{{ product.price }} ... save &euro;{{ reduction }}!</h6>
+            {% else %}
             <h4 class="card-text">&euro;{{ product.price }}</h4>
+            {% endif %}
+
             <span class="card-text text-muted">
                 <i class="fas fa-tag mr-2"></i>{{ product.category.friendly_name }}
             </span>
@@ -23,8 +30,8 @@
                         <div class="form-group text-center">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button class="decrement-qty btn btn-cherry"
-                                        data-item_id="{{ product.id }}" id="decrement-{{ product.id }}">
+                                    <button class="decrement-qty btn btn-cherry" data-item_id="{{ product.id }}"
+                                        id="decrement-{{ product.id }}">
                                         <span class="icon">
                                             <i class="fas fa-minus"></i>
                                         </span>
@@ -34,8 +41,8 @@
                                     name="quantity" value="1" min="1" max="10" data-item_id="{{ product.id }}"
                                     id="quantity-input-{{ product.id }}">
                                 <div class="input-group-append">
-                                    <button class="increment-qty btn btn-cherry"
-                                        data-item_id="{{ product.id }}" id="increment-{{ product.id }}">
+                                    <button class="increment-qty btn btn-cherry" data-item_id="{{ product.id }}"
+                                        id="increment-{{ product.id }}">
                                         <span class="icon">
                                             <i class="fas fa-plus"></i>
                                         </span>

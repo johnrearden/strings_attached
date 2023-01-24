@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, ProductAssociation, Category
+from .models import Product, ProductAssociation, Category, SpecialOffer
 from django.views import View
 from django.db.models import Q
 
@@ -8,6 +8,7 @@ class ProductDisplay(View):
     """
     Blah
     """
+
     def get(self, request):
         categories = Category.objects.all()
         products = Product.objects.all().order_by('category')
@@ -32,17 +33,26 @@ class ProductDetail(View):
     Provides all available detail about a single product, and a list
     of the products associated with that product, ordered by weight
     """
+
     def get(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
-        print(product)
+
+        # Get a list of any products associated with this one.
         associated_products = ProductAssociation.objects.filter(
             base_product=product
-            ).order_by('-weight')
+        ).order_by('-weight')
         p_list = [ap.associated_product for ap in associated_products]
+
+        # Get any special offer applying to this product.
+        special_offers = SpecialOffer.objects.filter(product=product) \
+            .order_by('-start_date')
+        offer = special_offers[0] if special_offers else None
+        reduction = product.price - offer.reduced_price if offer else 0
+
         context = {
             'product': product,
             'associated_products': p_list,
+            'offer': offer,
+            'reduction': reduction,
         }
-        print(context)
         return render(request, 'products/product_detail.html', context)
-

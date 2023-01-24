@@ -12,21 +12,26 @@ class ViewBasket(View):
     def get(self, request):
         basket = request.session.get('basket', {})
         items = []
-        special_offers = None
+        special_offers = []
         for id, quantity in basket.items():
+            # Check for special offers on each product
+            now = datetime.now()
+            queries = Q(start_date__lte=now) & Q(end_date__gte=now)
+            product = Product.objects.get(pk=id)
+            offers = SpecialOffer.objects \
+                                 .filter(queries) \
+                                 .filter(product=product)
+            offer = offers[0] if offers else None
             item = {}
             product = get_object_or_404(Product, pk=int(id))
             item['product'] = product
             item['quantity'] = quantity
-            item['subtotal'] = product.price * quantity
+            price = offer.reduced_price if offer else product.price
+            item['subtotal'] = price * quantity
             items.append(item)
 
-            # Check for special offers on each product
-            now = datetime.now()
-            queries = Q(start_date__lte=now) & Q(end_date__gte=now)
-            print(f'Queries on special offers : {queries}')
-            special_offers = SpecialOffer.objects.filter(queries)
-            # special_offers = SpecialOffer.objects.all()
+            if offer:
+                special_offers.append(offer)
 
         context = {
             'basket': items,

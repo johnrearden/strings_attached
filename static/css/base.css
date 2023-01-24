@@ -113,3 +113,9 @@ a, a:hover {
 audio {
     background-color: #401c20;
 }
+
+/* These elements style the basket page */
+.special-offer-banner {
+    background-image: linear-gradient(#f79032, #fdca37);
+    color: black;
+}

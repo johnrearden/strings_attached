@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import timedelta
+from datetime import datetime
 
 
 class Category(models.Model):
@@ -53,14 +53,11 @@ class SpecialOffer(models.Model):
     reduced_price = models.DecimalField(max_digits=6, decimal_places=2)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    required_product = models.ForeignKey(Product, on_delete=models.CASCADE,
-                                         related_name='required_products',
-                                         null=True, blank=True)
+
+    def is_live(self):
+        now = datetime.now()
+        return self.start_date < now < self.end_date
 
     def __str__(self):
-        if self.required_product:
-            extra = f' - must be accompanied by {self.required_product.name}'
-        else:
-            extra = ''
         return (f'Offer : {self.product} available at {self.reduced_price} '
-                f'until {self.end_date}{extra}')
+                f'until {self.end_date}')

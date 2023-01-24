@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.shortcuts import get_object_or_404
-from products.models import Product
+from products.models import Product, SpecialOffer
 
 
 def basket_contents(request):
@@ -16,9 +16,14 @@ def basket_contents(request):
 
     for id, quantity in basket.items():
         product = get_object_or_404(Product, pk=int(id))
+
+        # Check for special offers, and apply only the first offer returned
+        offers = SpecialOffer.objects.filter(product=product)
+        offer = offers[0] if offers else None
+
+        price = offer.reduced_price if offer else product.price
         product_count += quantity
-        subtotal += quantity * product.price
-        print(f'category = {product.category.name}')
+        subtotal += quantity * price
         if product.category.name == 'Instruments':
             order_includes_instrument = True
         basket_items.append({
