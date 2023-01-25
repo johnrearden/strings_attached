@@ -81,12 +81,29 @@
         </div>
         <div class="row justify-content-center">
             {% for prod in associated_products %}
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <div class="col-sm-6 col-md-4 col-lg-3">
                 <div class="card border-1">
-                    <img src="{{ prod.image.url }}" class="card-img-top img-fluid p-1"
+                    <img src="{{ prod.image.url }}" class="card-img-top img-fluid position-relative"
                         alt="Image of {{ product.name }}">
+                    <span class="card-title text-center slanted-tag">&euro;{{ prod.price }}</span>
                     <div class="card-body text-center semi-opaque">
                         <span class="card-title font-weight-bolder product-name">{{ prod.name }}</span>
+                    </div>
+                    <div class="text-center">
+                        <a href="{% url 'product_detail' prod.id %}">
+                            <span class="btn btn-cherry">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </span>
+                        </a>
+                        <form method="POST" action="{% url 'add_to_basket' prod.id %}"
+                            class="form-inline d-inline ml-3">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-cherry">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                        </form>
                     </div>
                 </div>
             </div>
