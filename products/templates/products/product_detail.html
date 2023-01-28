@@ -39,7 +39,7 @@
                                 </div>
                                 <input class="form-control quantity-input text-center" type="text" inputmode="numeric"
                                     name="quantity" value="1" min="1" max="10" data-item_id="{{ product.id }}"
-                                    id="quantity-input-{{ product.id }}">
+                                    data-should_submit="true" id="quantity-input-{{ product.id }}">
                                 <div class="input-group-append">
                                     <button class="increment-qty btn btn-cherry" data-item_id="{{ product.id }}"
                                         id="increment-{{ product.id }}">
@@ -83,13 +83,14 @@
             {% for prod in associated_products %}
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <div class="card border-1">
-                    <img src="{{ prod.image.url }}" class="card-img-top img-fluid position-relative"
+                    <img src="{{ prod.image.url }}" 
+                        class="card-img-top img-fluid mt-2 position-relative w-50 align-self-center"
                         alt="Image of {{ product.name }}">
                     <span class="card-title text-center slanted-tag">&euro;{{ prod.price }}</span>
                     <div class="card-body text-center semi-opaque">
                         <span class="card-title font-weight-bolder product-name">{{ prod.name }}</span>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center mb-2">
                         <a href="{% url 'product_detail' prod.id %}">
                             <span class="btn btn-cherry">
                                 <i class="fa-solid fa-circle-info"></i>
@@ -114,6 +115,9 @@
 
 </div>
 
-<script src="{% static 'js/quantity_buttons.js' %}"></script>
+{% endblock %}
 
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'js/quantity_buttons.js' %}"></script>
 {% endblock %}

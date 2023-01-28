@@ -2,6 +2,66 @@
 
 {% load static %}
 
+<div class="col-12 special-offer-banner py-2 text-center">
+    <h1 class="font-weight-bold text-white text-uppercase d-inline">
+        Special Offer
+    </h1>
+    <span class="font-bold mx-3">
+        {{ offer.product.name }} for only &euro;{{ offer.reduced_price }}
+        {% if offer.required_product %}
+        when you buy a {{ offer.required_product.name }}
+        {% endif %}
+    </span>
+    <span class="text-white font-bold">
+        Better hurry! Offer ends {{ offer.end_date }}
+    </span>
+    <form method="POST" action="{% url 'add_to_basket' offer.product.id %}" class="form-inline d-inline ml-3">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-cherry" value="ADD">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+    </form>
+</div>
+
+{% block subheader %}
+{{ block.super }}
+{% if special_offers %}
+
+
+        <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for offer in special_offers %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="special-offer-banner py-2 text-center">
+                        <h1 class="font-weight-bold text-white text-uppercase d-inline">
+                            Special Offer
+                        </h1>
+                        <span class="font-bold mx-3">
+                            {{ offer.product.name }} for only &euro;{{ offer.reduced_price }}
+                            {% if offer.required_product %}
+                            when you buy a {{ offer.required_product.name }}
+                            {% endif %}
+                        </span>
+                        <span class="text-white font-bold">
+                            Better hurry! Offer ends {{ offer.end_date }}
+                        </span>
+                        <form method="POST" action="{% url 'add_to_basket' offer.product.id %}" class="form-inline d-inline ml-3">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-cherry" value="ADD">
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+   
+{% endif %}
+
+{% endblock %}
+
+
 {% block content %}
 
 <div class="container">

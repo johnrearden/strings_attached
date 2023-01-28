@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -24,6 +25,11 @@ class Product(models.Model):
     audio_url = models.URLField(max_length=1024, null=True, blank=True)
     audio_clip = models.FileField(upload_to='product_audio_clips', null=True,
                                   blank=True)
+    stock_level = models.IntegerField(default=20)
+    reorder_threshold = models.IntegerField(default=5)
+    product_owner = models.ForeignKey(User, on_delete=models.SET_NULL,
+                                      related_name="owned_products",
+                                      default=1, null=True)
 
     def __str__(self):
         return f'{self.name} (cat. {self.category.name})'

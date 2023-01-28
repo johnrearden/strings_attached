@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, ProductAssociation, Category, SpecialOffer
 from django.views import View
 from django.db.models import Q
+from datetime import datetime
 
 
 class ProductDisplay(View):
@@ -10,6 +11,7 @@ class ProductDisplay(View):
     """
 
     def get(self, request):
+        offers = None
         categories = Category.objects.all()
         products = Product.objects.all().order_by('category')
         if 'category' in request.GET:
@@ -21,9 +23,15 @@ class ProductDisplay(View):
             queries = Q(name__icontains=search_term) | \
                 Q(description__icontains=search_term)
             products = products.filter(queries)
+
+        # Get all special offers that are currently active
+        now = datetime.now()
+        queries = Q(start_date__lte=now) & Q(end_date__gte=now)
+        offers = SpecialOffer.objects.filter(queries)
         context = {
             'products': products,
             'categories': categories,
+            'special_offers': offers,
         }
         return render(request, 'products/product_display.html', context)
 

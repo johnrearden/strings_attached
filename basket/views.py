@@ -69,6 +69,21 @@ class RemoveFromBasket(View):
         return redirect(redirect_url)
 
 
+class ReplaceItemQuantity(View):
+    """ Delete the current item quantity and replace it with the new quantity
+        in the POST request"""
+    def post(self, request, product_id):
+        redirect_url = request.POST.get('redirect_url')
+        basket = request.session.get('basket', {})
+        new_quantity = int(request.POST.get('quantity'))
+        print(basket)
+        print(f'new_quantity == {new_quantity}')
+        if (product_id in list(basket.keys())):
+            basket[product_id] = new_quantity
+        request.session['basket'] = basket
+        return redirect(redirect_url)
+
+
 class EmptyBasket(View):
     """
     Removes all items from the basket and returns the user to the main 

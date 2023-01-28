@@ -9,4 +9,7 @@ urlpatterns = [
          views.RemoveFromBasket.as_view(),
          name='remove_from_basket'),
     path('empty_basket/', views.EmptyBasket.as_view(), name="empty_basket"),
+    path('replace_item_quantity/<str:product_id>',
+         views.ReplaceItemQuantity.as_view(),
+         name='replace_item_quantity'),
     ]

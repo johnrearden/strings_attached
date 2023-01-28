@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const valueInputs = document.getElementsByClassName('quantity-input');
     for (let input of valueInputs) {
         const id = input.id.replace('quantity-input-', '');
+        const shouldSubmitOnChange = input.getAttribute('data-should_submit') === 'true'? true : false;
         disableButtonsIfRangeExceeded(id);
         input.addEventListener('change', (event) => {
             disableButtonsIfRangeExceeded(id);
@@ -16,7 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const incrementButton = document.getElementById(`increment-${id}`);
         incrementButton.addEventListener('click', (event) => {
-            event.preventDefault();
+            if (!shouldSubmitOnChange) {
+                event.preventDefault();
+            }
             let value = parseInt(input.value);
             value += 1;
             input.value = value;
@@ -24,7 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const decrementButton = document.getElementById(`decrement-${id}`);
         decrementButton.addEventListener('click', (event) => {
-            event.preventDefault();
+            if (!shouldSubmitOnChange) {
+                event.preventDefault();
+            }
             let value = parseInt(input.value);
             value -= 1;
             input.value = value;

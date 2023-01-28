@@ -125,6 +125,7 @@ audio {
     transform: translate(1rem,2rem) rotate(-45deg);
     background-color: orange;
     font-weight: bold;
+    font-size: 1.1rem;
     color: white;
     padding: 10px;
     border-radius: 10px;
