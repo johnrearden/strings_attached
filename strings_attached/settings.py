@@ -94,8 +94,21 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 ACCOUNT_EMAIL_VERIFICATION = "none"
+if os.environ.get('DEBUG') == 'True':
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_USER = 'strings_attached@gmail.com'
+    print('using console email output')
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = os.environ.get("EMAIL_APP_USER")
+    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_APP_PASSWORD")
+    DEFAULT_FROM_USER = os.environ.get("EMAIL_APP_USER")
+    
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',

@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 
 
 class Category(models.Model):
@@ -33,6 +34,17 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name} (cat. {self.category.name})'
+
+    def save(self, *args, **kwargs):
+        if self.stock_level < self.reorder_threshold:
+            print(' ***************** Stock low ******************')
+            send_mail(
+                subject='Urgent! : Stock low',
+                message=f'Please reorder {self.name}\nStock is now down to {self.stock_level}',
+                from_email=None,
+                recipient_list=[self.product_owner.email]
+            )
+        super(Product, self).save(*args, **kwargs)
 
 
 class ProductAssociation(models.Model):

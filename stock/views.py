@@ -17,3 +17,4 @@ class ProductUpdateView(UpdateView):
     fields = ['name', 'category', 'description', 'price', 'image',
               'audio_clip', 'stock_level', 'reorder_threshold',
               'product_owner']
+    success_url = '/'
