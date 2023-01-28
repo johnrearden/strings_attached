@@ -3,10 +3,11 @@ from .models import Product, Category, SpecialOffer, ProductAssociation
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'price', 'image',
-                    'audio_clip',
-                    'description',)
-    list_editable = ('category', 'price', 'image', 'audio_clip',
+    list_display = ('id','name', 'category', 'price', 'image',
+                    'stock_level', 'reorder_threshold', 'product_owner',
+                    'audio_clip', 'description',)
+    list_editable = ('name', 'category', 'price', 'image', 'audio_clip',
+                     'stock_level', 'reorder_threshold', 'product_owner',
                      'description',)
 
     ordering = ('name',)
