@@ -54,6 +54,11 @@
                             <a href="{% url 'product_display' %}">
                                 <span class="btn btn-cherry">Back to Shop</span>
                             </a>
+                            {% if request.user.is_staff %}
+                            <a href="{% url 'update_product' product.id %}">
+                                <span class="btn btn-cherry">Edit product</span>
+                            </a>
+                            {% endif %}
                             <input type="submit" class="btn btn-cherry" value="Add to Basket">
                         </div>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">

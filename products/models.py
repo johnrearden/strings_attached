@@ -37,10 +37,10 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if self.stock_level < self.reorder_threshold:
-            print(' ***************** Stock low ******************')
             send_mail(
                 subject='Urgent! : Stock low',
-                message=f'Please reorder {self.name}\nStock is now down to {self.stock_level}',
+                message=(f'Please reorder {self.name}\nStock is now down '
+                         f'to {self.stock_level}'),
                 from_email=None,
                 recipient_list=[self.product_owner.email]
             )

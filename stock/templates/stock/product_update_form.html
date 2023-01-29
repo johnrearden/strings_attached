@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-6 offset-3">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <input type="submit" value="Update Product">
