@@ -6,8 +6,16 @@
 <div class="container-fluid">
     <div class="row mt-4">
         <div class="col-8 offset-2 col-lg-3 offset-lg-2 border-dark">
-            <img src="{{ product.image.url }}" class="w-100" alt="Image of {{ product.name }}">
+            <div class="position-relative">
+                <img src="{{ product.image.url }}" class="w-100" alt="Image of {{ product.name }}">
+                {% if product.stock_level == 0 %}
+                <div class="out-of-stock-overlay"></div>
+                <div class="out-of-stock-tag">out of stock</div>
+                {% endif %}
+            </div>
+
         </div>
+
         <div class="col-10 offset-1 col-lg-5 mt-2">
             <h2 class="card-title font-weight-bolder">{{ product.name }}</h2>
             <p class="card-text">{{ product.description }}</p>
@@ -23,8 +31,10 @@
                 <i class="fas fa-tag mr-2"></i>{{ product.category.friendly_name }}
             </span>
             <div class="row">
+                {% if product.stock_level > 0 %}
                 <div class="col-6">
                     <p class="mt-3"><strong>Quantity:</strong></p>
+
                     <form method="POST" action="{% url 'add_to_basket' product.id %}">
                         {% csrf_token %}
                         <div class="form-group text-center">
@@ -63,8 +73,21 @@
                         </div>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     </form>
-
                 </div>
+                {% else %}
+                <div class="col-12 py-3 text-center">
+                    <h3 class="out-of-stock-bg p-1 mb-3">Sorry - will be back in stock soon!</h3>
+                    <a href="{% url 'product_display' %}">
+                        <span class="btn btn-cherry">Back to Shop</span>
+                    </a>
+                    {% if request.user.is_staff %}
+                    <a href="{% url 'update_product' product.id %}">
+                        <span class="btn btn-cherry">Edit product</span>
+                    </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+
                 {% if product.audio_clip %}
                 <div class="col-6 text-center border p-2 text-cherry">
                     <h1 class="text-center"><i class="fa-solid fa-headphones"></i></h1>
@@ -88,7 +111,7 @@
             {% for prod in associated_products %}
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <div class="card border-1">
-                    <img src="{{ prod.image.url }}" 
+                    <img src="{{ prod.image.url }}"
                         class="card-img-top img-fluid mt-2 position-relative w-50 align-self-center"
                         alt="Image of {{ product.name }}">
                     <span class="card-title text-center slanted-tag">&euro;{{ prod.price }}</span>

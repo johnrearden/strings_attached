@@ -130,3 +130,29 @@ audio {
     padding: 10px;
     border-radius: 10px;
 }
+
+.out-of-stock-overlay {
+    background-image: radial-gradient(#00000033, #00000066);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.out-of-stock-bg {
+    background-image: radial-gradient(#00000033, #00000066);
+}
+
+.out-of-stock-tag {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: orange;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
