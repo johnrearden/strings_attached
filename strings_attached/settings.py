@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'products',
     'basket',
     'stock',
+    'checkout',
 ]
 
 MIDDLEWARE = [
@@ -101,7 +102,6 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 if os.environ.get('DEBUG') == 'True':
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     DEFAULT_FROM_USER = 'strings_attached@gmail.com'
-    print('using console email output')
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_USE_TLS = True
