@@ -23,13 +23,15 @@ def basket_contents(request):
 
         price = offer.reduced_price if offer else product.price
         product_count += quantity
-        subtotal += quantity * price
+        item_cost = quantity * price
+        subtotal += item_cost
         if product.category.name == 'Instruments':
             order_includes_instrument = True
         basket_items.append({
             'id': id,
             'quantity': quantity,
             'product': product,
+            'item_cost': item_cost,
         })
 
     if not basket or order_includes_instrument:

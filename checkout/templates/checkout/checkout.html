@@ -3,14 +3,65 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container">
+<div class="container mt-5">
     <div class="row">
-        <div class="col-8 offset-2">
+        <div class="col-6 border">
+            <h1>Checkout</h1>
             <form action="" method="POST">
                 {% csrf_token %}
-                {{ order_form|crispy }}
+                <fieldset class="rounded px-2 border my-2">
+                    <legend class="fieldset-label small text-black w-auto">
+                        Personal details
+                    </legend>
+                    {{ order_form.full_name | as_crispy_field }}
+                    {{ order_form.email | as_crispy_field }}
+                    {{ order_form.phone_number | as_crispy_field }}
+                </fieldset>
+                <fieldset class="rounded px-2 border my-2">
+                    <legend class="fieldset-label small text-black w-auto">
+                        Delivery details
+                    </legend>
+                    {{ order_form.street_address1 | as_crispy_field}}
+                    {{ order_form.street_address2 | as_crispy_field}}
+                    {{ order_form.town_or_city | as_crispy_field}}
+                    {{ order_form.county | as_crispy_field}}
+                    {{ order_form.postcode | as_crispy_field}}
+                    {{ order_form.country | as_crispy_field}}
+                </fieldset>
+                <fieldset class="rounded px-2 border my-2">
+                    <legend class="fieldset-label small text-black w-auto">
+                        Payment
+                    </legend>
+                    <div class="mb-3" id="card-element"></div>
+                    <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                </fieldset>
             </form>
         </div>
+        <div class="col-5 offset-1">
+            <div class="bg-subtle px-4 py-2">
+                <h1 class="mb-3">Basket</h1>
+                {% for item in basket_items %}
+                <div class="row">
+                    <div class="col-3">
+                        <img src="{{item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid">
+                    </div>
+                    <div class="col-9">
+                        <h4>{{ item.product.name }}</h4>
+                        <span>Qty. {{ item.quantity }}</span>
+                        <span class="float-right">&euro;{{ item.item_cost }}</span>
+                    </div>
+                </div>
+                <hr>
+                {% endfor %}
+                <hr>
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <h5 class="d-inline">Total</h5>
+                        <span class="mx-3">({{ product_count }} items)</span>
+                        <h5 class="d-inline">&euro;{{ total }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}

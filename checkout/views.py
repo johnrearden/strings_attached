@@ -9,8 +9,7 @@ class CheckoutView(View):
         basket = request.session.get('basket', {})
         if not basket:
             messages.error(request, 'There\'s nothing in your basket!')
-            return redirect(reverse('products'))
-
+            return redirect(reverse('product_display'))
         order_form = OrderForm()
         template = 'checkout/checkout.html'
         context = {
