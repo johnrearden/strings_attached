@@ -13,7 +13,6 @@ class OrderForm(forms.ModelForm):
         """ Add placeholders, remove labels and autofocus on full_name field"""
         super().__init__(*args, **kwargs)
         self.fields['full_name'].widget.attrs['autofocus'] = True
-        print(self.fields)
         for field in self.fields:
             placeholder = field.replace('_', ' ').title()
             if self.fields[field].required:

@@ -93,7 +93,7 @@ TEMPLATES = [
 
 
 WSGI_APPLICATION = 'strings_attached.wsgi.application'
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+""" X_FRAME_OPTIONS = 'SAMEORIGIN' """
 SITE_ID = 2
 
 LOGIN_REDIRECT_URL = '/'
@@ -212,3 +212,8 @@ if os.environ.get('DEBUG') == 'False':
 
 # Business Logic configuration
 DEFAULT_DELIVERY_CHARGE = 5
+
+# Payments configuration
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_PRIVATE_KEY = os.environ.get('STRIPE_PRIVATE_KEY')
+STRIPE_CURRENCY = 'eur'
