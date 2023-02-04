@@ -12,6 +12,7 @@ def basket_contents(request):
     subtotal = 0
     product_count = 0
     basket = request.session.get('basket', {})
+    discount = 0
     order_includes_instrument = False
 
     for id, quantity in basket.items():
@@ -47,6 +48,7 @@ def basket_contents(request):
         'product_count': product_count,
         'delivery': delivery,
         'total': total,
+        'discount': discount,
     }
 
     return context

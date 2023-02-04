@@ -3,13 +3,13 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-2">
     <div class="row">
         <div class="col-6 border">
-            <h1>Checkout</h1>
+            <h3>Checkout</h3>
             <form id="payment-form" action="" method="POST">
                 {% csrf_token %}
-                <fieldset class="rounded px-2 border my-2">
+                <fieldset class="rounded px-2 border my-1">
                     <legend class="fieldset-label small text-black w-auto">
                         Personal details
                     </legend>
@@ -17,7 +17,7 @@
                     {{ order_form.email | as_crispy_field }}
                     {{ order_form.phone_number | as_crispy_field }}
                 </fieldset>
-                <fieldset class="rounded px-2 border my-2">
+                <fieldset class="rounded px-2 border my-1">
                     <legend class="fieldset-label small text-black w-auto">
                         Delivery details
                     </legend>
@@ -41,12 +41,12 @@
                         {% endif %}
                     </div>
                 </fieldset>
-                <fieldset class="rounded px-2 border my-2">
+                <fieldset class="rounded px-2 border my-1">
                     <legend class="fieldset-label small text-black w-auto">
                         Payment
                     </legend>
-                    <div class="mb-3" id="card-element"></div>
-                    <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                    <div class="mb-1" id="card-element"></div>
+                    <div class="mb-1 text-danger" id="card-errors" role="alert"></div>
                 </fieldset>
                 <input type="submit" value="go" id="submit-button">
             </form>

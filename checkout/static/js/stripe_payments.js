@@ -4,7 +4,7 @@ const stripeClientSecret = document.getElementById('id_stripe_client_secret').te
 const options = {
     clientSecret: stripeClientSecret,
     appearance: {
-        theme: 'stripe',
+        theme: 'night',
         variables: {
             colorPrimary: '#0570de',
             colorBackground: '#ffffff',
@@ -16,7 +16,6 @@ const options = {
         }
     }
 }
-console.log(stripePublicKey);
 const stripe = Stripe(stripePublicKey);
 const elements = stripe.elements(options);
 const paymentElement = elements.create('payment');
@@ -46,8 +45,8 @@ const form = document.getElementById('payment-form');
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    paymentElement.update({ 'disabled': true });
-    document.getElementById('submit-button').disabled = 'true';
+    paymentElement.update({ readOnly: true });
+    document.getElementById('submit-button').disabled = true;
     document.getElementById('payment-form').opacity = 0.2;
 
     const shippingDetails = {
@@ -63,30 +62,61 @@ form.addEventListener('submit', (event) => {
         }
     }
 
-    stripe.confirmPayment({
-        elements,
-        confirmParams: {
-            shipping: shippingDetails,
-        },
-        redirect: 'if_required',
-    }).then((result) => {
-        if (result.error) {
-            console.log('Weve got an error');
-            const html = `
-            <span class="icon" role="alert">
-                <i class="fas fa-times"></i>
-            </span>
-            <span>
-                ${event.error.message}
-            </span>
-        `;
-            errorDiv.innerHTML = html;
-            paymentElement.disabled= "false";
-        } else {
-            console.log('No errors - submitting form');
-            form.submit();
+    // Post all of the form-data, the shouldSaveInfo flag and the Stripe client secret
+    // to the backend so that this can all be saved before attempting to confirm payment.
+    let url = '/checkout/save_order/';
+    const formData = new FormData(form);
+    formData.append('client_secret', stripeClientSecret)
+    const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+    let data = {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': csrfToken,
         }
-    })
+    }
+    fetch(url, data).then(
+        response => {
+            if (response.status === 200) {
+                stripe.confirmPayment({
+                    elements,
+                    confirmParams: {
+                        shipping: shippingDetails,
+                    },
+                    redirect: 'if_required',
+                }).then((result) => {
+                    if (result.error) {
+                        const html = `
+                        <span class="icon" role="alert">
+                            <i class="fas fa-times"></i>
+                        </span>
+                        <span>
+                            ${result.error.message}
+                        </span>
+                    `;
+                        const errorDiv = document.getElementById('card-errors');
+                        errorDiv.innerHTML = html;
+                        paymentElement.disabled = "false";
+                    } else {
+                        url = '/checkout/payment_confirmed/';
+                        data = {
+                            'payment_confirmed': 'True',
+                            'client_secret': stripeClientSecret,
+                        }
+                        data = {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': csrfToken,
+                            }
+                        }
+                        fetch(url, data).then((res => window.location = res.url));
+                    }
+                });
+            }
+        }
+    );
 });
 
 

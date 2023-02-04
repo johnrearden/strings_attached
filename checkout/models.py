@@ -25,10 +25,12 @@ class Order(models.Model):
                                       null=False, default=0)
     grand_total = models.DecimalField(max_digits=8, decimal_places=2,
                                       null=False, default=0)
+    pid = models.CharField(max_length=256, editable=False, default='None')
+    payment_confirmed = models.BooleanField(default=False, null=False)
 
     def _create_order_number(self):
         """ Create a random, unique order number using UUID """
-        return uuid.uuid64.hex.upper()
+        return uuid.uuid4().hex.upper()
 
     def save(self, *args, **kwargs):
         """ If this order doesn't yet have an order number, generate one

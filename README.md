@@ -105,6 +105,15 @@ The User Epics and their related User Stories are as follows:
 
 - Data validation
 
+# Payments Integration
+
+In thinking about the payment integration, I decided to try to decouple the Django backend from Stripe
+as much as possible, to make it easier to switch to a different payment processor without having to rewrite the app. To this end, the payment flow is as follows.
+    
+    - When the user clicks the Pay Now button, the order is posted to the backend and saved, with the payment_confirmed flag set to False. The The newly generated order number is returned to the page in
+    the ensuing response.
+    - The event handler then 
+
 # Testing
 - Manual testing
 - Automated testing
