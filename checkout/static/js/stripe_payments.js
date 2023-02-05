@@ -47,7 +47,8 @@ form.addEventListener('submit', (event) => {
 
     paymentElement.update({ readOnly: true });
     document.getElementById('submit-button').disabled = true;
-    document.getElementById('payment-form').opacity = 0.2;
+    document.getElementById('payment-overlay').classList.remove('d-none');
+    document.getElementById('payment-overlay').classList.add('d-flex');
 
     const shippingDetails = {
         name: form.full_name.value,
