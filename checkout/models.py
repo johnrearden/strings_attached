@@ -65,12 +65,14 @@ class OrderLineItem(models.Model):
     quantity = models.IntegerField(null=False, blank=False, default=0)
     line_item_total = models.DecimalField(max_digits=8, decimal_places=2,
                                           null=False, blank=False,
-                                          editable=False)
+                                          editable=False, default=0)
 
     def save(self, *args, **kwargs):
         """ Set the line_item_total and update the order total """
-        self.line_item_total = self.product.price * self.quantity
-        super.save(*args, **kwargs)
+        current_price = self.product.get_current_price()
+        self.line_item_total = current_price * self.quantity
+        print(f'OrderLineItem : {self.product.name} current price is {current_price}')
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'Product {self.product.name} : order {self.order.order_number}'

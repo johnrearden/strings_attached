@@ -8,7 +8,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .forms import OrderForm
-from .models import Order
+from .models import Order, OrderLineItem
+from products.models import Product, SpecialOffer
 from basket.contexts import basket_contents
 
 import stripe
@@ -79,6 +80,16 @@ class SaveOrderView(APIView):
             # and basket to the Stripe paymentIntent metadata before returning
             # to the checkout page to process the payment.
             order.save()
+
+            # Create line items for each item in the basket.
+            print(basket)
+            for id, quantity in basket.items():
+                product = Product.objects.get(id=id)
+                line_item = OrderLineItem.objects.create(order=order,
+                                                         product=product,
+                                                         quantity=quantity)
+                line_item.save()
+
             metadata = {
                 'order_number': order.order_number,
                 'save_personal_info': data['save-info'],
@@ -94,7 +105,7 @@ class SaveOrderView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
-class PaymentConfirmed(APIView):
+class PaymentConfirmedView(APIView):
     def post(self, request):
         if request.data['payment_confirmed'] == 'True':
             pid = request.data.get('client_secret').split('_secret')[0]
@@ -107,6 +118,6 @@ class PaymentConfirmed(APIView):
         return HttpResponseRedirect(reverse('checkout_success'))
 
 
-class CheckoutSuccess(View):
+class CheckoutSuccessView(View):
     def get(self, request):
         return render(request, 'checkout/checkout_success.html', {})

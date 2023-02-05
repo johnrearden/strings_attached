@@ -18,11 +18,8 @@ def basket_contents(request):
     for id, quantity in basket.items():
         product = get_object_or_404(Product, pk=int(id))
 
-        # Check for special offers, and apply only the first offer returned
-        offers = SpecialOffer.objects.filter(product=product)
-        offer = offers[0] if offers else None
-
-        price = offer.reduced_price if offer else product.price
+        # Get the current product price (which adjusts for special offers)
+        price = product.get_current_price()
         product_count += quantity
         item_cost = quantity * price
         subtotal += item_cost
