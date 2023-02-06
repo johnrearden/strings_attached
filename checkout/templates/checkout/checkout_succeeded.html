@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-auto text-center">
+            <h1>Payment Successful</h1>
+            <p>Your order will be dispatched shortly</p>
+        </div>
+    </div>
+    <div class="row mt-5 d-flex align-items-stretch">
+        <div class="col-12 col-md-4 justify-content-center">
+            <div class="card w-auto">
+                <div class="card-body">
+                    <h5 class="card-title text-center bg-cherry text-white py-3">
+                        <i class="fa-solid fa-truck"></i>&nbsp;&nbsp;Your Delivery Details
+                    </h5>
+                    <p class="card-text">
+                        <hr>
+                        {{ order.full_name }},<br>
+                        {{ order.street_address1 }},<br>
+                        {% if order.street_address2 %}{{ order.street_address2 }},<br>{% endif %}
+                        {{ order.town_or_city }},<br>
+                        {% if order.county %}{{ order.county }},<br>{% endif %}
+                        {{ order.country }}{% if order.postcode %}, {{ order.postcode }}{% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <img src="{{ MEDIA_URL }}crowd_tall_bw.webp" alt="Black and white image of rock concert"
+                class="img-fluid">
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card w-auto">
+                <div class="card-body">
+                    <h5 class="card-title text-center bg-cherry text-white py-3">
+                        <i class="fa-solid fa-cart-shopping fa-lg"></i>&nbsp;&nbsp;Your Order
+                    </h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Qty.</th>
+                                <th class='text-right' scope="col">Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in order_line_items %}
+                            <tr>
+                                <td>{{ item.product.name}}</td>
+                                <td>{{ item.quantity}}</td>
+                                <td class="text-right">&euro;{{ item.line_item_total}}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td>Delivery</td>
+                                <td></td>
+                                <td class="text-right">&euro;{{ order.delivery_cost }}</td>
+                            </tr>
+                            <tr>
+                                <td>Total ({{ item_count }} item{% if item_count > 1 %}s{% endif %})</td>
+                                <td></td>
+                                <td class="text-right">&euro;{{ order.grand_total }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-auto text-center">
+            <h3>Thank you for shopping with us!</h3>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

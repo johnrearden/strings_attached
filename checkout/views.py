@@ -115,9 +115,18 @@ class PaymentConfirmedView(APIView):
             order = Order.objects.get(order_number=order_number)
             order.payment_confirmed = True
             order.save()
-        return HttpResponseRedirect(reverse('checkout_success'))
+            redirect_url = f'/checkout/checkout_succeeded/{order_number}'
+        return HttpResponseRedirect(redirect_url)
 
 
-class CheckoutSuccessView(View):
-    def get(self, request):
-        return render(request, 'checkout/checkout_success.html', {})
+class CheckoutSucceededView(View):
+    def get(self, request, order_number):
+        order = Order.objects.get(order_number=order_number)
+        line_items = OrderLineItem.objects.filter(order=order)
+        item_count = sum([item.quantity for item in line_items])
+        context = {
+            'order': order,
+            'order_line_items': line_items,
+            'item_count': item_count,
+        }
+        return render(request, 'checkout/checkout_succeeded.html', context)

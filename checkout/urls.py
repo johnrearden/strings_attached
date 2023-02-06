@@ -6,6 +6,7 @@ urlpatterns = [
     path('save_order/', views.SaveOrderView.as_view(), name='save_order'),
     path('payment_confirmed/', views.PaymentConfirmedView.as_view(),
          name='payment_confirmed'),
-    path('checkout_success/', views.CheckoutSuccessView.as_view(),
-         name='checkout_success'),
+    path('checkout_succeeded/<str:order_number>',
+         views.CheckoutSucceededView.as_view(),
+         name='checkout_succeeded'),
     ]

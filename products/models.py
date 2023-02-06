@@ -68,16 +68,13 @@ class Product(models.Model):
         """ Returns the price inclusive of the lowest currently valid
             special offer. """
         offers = SpecialOffer.objects.filter(product=self)
-        print(f'offers : {offers}')
         now = datetime.now()
         current_offers = offers.filter(start_date__lte=now, end_date__gte=now)
-        best_offer = current_offers.order_by('-reduced_price')[0]
-        if best_offer:
+        if current_offers:
+            best_offer = current_offers.order_by('-reduced_price')[0]
             price = best_offer.reduced_price
         else:
             price = self.price
-        print(f'current_offers == {current_offers}')
-        print(f'best_offer == {best_offer}')
         return price
 
 
