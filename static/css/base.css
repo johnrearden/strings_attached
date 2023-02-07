@@ -5,7 +5,7 @@
 }
 
 .bg-light-grey {
-    background-color: #aaaaaa;
+    background-image: radial-gradient(#eeeeeeaa, #eeeeeedd);
 }
 
 .bg-cherry {
@@ -22,18 +22,58 @@
 }
 
 .btn-cherry {
-    color: white;
-    background-color: #401c20;
+    color: #401c20;
+    background-color: white;
+    border: 1px solid #401c20;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 .btn-cherry:hover {
     color: white;
-    background-color: #86424d;
+    background-color:#401c20;
+    border: 1px solid #401c20;
+}   
+
+.btn-quantity {
+    color: white;
+    background-color:#401c20;
+    height: 40px;
+}
+
+.btn-quantity:hover {
+    background-color: #890d0d;
+    color: white;
+}
+
+.quantity-input {
+    height: 40px;
+}
+
+.checkout-button {
+    background-color: #000044;
+    color: white;
+    text-transform: uppercase;
+    border: 1px solid #000044;
+    font-weight: bold;
+    font-size: 2.1em;
+    width: 100%;
+}
+
+.checkout-button:hover {
+    color: #000044;
+    background-color: white;
+    
 }
 
 .card:hover a {
     color: white;
     background-color: #86424d;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
 }
 
 body {

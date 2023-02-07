@@ -5,7 +5,7 @@
 {% if special_offers %}
 
 <div class="container-fluid">
-    <div class="row align-items-center">
+    <div class="row align-items-center mt-5">
         {% for offer in special_offers %}
         <div class="col-12 special-offer-banner py-2 text-center">
             <h1 class="font-weight-bold text-white text-uppercase d-inline">
@@ -36,101 +36,137 @@
 
 {% block content %}
 
-<div class="container-fluid text-black mt-3">
+<div class="container-fluid text-black mt-5">
     <row>
-        <div class="col-6 offset-3 text-center">
-            <h1>Your Basket</h1>
+        <div class="col-md-6 offset-md-3 text-center">
+            <h1 class="">Your Basket</h1>
         </div>
     </row>
-    <hr>
-    {% for item in basket %}
-    <div class="row bg-subtle justify-content-center py-2 align-items-center">
-        <div class="col-1">
-            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid">
+    <row>
+        <div class="col-md-6 offset-md-3 mt-3">
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th></th>
+                        <th class="text-left" scope="col">Product</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in basket %}
+                    <tr>
+                        <td>
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-thumbnail thumbnail">
+                        </td>
+                        <td class="align-middle">
+                            <h5>{{ item.product.name }}</h5>
+                        </td>
+                        <td class="align-middle">
+                            <form method="POST" action="{% url 'replace_item_quantity' item.product.id %}"style="width: 150px;">
+                                {% csrf_token %}
+                                <div class="form-group text-center my-auto">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button class="decrement-qty btn btn-quantity"
+                                                data-item_id="{{ item.product.id }}"
+                                                id="decrement-{{ item.product.id }}">
+                                                <span class="icon">
+                                                    <i class="fas fa-minus"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <input class="form-control quantity-input text-center" type="text"
+                                            inputmode="numeric" name="quantity" value="{{ item.quantity }}" min="1"
+                                            max="10" data-item_id="{{ item.product.id }}" data-should_submit="true"
+                                            id="quantity-input-{{ item.product.id }}">
+                                        <div class="input-group-append">
+                                            <button class="increment-qty btn btn-quantity"
+                                                data-item_id="{{ item.product.id }}"
+                                                id="increment-{{ item.product.id }}">
+                                                <span class="icon">
+                                                    <i class="fas fa-plus"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            </form>
+                        </td>
+                        <td class="align-middle text-right">
+                            <span>&euro;{{ item.subtotal }}</span>
+                        </td>
+                        <td class="align-middle">
+                            <form method="POST" action="{% url 'remove_from_basket' item.product.id %}"
+                                class="form-inline d-inline ml-3">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-cherry">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <div class="col-3">
-            <h4>{{ item.product.name }}</h4>
-        </div>
-        <div class="col-1">
-            <form method="POST" action="{% url 'replace_item_quantity' item.product.id %}">
-                {% csrf_token %}
-                <div class="form-group text-center">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <button class="decrement-qty btn btn-cherry" data-item_id="{{ item.product.id }}"
-                                id="decrement-{{ item.product.id }}">
-                                <span class="icon">
-                                    <i class="fas fa-minus"></i>
-                                </span>
-                            </button>
-                        </div>
-                        <input class="form-control quantity-input text-center" type="text" inputmode="numeric"
-                            name="quantity" value="{{ item.quantity }}" min="1" max="10" data-item_id="{{ item.product.id }}"
-                            data-should_submit="true" id="quantity-input-{{ item.product.id }}">
-                        <div class="input-group-append">
-                            <button class="increment-qty btn btn-cherry" data-item_id="{{ item.product.id }}"
-                                id="increment-{{ item.product.id }}">
-                                <span class="icon">
-                                    <i class="fas fa-plus"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <input type="hidden" name="redirect_url" value="{{ request.path }}">
-            </form>
-        </div>
-        <div class="col-1">
-            <span>&euro;{{ item.subtotal }}</span>
-        </div>
-        <form method="POST" action="{% url 'remove_from_basket' item.product.id %}" class="form-inline d-inline ml-3">
-            {% csrf_token %}
-            <input type="submit" class="btn btn-cherry" value="&#x1F5D1;">
-            <input type="hidden" name="redirect_url" value="{{ request.path }}">
-        </form>
-    </div>
-    <hr class="w-50">
-    {% endfor %}
+    </row>
+
 
     <div class="row">
-        <div class="col-4 offset-3 d-flex justify-content-around align-items-center">
+        <div class="col-3 offset-3 d-flex justify-content-around align-items-center bg-light-grey">
             <a href="{% url 'product_display' %}">
-                <span class="btn btn-cherry">Back to Shop</span>
+                <span class="btn btn-cherry">
+                    <i class="fa-regular fa-hand-point-left"></i>&nbsp;&nbsp;Shop
+                </span>
             </a>
-            <a href="{% url 'checkout' %}">
-                <span class="btn btn-cherry">Checkout</span>
-            </a>
+            
             <a href="{% url 'empty_basket' %}">
-                <span class="btn btn-cherry">Empty Basket</span>
+                <span class="btn btn-cherry">
+                    Clear&nbsp;&nbsp;<i class="fa-regular fa-trash-can"></i>
+                </span>
             </a>
         </div>
 
         {% if total %}
-        <div class="col-2">
+        <div class="col-3">
             <div class="row">
-                <div class="col-6">
+                <div class="col-4">
                     <span class="font-weight-bolder">Subtotal :</span>
                 </div>
-                <div class="col-6">
+                <div class="col-8 text-right">
                     <span class="font-weight-bolder">${{ subtotal|floatformat:2 }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <span class="font-weight-bolder">Delivery :</span>
                     <hr>
                 </div>
-                <div class="col-6">
+                <div class="col-8  text-right">
                     <span class="font-weight-bolder">${{ delivery|floatformat:2 }}</span>
                     <hr>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <h5 class="font-weight-bolder">Total :</h5>
                 </div>
-                <div class="col-6">
-                    <h5 class="font-weight-bolder">${{ total|floatformat:2 }}</h5>
+                <div class="col-8 text-right">
+                    <h4 class="font-weight-bolder">${{ total|floatformat:2 }}</h4>
                 </div>
             </div>
         </div>
         {% endif %}
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4">
+            <a href="{% url 'checkout' %}">
+                <span class="btn checkout-button">
+                    Checkout&nbsp;&nbsp;<i class="fa-solid fa-coins"></i>
+                </span>
+            </a>
+        </div>
+        
     </div>
 </div>
 
