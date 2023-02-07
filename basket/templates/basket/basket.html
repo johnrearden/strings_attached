@@ -43,10 +43,10 @@
         </div>
     </row>
     <row>
-        <div class="col-md-6 offset-md-3 mt-3">
-            <table class="table">
-                <thead>
-                    <tr class="text-center">
+        <div class="col-md-8 offset-md-2 mt-3">
+            <table class="table table-sm">
+                <thead class="bg-cherry text-white">
+                    <tr class="text-center font-weight-bolder">
                         <th></th>
                         <th class="text-left" scope="col">Product</th>
                         <th scope="col">Quantity</th>
@@ -58,7 +58,7 @@
                     {% for item in basket %}
                     <tr>
                         <td>
-                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-thumbnail thumbnail">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="thumbnail">
                         </td>
                         <td class="align-middle">
                             <h5>{{ item.product.name }}</h5>
@@ -112,12 +112,13 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <hr>
         </div>
     </row>
 
 
     <div class="row">
-        <div class="col-3 offset-3 d-flex justify-content-around align-items-center bg-light-grey">
+        <div class="col-4 offset-2 d-flex justify-content-around align-items-center bg-light-grey">
             <a href="{% url 'product_display' %}">
                 <span class="btn btn-cherry">
                     <i class="fa-regular fa-hand-point-left"></i>&nbsp;&nbsp;Shop
@@ -132,7 +133,7 @@
         </div>
 
         {% if total %}
-        <div class="col-3">
+        <div class="col-4">
             <div class="row">
                 <div class="col-4">
                     <span class="font-weight-bolder">Subtotal :</span>

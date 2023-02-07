@@ -3,80 +3,100 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container mt-2 position-relative">
-    <div class="row">
-        <div class="col-6 border">
-            <h3>Checkout</h3>
+<div class="container-fluid mt-2 position-relative">
+    <div class="row justify-content-center">
+        <div class="col-auto mt-3">
+            <h1 class="text-center">Checkout</h1>
+            <hr>
+        </div>
+        
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
             <form id="payment-form" action="" method="POST">
                 {% csrf_token %}
-                <fieldset class="rounded px-2 border my-1">
-                    <legend class="fieldset-label small text-black w-auto">
-                        Personal details
-                    </legend>
-                    {{ order_form.full_name | as_crispy_field }}
-                    {{ order_form.email | as_crispy_field }}
-                    {{ order_form.phone_number | as_crispy_field }}
-                </fieldset>
-                <fieldset class="rounded px-2 border my-1">
-                    <legend class="fieldset-label small text-black w-auto">
-                        Delivery details
-                    </legend>
-                    {{ order_form.street_address1 | as_crispy_field}}
-                    {{ order_form.street_address2 | as_crispy_field}}
-                    {{ order_form.town_or_city | as_crispy_field}}
-                    {{ order_form.county | as_crispy_field}}
-                    {{ order_form.postcode | as_crispy_field}}
-                    {{ order_form.country | as_crispy_field}}
-                    <div class="form-check form-check-inline float-right mr-0">
-                        {% if user.is_authenticated %}
-                        <label class="form-check-label" for="id-save-info">Save this delivery information to my
-                            profile</label>
-                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info"
-                            checked>
-                        {% else %}
-                        <label class="form-check-label" for="id-save-info">
-                            <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
-                            <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                        </label>
-                        {% endif %}
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <fieldset class="rounded px-2 border my-1">
+                            <legend class="fieldset-label small text-black w-auto">
+                                Personal details
+                            </legend>
+                            {{ order_form.full_name | as_crispy_field }}
+                            {{ order_form.email | as_crispy_field }}
+                            {{ order_form.phone_number | as_crispy_field }}
+                        </fieldset>
+                        <fieldset class="rounded px-2 border my-1">
+                            <legend class="fieldset-label small text-black w-auto">
+                                Delivery details
+                            </legend>
+                            {{ order_form.street_address1 | as_crispy_field}}
+                            {{ order_form.street_address2 | as_crispy_field}}
+                            {{ order_form.town_or_city | as_crispy_field}}
+                            {{ order_form.county | as_crispy_field}}
+                            {{ order_form.postcode | as_crispy_field}}
+                            {{ order_form.country | as_crispy_field}}
+                            <div class="form-check form-check-inline float-right mr-0">
+                                {% if user.is_authenticated %}
+                                <label class="form-check-label" for="id-save-info">Save this delivery information to my
+                                    profile</label>
+                                <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info"
+                                    name="save-info" checked>
+                                {% else %}
+                                <label class="form-check-label" for="id-save-info">
+                                    <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
+                                    <a class="text-info" href="{% url 'account_login' %}">login</a> to save this
+                                    information
+                                </label>
+                                {% endif %}
+                            </div>
+                        </fieldset>
                     </div>
-                </fieldset>
-                <fieldset class="rounded px-2 border my-1">
-                    <legend class="fieldset-label small text-black w-auto">
-                        Payment
-                    </legend>
-                    <div class="mb-1" id="card-element"></div>
-                    <div class="mb-1 text-danger" id="card-errors" role="alert"></div>
-                </fieldset>
-                <input type="submit" value="go" id="submit-button">
+                    <div class="col-4 h-100 d-none d-lg-block text-center p-2">
+                        <img class="img-fluid checkout-panel-img" src="{{ MEDIA_URL }}crowd_tall_bw.webp"
+                            alt="Image of crowd">
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <fieldset class="rounded px-2 border my-1">
+                            <legend class="fieldset-label small text-black w-auto">
+                                Payment
+                            </legend>
+                            <div class="mb-1" id="card-element"></div>
+                            <div class="mb-1 text-danger" id="card-errors" role="alert"></div>
+                        </fieldset>
+                        <button type="submit" id="submit-button" class="checkout-button mt-3">Pay now</button>
+
+                        <div class="border p-2 mt-5">
+                            <h3 class="mb-3">Basket</h3>
+                            <table class="table table-sm">
+                                <thead class="bg-cherry text-white">
+                                    <tr class="text-center font-weight-bolder">
+                                        <th class="text-left" scope="col">Product</th>
+                                        <th scope="col">Qty.</th>
+                                        <th scope="col">&euro;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in basket_items %}
+                                    <tr>
+                                        <td class="align-middle">
+                                            <span>{{ item.product.name }}</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span>{{ item.quantity }}</span>
+                                        </td>
+                                        <td class="align-middle text-right">
+                                            <span>&euro;{{ item.item_cost }}</span>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
-        <div class="col-5 offset-1">
-            <div class="bg-subtle px-4 py-2">
-                <h1 class="mb-3">Basket</h1>
-                {% for item in basket_items %}
-                <div class="row">
-                    <div class="col-3">
-                        <img src="{{item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid">
-                    </div>
-                    <div class="col-9">
-                        <div class="font-weight-bolder">{{ item.product.name }}</div>
-                        <span>Qty. {{ item.quantity }}</span>
-                        <span class="float-right">&euro;{{ item.item_cost }}</span>
-                    </div>
-                </div>
-                <hr>
-                {% endfor %}
-                <hr>
-                <div class="row justify-content-center">
-                    <div class="col-auto">
-                        <h5 class="d-inline">Total</h5>
-                        <span class="mx-3">({{ product_count }} items)</span>
-                        <h5 class="d-inline">&euro;{{ total }}</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 
     <!-- Modal spinner shown while waiting for payment processor -->

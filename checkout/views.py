@@ -82,7 +82,6 @@ class SaveOrderView(APIView):
             order.save()
 
             # Create line items for each item in the basket.
-            print(basket)
             for id, quantity in basket.items():
                 product = Product.objects.get(id=id)
                 line_item = OrderLineItem.objects.create(order=order,
@@ -90,9 +89,10 @@ class SaveOrderView(APIView):
                                                          quantity=quantity)
                 line_item.save()
 
+            save_info = 'off' if not data.get('save-info') else data['save-info']
             metadata = {
                 'order_number': order.order_number,
-                'save_personal_info': data['save-info'],
+                'save_personal_info': save_info,
                 'basket': json.dumps(basket),
             }
             stripe.api_key = settings.STRIPE_PRIVATE_KEY
@@ -127,6 +127,5 @@ class CheckoutSucceededView(View):
         context = {
             'order': order,
             'order_line_items': line_items,
-            'item_count': item_count,
         }
         return render(request, 'checkout/checkout_succeeded.html', context)
