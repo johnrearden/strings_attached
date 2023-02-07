@@ -28,7 +28,7 @@
 {% if special_offers %}
 
 
-<div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         {% for offer in special_offers %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -65,11 +65,11 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="row py-2 bg-radial-cherry text-center justify-content-center">
+<div class="container-fluid w-75">
+    <div class="row py-2 text-center justify-content-center">
         <div class="col-auto">
             <a href="{% url 'product_display' %}?category=all">
-                <span class="btn btn-cherry w-100 text-white font-weight-bolder">
+                <span class="category-link w-100 font-weight-bolder mx-3">
                     All
                 </span>
             </a>
@@ -77,23 +77,24 @@
         {% for category in categories %}
         <div class="col-auto">
             <a href="{% url 'product_display' %}?category={{ category.name }}">
-                <span class="btn btn-cherry w-100 text-white font-weight-bolder">
+                <span class="category-link w-100 font-weight-bolder mx-3">
                     {{ category.friendly_name }}
                 </span>
             </a>
         </div>
         {% endfor %}
     </div>
+    <hr>
     <div class="row pt-3">
         {% for product in products %}
         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
             <a href="{% url 'product_detail' product.id %}">
-                <div class="card border-1 w-100">
-                    <img src="{{ product.image.url }}" class="card-img-top img-fluid p-3"
+                <div class="card border-1">
+                    <img src="{{ product.image.url }}" class="img-fluid w-75 p-1 mx-auto"
                         alt="Image of {{ product.name }}">
                     <div class="card-body">
-                        <h5 class="card-title font-weight-bolder product-name">{{ product.name }}</h5>
-                        <p class="card-text product-description">{{ product.description }}</p>
+                        <h6 class="card-title font-weight-bolder product-name text-cherry">{{ product.name }}</h6>
+                        <span class="card-text product-description d-block">{{ product.description }}</span>
                         <span class="card-text float-left">&euro;{{ product.price }}</span>
                         <span class="card-text text-muted float-right">
                             <i class="fas fa-tag mr-2"></i>{{ product.category.friendly_name }}

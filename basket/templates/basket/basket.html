@@ -64,7 +64,7 @@
                             <h5>{{ item.product.name }}</h5>
                         </td>
                         <td class="align-middle">
-                            <form method="POST" action="{% url 'replace_item_quantity' item.product.id %}"style="width: 150px;">
+                            <form method="POST" action="{% url 'replace_item_quantity' item.product.id %}" class="quantity-form-element">
                                 {% csrf_token %}
                                 <div class="form-group text-center my-auto">
                                     <div class="input-group">

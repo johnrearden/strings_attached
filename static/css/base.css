@@ -50,6 +50,10 @@
     height: 40px;
 }
 
+.quantity-form-element {
+    width: 150px;
+}
+
 .checkout-button {
     background-color: #000044;
     color: white;
@@ -81,7 +85,7 @@
 }
 
 body {
-    padding-top: 100px;
+    padding-top: 96px;
     height: 100vh;
 }
 
@@ -122,6 +126,14 @@ a, a:hover {
     color: black;
     font-size: 1.3rem;
 }
+/* These elements override standard bootstrap classes */
+.card-title {
+    margin-bottom: 0 !important;
+}
+
+.card-body {
+    padding: 0.8rem !important;
+}
 
 .card:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
@@ -129,6 +141,15 @@ a, a:hover {
 
 .card {
     background-color: #ffffffdd;
+}
+
+.category-link {
+    font-size: 1.5rem;
+    color: #401c20;
+}
+
+.category-link:hover {
+    text-decoration: underline;
 }
 
 /* These elements style the product display page */

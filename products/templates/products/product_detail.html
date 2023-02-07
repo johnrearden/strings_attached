@@ -5,18 +5,17 @@
 
 <div class="container-fluid">
     <div class="row mt-4">
-        <div class="col-8 offset-2 col-lg-3 offset-lg-2 border-dark">
+        <div class="col-xs-8 offset-xs-2 col-md-5 col-lg-4 border-dark d-flex align-items-center justify-content-center">
             <div class="position-relative">
-                <img src="{{ product.image.url }}" class="w-100" alt="Image of {{ product.name }}">
-                {% if product.stock_level == 0 %}
-                <div class="out-of-stock-overlay"></div>
-                <div class="out-of-stock-tag">out of stock</div>
-                {% endif %}
+                <img src="{{ product.image.url }}" class="img-fluid p-3" alt="Image of {{ product.name }}">
             </div>
-
+            {% if product.stock_level == 0 %}
+            <div class="out-of-stock-overlay"></div>
+            <div class="out-of-stock-tag">out of stock</div>
+            {% endif %}
         </div>
 
-        <div class="col-10 offset-1 col-lg-5 mt-2">
+        <div class="col-xs-10 offset-xs-1 col-md-7 col-lg-8 mt-2">
             <h2 class="card-title font-weight-bolder">{{ product.name }}</h2>
             <p class="card-text">{{ product.description }}</p>
             {% if offer %}
@@ -37,10 +36,10 @@
 
                     <form method="POST" action="{% url 'add_to_basket' product.id %}">
                         {% csrf_token %}
-                        <div class="form-group text-center">
+                        <div class="form-group text-center quantity-form-element">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button class="decrement-qty btn btn-cherry" data-item_id="{{ product.id }}"
+                                    <button class="decrement-qty btn btn-quantity" data-item_id="{{ product.id }}"
                                         id="decrement-{{ product.id }}">
                                         <span class="icon">
                                             <i class="fas fa-minus"></i>
@@ -51,7 +50,7 @@
                                     name="quantity" value="1" min="1" max="10" data-item_id="{{ product.id }}"
                                     data-should_submit="true" id="quantity-input-{{ product.id }}">
                                 <div class="input-group-append">
-                                    <button class="increment-qty btn btn-cherry" data-item_id="{{ product.id }}"
+                                    <button class="increment-qty btn btn-quantity" data-item_id="{{ product.id }}"
                                         id="increment-{{ product.id }}">
                                         <span class="icon">
                                             <i class="fas fa-plus"></i>
@@ -60,7 +59,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center">
+                        <div class="text-left">
                             <a href="{% url 'product_display' %}">
                                 <span class="btn btn-cherry">Back to Shop</span>
                             </a>
@@ -75,7 +74,7 @@
                     </form>
                 </div>
                 {% else %}
-                <div class="col-12 py-3 text-center">
+                <div class="col-12 py-3">
                     <h3 class="out-of-stock-bg p-1 mb-3">Sorry - will be back in stock soon!</h3>
                     <a href="{% url 'product_display' %}">
                         <span class="btn btn-cherry">Back to Shop</span>
@@ -89,7 +88,7 @@
                 {% endif %}
 
                 {% if product.audio_clip %}
-                <div class="col-6 text-center border p-2 text-cherry">
+                <div class="col-5 text-center border p-2 text-cherry">
                     <h1 class="text-center"><i class="fa-solid fa-headphones"></i></h1>
                     <h2>Listen</h2>
                     <audio src="{{ product.audio_clip.url }}" class="w-100" controls></audio>
