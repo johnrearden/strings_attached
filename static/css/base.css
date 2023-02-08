@@ -143,6 +143,10 @@ a, a:hover {
     background-color: #ffffffdd;
 }
 
+.thick-border-bottom {
+    border-bottom: 2px solid gray !important;
+}
+
 .category-link {
     font-size: 1.5rem;
     color: #401c20;

@@ -66,7 +66,7 @@
                         <button type="submit" id="submit-button" class="checkout-button mt-3">Pay now</button>
 
                         <div class="border p-2 mt-5">
-                            <h3 class="mb-3">Basket</h3>
+                            <h4 class="mb-3 text-center">Basket Summary</h4>
                             <table class="table table-sm">
                                 <thead class="bg-cherry text-white">
                                     <tr class="text-center font-weight-bolder">
@@ -89,6 +89,24 @@
                                         </td>
                                     </tr>
                                     {% endfor %}
+                                    <tr class="thick-border-bottom">
+                                        <td>
+                                            <span>Delivery</span>
+                                        </td>
+                                        <td></td>
+                                        <td class="align-middle text-right">
+                                            <span>&euro;{{ delivery }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>Total</span>
+                                        </td>
+                                        <td></td>
+                                        <td class="align-middle text-right">
+                                            <span>&euro;{{ total }}</span>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
