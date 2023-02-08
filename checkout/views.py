@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.views import View
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -115,6 +116,25 @@ class PaymentConfirmedView(APIView):
             order = Order.objects.get(order_number=order_number)
             order.payment_confirmed = True
             order.save()
+
+            # Send confirmation email to the customer
+            addr_fields = [order.full_name, order.street_address1,
+                           order.street_address2, order.town_or_city,
+                           order.postcode, order.country]
+            address = ''.join([f'{fd}\n' if fd else '' for fd in addr_fields])
+            items = OrderLineItem.objects.filter(order=order)
+            item_str = ''.join([f'{i.product.name} x {i.quantity}\n' for i in items])
+
+            message = (f'Your order #{order_number} is confirmed, and will be '
+                       f'dispatched shortly.\nYour order details are as '
+                       f'follows -\nAddress :\n{address}\nItems :\n'
+                       f'{item_str}\nEnjoy!!')
+            send_mail(
+                subject=f'Order #{order_number} confirmed',
+                message=message,
+                from_email=None,
+                recipient_list={order.email},
+            )
             redirect_url = f'/checkout/checkout_succeeded/{order_number}'
         return HttpResponseRedirect(redirect_url)
 
