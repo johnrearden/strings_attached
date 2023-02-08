@@ -9,8 +9,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .forms import OrderForm
-from .models import Order, OrderLineItem
-from products.models import Product, SpecialOffer
+from .models import Order, OrderLineItem, UserOrderProfile
+from products.models import Product
 from basket.contexts import basket_contents
 
 import stripe
@@ -36,8 +36,25 @@ class CheckoutView(View):
             currency=settings.STRIPE_CURRENCY,
             automatic_payment_methods={"enabled": True},
         )
-
-        order_form = OrderForm()
+        
+        # Populate the order form if the user has a UserOrderProfile
+        order_profile = UserOrderProfile.objects.filter(user=request.user)
+        if order_profile:
+            prof = order_profile[0]
+            data = {
+                'full_name': prof.full_name,
+                'email': prof.email,
+                'phone_number': prof.phone_number,
+                'country': prof.country,
+                'postcode': prof.postcode,
+                'town_or_city': prof.town_or_city,
+                'street_address1': prof.street_address1,
+                'street_address2': prof.street_address2,
+                'county': prof.county,
+            }
+            order_form = OrderForm(initial=data)
+        else:
+            order_form = OrderForm()
         template = 'checkout/checkout.html'
         context = {
             'order_form': order_form,
@@ -91,6 +108,34 @@ class SaveOrderView(APIView):
                 line_item.save()
 
             save_info = 'off' if not data.get('save-info') else data['save-info']
+            if save_info:
+                profile = UserOrderProfile.objects.filter(user=request.user)
+                if not profile:
+                    UserOrderProfile.objects.create(
+                        user=request.user,
+                        full_name=order.full_name,
+                        email=order.email,
+                        phone_number=order.phone_number,
+                        country=order.country,
+                        postcode=order.postcode,
+                        town_or_city=order.town_or_city,
+                        street_address1=order.street_address1,
+                        street_address2=order.street_address2,
+                        county=order.county,
+                    )
+                else:
+                    prof = profile[0]
+                    prof.full_name = order.full_name
+                    prof.email = order.email
+                    prof.phone_number = order.phone_number
+                    prof.country = order.country
+                    prof.postcode = order.postcode
+                    prof.town_or_city = order.town_or_city
+                    prof.street_address1 = order.street_address1
+                    prof.street_address2 = order.street_address2
+                    prof.county = order.county
+                    prof.save()
+
             metadata = {
                 'order_number': order.order_number,
                 'save_personal_info': save_info,

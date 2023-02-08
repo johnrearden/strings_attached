@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django.db.models import Sum
 from django.conf import settings
+from django.contrib.auth.models import User
 from products.models import Product
 
 
@@ -75,3 +76,20 @@ class OrderLineItem(models.Model):
 
     def __str__(self):
         return f'Product {self.product.name} : order {self.order.order_number}'
+
+
+class UserOrderProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,
+                                related_name='order_profile')
+    full_name = models.CharField(max_length=64)
+    email = models.EmailField(max_length=254)
+    phone_number = models.CharField(max_length=32)
+    country = models.CharField(max_length=64)
+    postcode = models.CharField(max_length=32, null=True, blank=True)
+    town_or_city = models.CharField(max_length=64)
+    street_address1 = models.CharField(max_length=96)
+    street_address2 = models.CharField(max_length=96, null=True, blank=True)
+    county = models.CharField(max_length=32, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.full_name} ({self.email})'
