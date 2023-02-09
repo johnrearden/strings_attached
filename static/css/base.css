@@ -210,6 +210,18 @@ audio {
     background-image: radial-gradient(#00000033, #00000066);
 }
 
+.stock-low-badge {
+    background-image: linear-gradient(#fc2212, #ff5e5b);
+    color: white;
+    font-weight: bold;
+}
+
+.special-offer-badge {
+    background-image: linear-gradient(#f79032, #fdca37);
+    color: white;
+    font-weight: bold;
+}
+
 .out-of-stock-tag {
     position: absolute;
     left: 10px;
