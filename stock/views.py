@@ -4,6 +4,7 @@ from django.views import View
 from django.db.models import F, Q
 from .forms import ProductAddForm
 from products.models import Product, SpecialOffer
+from itertools import chain
 
 
 class ProductAddView(FormView):
@@ -26,17 +27,28 @@ class ProductUpdateView(UpdateView):
 class StaffProductList(View):
     """
     Provides a table summarising the complete list of products, which can
-    be filtered and sorted by category, price, need for reorder.
+    be filtered and sorted by name, category, price and
+    stock-below-reorder-threshold. Because some prices can be reduced, the 
+    price sorting is implemented in python after accessing the database. 
     """
     def get(self, request, sort_key):
+        reverse = '' if sort_key[0] == '-' else '-'
+        product_order = ''
+        category_order = ''
+        price_order = ''
         manager = Product.objects
-        if sort_key == 'all':
-            product_list = manager.all()
-        elif sort_key == 'price':
-            product_list = manager.all().order_by('price')
-        elif sort_key == 'stock-low':
-            query = Q(stock_level__lte=F('reorder_threshold'))
-            product_list = manager.all().filter(query)
+        if 'all' in sort_key:
+            product_list = manager.all().order_by(f'{reverse}name')
+            product_order = '' if sort_key[0] == '-' else '-'
+        elif 'stock-low' in sort_key:
+            low_query = Q(stock_level__lte=F('reorder_threshold'))
+            stock_low_list = manager.all().filter(low_query)
+            normal_query = Q(stock_level__gt=F('reorder_threshold'))
+            stock_normal_list = manager.all().filter(normal_query)
+            product_list = list(chain(stock_low_list, stock_normal_list))
+        elif sort_key == 'category':
+            product_list = manager.all().order_by(f'{reverse}category')
+            category_order = '' if sort_key[0] == '-' else '-'
         else:
             product_list = manager.all()
 
@@ -54,17 +66,26 @@ class StaffProductList(View):
                 'category': prod.category.name,
                 'stock': prod.stock_level,
                 'threshold': prod.reorder_threshold,
-                'stock_low': prod.stock_level < prod.reorder_threshold,
+                'stock_low': prod.stock_level < prod.reorder_threshold
+                and prod.stock_level > 0,
+                'out_of_stock': prod.stock_level == 0,
                 'on_special': on_offer,
             }
             items.append(item)
-            if sort_key == 'on-special':
-                filtered_items = []
-                for item in items:
-                    if item['on_special'] is True:
-                        filtered_items.append(item)
-                items = filtered_items
+
+            # If required, sort items on effective price (incl. special offers)
+            if 'price' in sort_key:
+                if sort_key[0] == '-':
+                    items = sorted(items, key=lambda x: x['price'],
+                                   reverse=True)
+                else:
+                    items = sorted(items, key=lambda x: x['price'])
+                price_order = '' if sort_key[0] == '-' else '-'
+
         context = {
             'products': items,
+            'product_order': product_order,
+            'category_order': category_order,
+            'price_order': price_order,
         }
         return render(request, 'stock/staff_product_list.html', context)

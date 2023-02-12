@@ -6,33 +6,60 @@
     <div class="row justify-content-center">
         <div class="col-auto">
             <h3>Staff Product List</h3>
+            <span>Click header to sort or click item to edit.</span>
             <table class="table table-hover border mt-3">
 
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Product</th>
-                        <th scope="col">Category</th>
-                        <th scope="col" onclick="onColHeaderClick(event, 'price')">Price</th>
-                        <th scope="col">Stock</th>
+                        <th scope="col" onclick="onColHeaderClick(event, 'all')"
+                            data-order="{{ product_order }}" class="staff-product-title">
+                            Product&nbsp;&nbsp;<i class="fa-solid fa-sort"></i>
+                        </th>
+                        <th scope="col" onclick="onColHeaderClick(event, 'category')"
+                            data-order="{{ category_order }}">
+                            Category&nbsp;&nbsp;<i class="fa-solid fa-sort"></i>
+                        </th>
+                        <th scope="col" 
+                            onclick="onColHeaderClick(event, 'price')"
+                            data-order="{{ price_order }}">
+                            Price&nbsp;&nbsp;<i class="fa-solid fa-sort"></i>
+                        </th>
+                        <th scope="col" onclick="onColHeaderClick(event, 'stock-low')"
+                            data-order="">
+                            Stk <sub>low</sub>
+                        </th>
                         <th scope="col">Threshold</th>
-                        <th scope="col" onclick="onColHeaderClick(event, 'stock-low')">Stock Low</th>
-                        <th scope="col" onclick="onColHeaderClick(event, 'on-special')">Special Offer</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in products %}
                     <tr onclick="onRowClick(event, '{{ item.id }}')">
-                        <td>{{ item.name }}</td>
+                        <td>{{ item.name }}
+                            {% if item.on_special %}
+                            <span class="badge badge-pill badge-success">
+                                offer
+                            </span>
+                            {% endif %}
+                            {% if item.stock_low %}
+                            <span class="badge badge-pill badge-warning">
+                                low
+                            </span>
+                            {% endif %}
+                            {% if item.out_of_stock %}
+                            <span class="badge badge-pill badge-danger">
+                                o/s
+                            </span>
+                            {% endif %}
+                        </td>
                         <td>{{ item.category }}</td>
-                        <td class="text-right">&euro;{{ item.price }}</td>
-                        <td class="text-center">{{ item.stock }}</td>
+                        <td class="text-right {% if item.on_special %}special-offer-badge{% endif %}">
+                            &euro;{{ item.price }}
+                        </td>
+                        <td class="text-center {% if item.stock_low %}stock-low-badge{% endif %}
+                            {% if item.out_of_stock %}out-of-stock-badge{% endif %}">
+                            {{ item.stock }}
+                        </td>
                         <td class="text-center">{{ item.threshold }}</td>
-                        <td class="text-center {% if item.stock_low %}stock-low-badge{% endif %}">
-                            {% if item.stock_low %}LOW{% endif %}
-                        </td>
-                        <td class="text-center {% if item.on_special %}special-offer-badge{% endif %}">
-                            {% if item.on_special %}ON OFFER{% endif %}
-                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -48,7 +75,9 @@
         window.location = `/stock/update_product/${id}`;
     }
     const onColHeaderClick = (event, name) => {
-        window.location = `/stock/staff_product_list/${name}`;
+        const order = event.target.getAttribute('data-order');
+        event.target.setAttribute('data-order', order === '' ? '-': '');
+        window.location = `/stock/staff_product_list/${order}${name}`;
     }
 </script>
 {% endblock %}

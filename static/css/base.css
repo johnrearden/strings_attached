@@ -206,20 +206,33 @@ audio {
     top: 0;
 }
 
+.staff-product-title {
+    cursor: pointer;
+}
+
 .out-of-stock-bg {
     background-image: radial-gradient(#00000033, #00000066);
 }
 
 .stock-low-badge {
-    background-image: linear-gradient(#fc2212, #ff5e5b);
-    color: white;
-    font-weight: bold;
-}
-
-.special-offer-badge {
     background-image: linear-gradient(#f79032, #fdca37);
     color: white;
     font-weight: bold;
+    border-radius: 5px;
+}
+
+.out-of-stock-badge {
+    background-image: linear-gradient(#910c03, #ff5e5b);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.special-offer-badge {
+    background-image: linear-gradient(#0d6106, #46f732);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
 }
 
 .out-of-stock-tag {

@@ -264,6 +264,8 @@ Truncate text in a paragraph tag in html
 https://stackoverflow.com/questions/47761085/how-can-i-set-a-character-limit-for-paragraph
 Remove up and down arrows from number input
 https://www.geeksforgeeks.org/how-to-disable-arrows-from-number-input/
+Combining querysets in Django
+https://stackoverflow.com/questions/431628/how-to-combine-multiple-querysets-in-django
 
 
 # Acknowledgements
