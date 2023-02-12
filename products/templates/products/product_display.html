@@ -27,7 +27,6 @@
 {{ block.super }}
 {% if special_offers %}
 
-
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         {% for offer in special_offers %}
@@ -57,14 +56,10 @@
         {% endfor %}
     </div>
 </div>
-
 {% endif %}
-
 {% endblock %}
 
-
 {% block content %}
-
 <div class="container-fluid w-75">
     <div class="row py-2 text-center justify-content-center">
         <div class="col-auto">

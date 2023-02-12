@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from datetime import datetime, timedelta
 
 
-class TestProductsViews(TestCase):
+class TestProductsModels(TestCase):
 
     test_special_offer_price = 10
     test_standard_price = 20
@@ -32,13 +32,21 @@ class TestProductsViews(TestCase):
             stock_level=10,
             reorder_threshold=10,
             product_owner=cls.test_user)
+        cls.associated_product = Product.objects.create(
+            name='Guitar2',
+            category=cls.test_category,
+            description='A cool guitar also.',
+            price=cls.test_standard_price,
+            stock_level=10,
+            reorder_threshold=10,
+            product_owner=cls.test_user)
         cls.test_special_offer = SpecialOffer.objects.create(
             product=cls.test_product,
             reduced_price=cls.test_special_offer_price,
             start_date=datetime.now() - timedelta(days=10),
             end_date=datetime.now() + timedelta(days=10),)
 
-    # Tests on Product model
+# Tests on Product model
     def test_product_str_method(self):
         self.assertIn(self.test_product.name, self.test_product.__str__())
         cat_name = self.test_product.category.name
@@ -99,12 +107,12 @@ class TestProductsViews(TestCase):
         current_price = self.test_product.get_current_price()
         self.assertEqual(current_price, self.test_standard_price)
 
-    # Tests on Category model
+# Tests on Category model
     def test_category_string_method(self):
         cat_name = self.test_category.name
         self.assertIn(cat_name, self.test_category.__str__())
 
-    # Tests on Special Offer model
+# Tests on Special Offer model
     def test_creation_fails_with_negative_reduced_price(self):
         offer = SpecialOffer.objects.create(
             product=self.test_product,
@@ -139,3 +147,29 @@ class TestProductsViews(TestCase):
         )
         self.assertRaises(ValidationError, lambda: self.clean_it(offer))
 
+# Tests on ProductAssociation model
+    def test_association_weight_less_than_1_raises_exception(self):
+        association = ProductAssociation.objects.create(
+            base_product=self.test_product,
+            associated_product=self.associated_product,
+            weight=-1,
+        )
+        self.assertRaises(ValidationError, lambda: self.clean_it(association))
+
+    def test_product_association_with_same_product_raises_exception(self):
+        association = ProductAssociation.objects.create(
+            base_product=self.test_product,
+            associated_product=self.test_product,
+            weight=2,
+        )
+        self.assertRaises(ValidationError, lambda: self.clean_it(association))
+    
+    def test_product_association_string_method(self):
+        association = ProductAssociation.objects.create(
+            base_product=self.test_product,
+            associated_product=self.associated_product,
+        )
+        name1 = association.base_product.name
+        name2 = association.associated_product.name
+        self.assertIn(name1, association.__str__())
+        self.assertIn(name2, association.__str__())

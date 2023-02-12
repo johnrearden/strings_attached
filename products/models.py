@@ -48,7 +48,8 @@ class Product(models.Model):
                                 validators=[MinValueValidator(0)],)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(upload_to='product_images/', null=True,
-                              blank=True)
+                              blank=True,
+                              default='product_images/tempfile.png')
     audio_url = models.URLField(max_length=1024, null=True, blank=True)
     audio_clip = models.FileField(upload_to='product_audio_clips', null=True,
                                   blank=True)
@@ -97,11 +98,15 @@ class ProductAssociation(models.Model):
                                      related_name='from_product')
     associated_product = models.ForeignKey(Product, on_delete=models.CASCADE,
                                            related_name='associated_products')
-    weight = models.IntegerField(default=1)
+    weight = models.IntegerField(default=1, validators=[MinValueValidator(1),])
 
     def __str__(self):
         return (f'Association : from {self.base_product.name} to '
                 f'{self.associated_product.name}')
+
+    def clean(self):
+        if self.base_product == self.associated_product:
+            raise ValidationError('You can\'t associate a product with itself')
 
 
 
