@@ -84,6 +84,11 @@
     height: 80px;
 }
 
+.thumbnail-tiny {
+    width: 40px;
+    height: 40px;
+}
+
 body {
     padding-top: 96px;
     height: 100vh;
@@ -229,8 +234,7 @@ audio {
 }
 
 .special-offer-badge {
-    background-image: linear-gradient(#0d6106, #46f732);
-    color: white;
+    color: green;
     font-weight: bold;
     border-radius: 5px;
 }

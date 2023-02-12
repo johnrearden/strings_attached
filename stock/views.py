@@ -61,6 +61,7 @@ class StaffProductList(View):
             price = offers[0].reduced_price if on_offer else prod.price
             item = {
                 'name': prod.name,
+                'image': prod.image.url,
                 'id': prod.id,
                 'price': price,
                 'category': prod.category.name,
