@@ -266,6 +266,10 @@ Remove up and down arrows from number input
 https://www.geeksforgeeks.org/how-to-disable-arrows-from-number-input/
 Combining querysets in Django
 https://stackoverflow.com/questions/431628/how-to-combine-multiple-querysets-in-django
+Testing in Django
+https://realpython.com/testing-in-django-part-1-best-practices-and-examples/
+Email send test not working because of missing User email field
+https://stackoverflow.com/questions/39493749/django-tests-for-sending-email
 
 
 # Acknowledgements

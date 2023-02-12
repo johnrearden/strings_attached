@@ -102,7 +102,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 if os.environ.get('DEBUG') == 'True':
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
     DEFAULT_FROM_USER = 'strings_attached@gmail.com'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -124,13 +124,18 @@ MESSAGE_TAGS = {
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
+# Database : Use local sqlite db if running tests.
+if sys.argv.__contains__('test'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL')),
     }
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

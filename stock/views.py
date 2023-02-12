@@ -2,19 +2,24 @@ from django.views.generic.edit import FormView, UpdateView
 from django.shortcuts import render
 from django.views import View
 from django.db.models import F, Q
+from django.contrib.auth.mixins import UserPassesTestMixin
 from .forms import ProductAddForm
 from products.models import Product, SpecialOffer
 from itertools import chain
 
 
-class ProductAddView(FormView):
+class ProductAddView(UserPassesTestMixin, FormView):
     """ A form to allow staff to add a new product """
     template_name = 'stock/product_add_form.html'
     form_class = ProductAddForm
     success_url = '/'
 
+    def test_func(self):
+        print(f'user is staff == {self.request.user.is_staff}')
+        return self.request.user.is_staff
 
-class ProductUpdateView(UpdateView):
+
+class ProductUpdateView(UserPassesTestMixin, UpdateView):
     """ A form to allow staff to update an existing product """
     model = Product
     template_name = 'stock/product_update_form.html'
@@ -23,8 +28,11 @@ class ProductUpdateView(UpdateView):
               'product_owner']
     success_url = '/'
 
+    def test_func(self):
+        return self.request.user.is_staff
 
-class StaffProductList(View):
+
+class StaffProductList(UserPassesTestMixin, View):
     """
     Provides a table summarising the complete list of products, which can
     be filtered and sorted by name, category, price and
@@ -90,3 +98,6 @@ class StaffProductList(View):
             'price_order': price_order,
         }
         return render(request, 'stock/staff_product_list.html', context)
+
+    def test_func(self):
+        return self.request.user.is_staff

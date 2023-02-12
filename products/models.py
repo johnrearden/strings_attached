@@ -2,6 +2,8 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.core.validators import MinValueValidator
+from django.core.exceptions import ValidationError
 
 
 class Category(models.Model):
@@ -18,7 +20,8 @@ class SpecialOffer(models.Model):
         cases, a second product is required """
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE,
                                 related_name='products')
-    reduced_price = models.DecimalField(max_digits=6, decimal_places=2)
+    reduced_price = models.DecimalField(max_digits=6, decimal_places=2,
+                                        validators=[MinValueValidator(0),])
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
 
@@ -30,6 +33,10 @@ class SpecialOffer(models.Model):
         return (f'Offer : {self.product} available at {self.reduced_price} '
                 f'until {self.end_date}')
 
+    def clean(self):
+        if self.start_date > self.end_date:
+            raise ValidationError('Start date can\'t be after end date!')
+
 
 class Product(models.Model):
     """ A product purchaseable by the user """
@@ -37,15 +44,18 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name='products')
     description = models.TextField()
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.DecimalField(max_digits=7, decimal_places=2,
+                                validators=[MinValueValidator(0)],)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(upload_to='product_images/', null=True,
                               blank=True)
     audio_url = models.URLField(max_length=1024, null=True, blank=True)
     audio_clip = models.FileField(upload_to='product_audio_clips', null=True,
                                   blank=True)
-    stock_level = models.IntegerField(default=20)
-    reorder_threshold = models.IntegerField(default=5)
+    stock_level = models.IntegerField(default=20,
+                                      validators=[MinValueValidator(0)],)
+    reorder_threshold = models.IntegerField(default=5,
+                                            validators=[MinValueValidator(0)],)
     product_owner = models.ForeignKey(User, on_delete=models.SET_NULL,
                                       related_name="owned_products",
                                       default=1, null=True)
