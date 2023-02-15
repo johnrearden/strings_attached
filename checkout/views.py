@@ -36,25 +36,28 @@ class CheckoutView(View):
             currency=settings.STRIPE_CURRENCY,
             automatic_payment_methods={"enabled": True},
         )
-        
+
         # Populate the order form if the user has a UserOrderProfile
-        order_profile = UserOrderProfile.objects.filter(user=request.user)
-        if order_profile:
-            prof = order_profile[0]
-            data = {
-                'full_name': prof.full_name,
-                'email': prof.email,
-                'phone_number': prof.phone_number,
-                'country': prof.country,
-                'postcode': prof.postcode,
-                'town_or_city': prof.town_or_city,
-                'street_address1': prof.street_address1,
-                'street_address2': prof.street_address2,
-                'county': prof.county,
-            }
-            order_form = OrderForm(initial=data)
-        else:
+        if request.user.is_anonymous:
             order_form = OrderForm()
+        else:
+            order_profile = UserOrderProfile.objects.filter(user=request.user)
+            if order_profile:
+                prof = order_profile[0]
+                data = {
+                    'full_name': prof.full_name,
+                    'email': prof.email,
+                    'phone_number': prof.phone_number,
+                    'country': prof.country,
+                    'postcode': prof.postcode,
+                    'town_or_city': prof.town_or_city,
+                    'street_address1': prof.street_address1,
+                    'street_address2': prof.street_address2,
+                    'county': prof.county,
+                }
+                order_form = OrderForm(initial=data)
+            else:
+                order_form = OrderForm()
         template = 'checkout/checkout.html'
         context = {
             'order_form': order_form,
@@ -63,9 +66,6 @@ class CheckoutView(View):
         }
 
         return render(request, template, context)
-
-    def post(self, request):
-        print(request.POST)
 
 
 class SaveOrderView(APIView):
@@ -107,7 +107,7 @@ class SaveOrderView(APIView):
                                                          quantity=quantity)
                 line_item.save()
 
-            save_info = 'off' if not data.get('save-info') else data['save-info']
+            save_info = '' if not data.get('save-info') else data['save-info']
             if save_info:
                 profile = UserOrderProfile.objects.filter(user=request.user)
                 if not profile:
@@ -147,8 +147,8 @@ class SaveOrderView(APIView):
                     pid,
                     metadata=metadata)
             except Exception:
-                print('exception')
-        return Response(status=status.HTTP_200_OK)
+                print('cant save metadata in payment intent')
+            return Response(status=status.HTTP_200_OK)
 
 
 class PaymentConfirmedView(APIView):
@@ -188,7 +188,6 @@ class CheckoutSucceededView(View):
     def get(self, request, order_number):
         order = Order.objects.get(order_number=order_number)
         line_items = OrderLineItem.objects.filter(order=order)
-        item_count = sum([item.quantity for item in line_items])
         context = {
             'order': order,
             'order_line_items': line_items,

@@ -47,7 +47,8 @@ class Order(models.Model):
         self.order_total = self.items.aggregate(sum)['line_item_total__sum']
 
         # Check for delivery charge on orders not including an instrument
-        instrument_line_items = self.items.filter(category__name='Instrument')
+        instrument_line_items = self.items \
+            .filter(product__category__name='Instruments')
         if not instrument_line_items:
             self.delivery_cost = settings.DEFAULT_DELIVERY_CHARGE
         self.grand_total = self.order_total + self.delivery_cost

@@ -15,7 +15,6 @@ class ProductAddView(UserPassesTestMixin, FormView):
     success_url = '/'
 
     def test_func(self):
-        print(f'user is staff == {self.request.user.is_staff}')
         return self.request.user.is_staff
 
 
@@ -36,8 +35,8 @@ class StaffProductList(UserPassesTestMixin, View):
     """
     Provides a table summarising the complete list of products, which can
     be filtered and sorted by name, category, price and
-    stock-below-reorder-threshold. Because some prices can be reduced, the 
-    price sorting is implemented in python after accessing the database. 
+    stock-below-reorder-threshold. Because some prices can be reduced, the
+    price sorting is implemented in python after accessing the database.
     """
     def get(self, request, sort_key):
         reverse = '' if sort_key[0] == '-' else '-'

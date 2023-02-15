@@ -16,8 +16,7 @@ class Category(models.Model):
 
 
 class SpecialOffer(models.Model):
-    """ Represents a time-limited price reduction on a product. In some
-        cases, a second product is required """
+    """ Represents a time-limited price reduction on a product."""
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE,
                                 related_name='products')
     reduced_price = models.DecimalField(max_digits=6, decimal_places=2,
@@ -107,6 +106,3 @@ class ProductAssociation(models.Model):
     def clean(self):
         if self.base_product == self.associated_product:
             raise ValidationError('You can\'t associate a product with itself')
-
-
-

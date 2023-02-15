@@ -113,6 +113,14 @@ class TestProductsModels(TestCase):
         self.assertIn(cat_name, self.test_category.__str__())
 
 # Tests on Special Offer model
+    def test_special_offer_string_method(self):
+        product = self.test_special_offer.product.name
+        price = self.test_special_offer.reduced_price
+        end = self.test_special_offer.end_date
+        self.assertIn(product, self.test_special_offer.__str__())
+        self.assertIn(str(price), self.test_special_offer.__str__())
+        self.assertIn(str(end), self.test_special_offer.__str__())
+
     def test_creation_fails_with_negative_reduced_price(self):
         offer = SpecialOffer.objects.create(
             product=self.test_product,
