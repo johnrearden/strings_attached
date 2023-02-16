@@ -7,8 +7,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const valueInputs = document.getElementsByClassName('quantity-input');
+    let quantitySubmitTimerID;
     for (let input of valueInputs) {
         const id = input.id.replace('quantity-input-', '');
+        const form = document.getElementById(`form_${id}`);
         const shouldSubmitOnChange = input.getAttribute('data-should_submit') === 'true'? true : false;
         disableButtonsIfRangeExceeded(id);
         input.addEventListener('change', (event) => {
@@ -17,27 +19,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const incrementButton = document.getElementById(`increment-${id}`);
         incrementButton.addEventListener('click', (event) => {
-            if (!shouldSubmitOnChange) {
-                event.preventDefault();
-            }
+            event.preventDefault();
             let value = parseInt(input.value);
             value += 1;
             input.value = value;
             disableButtonsIfRangeExceeded(id);
+            if (shouldSubmitOnChange) {
+                console.log('if statement invoked')
+                clearTimeout(quantitySubmitTimerID);
+                quantitySubmitTimerID = setTimeout(() => {
+                    console.log('submitting form');
+                    form.submit();
+                }, 500);
+            }
         });
         const decrementButton = document.getElementById(`decrement-${id}`);
         decrementButton.addEventListener('click', (event) => {
-            if (!shouldSubmitOnChange) {
-                event.preventDefault();
-            }
+            event.preventDefault();
             let value = parseInt(input.value);
             value -= 1;
             input.value = value;
             disableButtonsIfRangeExceeded(id);
+            if (shouldSubmitOnChange) {
+                console.log('if statement invoked')
+                clearTimeout(quantitySubmitTimerID);
+                quantitySubmitTimerID = setTimeout(() => {
+                    console.log('submitting form');
+                    form.submit();
+                }, 500);
+            }
         });
     }
-
-
 });
 
 
