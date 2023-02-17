@@ -188,8 +188,10 @@ class CheckoutSucceededView(View):
     def get(self, request, order_number):
         order = Order.objects.get(order_number=order_number)
         line_items = OrderLineItem.objects.filter(order=order)
+        item_count = sum([item.quantity for item in line_items])
         context = {
             'order': order,
             'order_line_items': line_items,
+            'item_count': item_count,
         }
         return render(request, 'checkout/checkout_succeeded.html', context)
