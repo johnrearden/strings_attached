@@ -70,6 +70,11 @@
                             </a>
                             {% endif %}
                             <input type="submit" class="btn btn-cherry" value="Add to Basket">
+                            <a href="{% url 'view_basket' %}">
+                                <span class="btn btn-cherry">
+                                    View Basket
+                                </span>
+                            </a>
                         </div>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     </form>
@@ -133,6 +138,7 @@
                             <input type="hidden" name="quantity" value="1">
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         </form>
+                        
                     </div>
                 </div>
             </div>

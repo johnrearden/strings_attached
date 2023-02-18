@@ -5,7 +5,7 @@
 {% if special_offers %}
 
 <div class="container-fluid">
-    <div class="row align-items-center mt-5">
+    <div class="row align-items-center">
         {% for offer in special_offers %}
         <div class="col-12 special-offer-banner py-2 text-center">
             <h1 class="font-weight-bold text-white text-uppercase d-inline">
@@ -18,15 +18,8 @@
                 {% endif %}
             </span>
             <span class="text-white font-bold">
-                Better hurry! Offer ends {{ offer.end_date }}
+                Offer ends {{ offer.end_date }}
             </span>
-            <form method="POST" action="{% url 'add_to_basket' offer.product.id %}" class="form-inline d-inline ml-3">
-                {% csrf_token %}
-                <input type="submit" class="btn btn-cherry" value="ADD">
-                <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="redirect_url" value="{{ request.path }}">
-            </form>
-
         </div>
         {% endfor %}
     </div>
@@ -125,12 +118,13 @@
                     <i class="fa-regular fa-hand-point-left"></i>&nbsp;&nbsp;Shop
                 </span>
             </a>
-            
-            <a href="{% url 'empty_basket' %}">
-                <span class="btn btn-cherry">
-                    Clear&nbsp;&nbsp;<i class="fa-regular fa-trash-can"></i>
-                </span>
+            <form method="POST" action="{% url 'empty_basket' %}">
+                {% csrf_token %}
+                <button type='submit' class="btn btn-cherry">
+                    Clear All&nbsp;&nbsp;<i class="fa-regular fa-trash-can"></i>
+                </button>
             </a>
+            
         </div>
 
         {% if total %}

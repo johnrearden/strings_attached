@@ -100,8 +100,11 @@ The User Epics and their related User Stories are as follows:
     - Story : [)
 
 ## Data Model
+### Products App
+![Entity-relationship diagram for models](docs/products_app_db_schema.png)
 
-![Entity-relationship diagram for models]()
+### Checkout App
+![Entity-relationship diagram for models](docs/checkout_app_db_schema.png)
 
 - Data validation
 
@@ -258,24 +261,33 @@ GitHub icon to connect your Heroku project to your GitHub repo. Enter your repos
 # Credits
 Structure of extensible base.html page largely copied from Boutique Ado Walkthrough
 https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/250e2c2b8e43cccb56b4721cd8a8bd4de6686546/templates/base.html
+
 Hero image of guitar on guitar stand - Kelvin Franca on Pexels
 https://www.pexels.com/@kelvinernandi/
+
 Truncate text in a paragraph tag in html
 https://stackoverflow.com/questions/47761085/how-can-i-set-a-character-limit-for-paragraph
+
 Remove up and down arrows from number input
 https://www.geeksforgeeks.org/how-to-disable-arrows-from-number-input/
+
 Combining querysets in Django
 https://stackoverflow.com/questions/431628/how-to-combine-multiple-querysets-in-django
+
 Testing in Django
 https://realpython.com/testing-in-django-part-1-best-practices-and-examples/
+
 Email send test not working because of missing User email field
 https://stackoverflow.com/questions/39493749/django-tests-for-sending-email
+
+Generate database schema diagram from project models
+https://django-extensions.readthedocs.io/en/latest/graph_models.html
 
 
 # Acknowledgements
 
 I'd like to acknowledge the invaluable assistance I received from my tutor, Celestine Okoro, 
-and the advice and encouragement I received from my cohort coordinators Kenan Wright and Kasia Bogucka.
+and the advice and encouragement I received from my cohort facilitators Kenan Wright, Kasia Bogucka, and Paul O'Donnell.
 Thanks also to my fellow students whose help in our weekly stand-ups made a big difference.
 
 [Return to top](#Strings_attached)

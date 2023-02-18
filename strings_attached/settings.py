@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'crispy_forms',
     'storages',
+    'django_extensions',
     'welcome',
     'products',
     'basket',
@@ -114,13 +115,13 @@ else:
     DEFAULT_FROM_USER = os.environ.get("EMAIL_APP_USER")
 
 
-MESSAGE_TAGS = {
+""" MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
     messages.INFO: 'alert-info',
     messages.SUCCESS: 'alert-success',
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
-}
+} """
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
@@ -223,3 +224,9 @@ DEFAULT_DELIVERY_CHARGE = 5
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_PRIVATE_KEY = os.environ.get('STRIPE_PRIVATE_KEY')
 STRIPE_CURRENCY = 'eur'
+
+# Pydot configuration for auto-generating database schema
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}

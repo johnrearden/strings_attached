@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+from django.contrib import messages
 from products.models import Product, SpecialOffer
 from datetime import datetime
 from django.db.models import Q
@@ -55,6 +56,9 @@ class AddToBasket(View):
             basket[product_id] = quantity
 
         request.session['basket'] = basket
+        product = Product.objects.get(pk=product_id)
+        msg = f'Added {quantity} x {product.name} to your basket!'
+        messages.success(request, msg)
         return redirect(redirect_url)
 
 
@@ -66,6 +70,12 @@ class RemoveFromBasket(View):
         if (product_id in list(basket.keys())):
             basket.pop(product_id)
         request.session['basket'] = basket
+
+        # Notify the user with a success message
+        product = Product.objects.get(pk=product_id)
+        msg = f'{product.name} removed from basket.'
+        messages.success(request, msg)
+
         return redirect(redirect_url)
 
 
@@ -76,19 +86,24 @@ class ReplaceItemQuantity(View):
         redirect_url = request.POST.get('redirect_url')
         basket = request.session.get('basket', {})
         new_quantity = int(request.POST.get('quantity'))
-        print(basket)
-        print(f'new_quantity == {new_quantity}')
         if (product_id in list(basket.keys())):
             basket[product_id] = new_quantity
         request.session['basket'] = basket
+
+        # Notify the user with a success message
+        product = Product.objects.get(pk=product_id)
+        msg = f'Your basket now has {new_quantity} x {product.name}'
+        messages.success(request, msg)
+
         return redirect(redirect_url)
 
 
 class EmptyBasket(View):
     """
-    Removes all items from the basket and returns the user to the main 
+    Removes all items from the basket and returns the user to the main
     product display page.
     """
-    def get(self, request):
+    def post(self, request):
         request.session['basket'] = {}
+        messages.success(request, 'All items removed from basket.')
         return redirect('product_display')

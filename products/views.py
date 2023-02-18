@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, ProductAssociation, Category, SpecialOffer
 from django.views import View
 from django.db.models import Q
+from django.contrib import messages
 from datetime import datetime
 
 
