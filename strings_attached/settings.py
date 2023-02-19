@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'basket',
     'stock',
     'checkout',
+    'video_lessons',
 ]
 
 MIDDLEWARE = [
@@ -219,6 +220,7 @@ if os.environ.get('DEBUG') == 'False':
 
 # Business Logic configuration
 DEFAULT_DELIVERY_CHARGE = 5
+FREE_LESSONS = 2
 
 # Payments configuration
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')

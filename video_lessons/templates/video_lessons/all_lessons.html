@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <h1>Check out our video lessons!</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        {% if not full_access %}
+        <div class="col-2 special-offer-banner py-5">
+            <a href="{% url 'subscribe' %}">
+                <h2>Subscribe</h2>
+                <p>Become a member.</p>
+                <p>Unlock all videos.</p>
+                <p>Begin your journey.</p>
+            </a>
+        </div>
+        {% else %}
+        <div class="col-2 py-5 border">
+            <h2>Practice</h2>
+            <h3>Makes</h3>
+            <h4>Perfect.</h4>
+            <p>Enjoy your journey.</p>
+        </div>
+        {% endif %}
+
+        <div class="col-9">
+            {% for ser in series %}
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h3>{{ ser.name }}</h3>
+                    <p>{{ ser.description }}</p>
+                </div>
+                {% for lesson in ser.lessons %}
+                <div class="col-2 mb-2">
+                    {% if forloop.counter > ser.lesson_count %}
+                    <img src="{{ lesson.image.url }}" alt="Thumbnail image of {{ lesson.name }}"
+                        class="video-thumbnail img-fluid">
+                    <img src="{{ MEDIA_URL }}/video_locked_overlay.png" alt="overlay image of padlock"
+                        class="video-locked-overlay img-fluid">
+                    {% else %}
+                    <a href="{% url 'video_player' lesson.id %}">
+                        <img src="{{ lesson.image.url }}" alt="Thumbnail image of {{ lesson.name }}"
+                            class="img-fluid video-thumbnail">
+                    </a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row text-center mt-5">
+        <div class="col">
+            <h1>Subscribe</h1>
+        </div>
+    </div>
+    <div class="row mt-3">
+        {% for subscription in subscriptions %}
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <img class="card-img-top img-fluid p-3" src="{{ subscription.image.url}}" alt="Card image cap">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ subscription.name }}</h5>
+                    <p class="card-text">{{ subscription.description }}</p>
+                    <a href="{% url 'create_subscription_checkout_session' subscription.id %}" class="btn btn-primary">
+                        Subscribe
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

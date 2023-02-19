@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mt-5 mb-3 text-center">
+        <div class="col-lg-6 offset-lg-3">
+            <h1>Lesson #{{ lesson.ordinal }} - {{ lesson.name }}</h1>
+            <video width="100%" controls>
+                <source src="{{ lesson.video_file.url }}" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    <div class="row text-center mt-3">
+        <div class="col">
+            
+            {% if lesson.ordinal > 1 %}
+            <a href="{% url 'video_player' lesson.id|add:'-1' %}">
+                <span class="btn btn-cherry">
+                    <i class="fa-solid fa-chevron-left"></i>&nbsp;&nbsp;Previous
+                </span>
+            </a>
+            {% else %}
+            <span class="btn btn-inactive">
+                <i class="fa-solid fa-chevron-left"></i>&nbsp;&nbsp;Previous
+            </span>
+            {% endif %}
+            {% if lesson.ordinal < lesson_count %}
+            <a href="{% url 'video_player' lesson.id|add:'1' %}">
+                <span class="btn btn-cherry">
+                    Next&nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>
+                </span>
+            </a>
+            {% else %}
+            <span class="btn btn-inactive">
+                Next&nbsp&nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>
+            </span>
+            {% endif %}
+            <a href="{% url 'all_lessons' %}">
+                <span class="btn btn-cherry ml-5">See All Lessons</span>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <div class="row text-center mt-4 mb-2">
+        <div class="col">
+            <h3>Other lessons in series</h3>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        
+        {% for les in lessons_in_series %}
+        <div class="col-1">
+            {% if not full_access and forloop.counter > 2 %}
+            <img src="{{ lesson.image.url }}" alt="Thumbnail image of {{ lesson.name }}"
+                class="video-thumbnail img-fluid">
+            <img src="{{ MEDIA_URL }}/video_locked_overlay.png" alt="overlay image of padlock"
+                class="video-locked-overlay img-fluid">
+            {% else %}
+            <a href="{% url 'video_player' lesson.id %}">
+                <img src="{{ lesson.image.url }}" alt="Thumbnail image of {{ lesson.name }}" 
+                    class="img-fluid video-thumbnail
+                    {% if lesson.ordinal == forloop.counter %}video-thumbnail-selected{% else %}video-thumbnail{% endif %}">
+            </a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% if lesson.ordinal == forloop.counter %}video-thumbnail-selected{% else %}video-thumbnail{% endif %}

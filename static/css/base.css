@@ -46,6 +46,13 @@
     color: white;
 }
 
+.btn-inactive {
+    color: #bbbbbb;
+    border: 1px solid #bbbbbb;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
 .quantity-input {
     height: 40px;
 }
@@ -87,6 +94,36 @@
 .thumbnail-tiny {
     width: 40px;
     height: 40px;
+}
+
+.video-thumbnail {
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+.video-thumbnail:hover {
+    border: 1px solid orange;
+    box-shadow: 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 10px !important;
+}
+
+.video-thumbnail-selected {
+    border: 3px solid #f16b7a;
+    border-radius: 5px;
+}
+
+.video-locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border: 1px solid grey;
+    border-radius: 5px;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 body {
