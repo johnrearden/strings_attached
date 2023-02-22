@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from django.conf import settings
@@ -15,7 +14,7 @@ class AllLessonsView(View):
         if not request.user.is_anonymous:
             profile = UserLearningProfile.objects.filter(user=request.user)
             if profile:
-                subscriber = profile[0].subscriber 
+                subscriber = profile[0].subscriber
                 paid = profile[0].subscription_paid
                 full_access = subscriber and paid
 
@@ -45,7 +44,7 @@ class VideoPlayer(View):
         if not request.user.is_anonymous:
             profile = UserLearningProfile.objects.filter(user=request.user)
             if profile:
-                subscriber = profile[0].subscriber 
+                subscriber = profile[0].subscriber
                 paid = profile[0].subscription_paid
                 full_access = subscriber and paid
 
@@ -73,13 +72,25 @@ class SubscriptionOptionsView(View):
 
 class CreateStripeCheckoutSessionView(View):
     def get(self, request, subscription_id):
+
+        # If no user_learning_profile exists, create one (login is required
+        # for this view, so the user will not be anonymous)
+        user_learning_profile = UserLearningProfile.objects.\
+            filter(user=request.user)
+        if not user_learning_profile:
+            profile = UserLearningProfile.objects.create(
+                user=request.user,
+            )
+        else:
+            profile = user_learning_profile[0]
         subscription = Subscription.objects.get(pk=subscription_id)
         stripe_lookup_id = subscription.stripe_lookup_id
         stripe.api_key = settings.STRIPE_PRIVATE_KEY
         metadata = {
-            'test': 'test_data',
+            'user_id': profile.id,
         }
         base_url = 'http://localhost:8000'
+        email = request.user.email
         session = stripe.checkout.Session.create(
             success_url=f'{base_url}/video_lessons/subscription_success/',
             cancel_url=f'{base_url}/video_lessons/subscription_cancelled/',
@@ -89,7 +100,7 @@ class CreateStripeCheckoutSessionView(View):
                 'price': stripe_lookup_id,
                 'quantity': 1,
             }],
-            customer_email='mickey@mouse.com',
+            customer_email=email,
             metadata=metadata,
         )
         print(session.last_response.body)

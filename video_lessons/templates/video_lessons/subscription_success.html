@@ -5,7 +5,23 @@
 <div class="container mt-3">
     <div class="row text-center mt-5">
         <div class="col">
-            <h1>Subscription Successful</h1>
+            <h1>Subscription Successful!</h1>
+            <h2>Welcome to the Strings Attached Guitar School</h2>
+            <p>
+                You now have full access to all of our video content. Click on Browse Lessons
+                below to see all the available lessons. You can manage your subscription by clicking
+                on the Manage Subscription link below.
+            </p>
+            <a href="{% url 'all_lessons' %}">
+                <span class="btn btn-cherry">
+                    Browse Lessons
+                </span>
+            </a>
+            <a href="#">
+                <span class="btn btn-cherry">
+                    Manage Subscription
+                </span>
+            </a>
         </div>
     </div>
 </div>

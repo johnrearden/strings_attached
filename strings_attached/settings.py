@@ -103,6 +103,9 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+
 if os.environ.get('DEBUG') == 'True':
     EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
     DEFAULT_FROM_USER = 'strings_attached@gmail.com'
