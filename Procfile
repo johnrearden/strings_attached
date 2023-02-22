@@ -1,1 +1,1 @@
-web: gunicorn strings_attached.wsgi
+web: gunicorn strings_attached.wsgi --log-file=-
