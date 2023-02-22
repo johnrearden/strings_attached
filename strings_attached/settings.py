@@ -225,6 +225,7 @@ FREE_LESSONS = 2
 # Payments configuration
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_PRIVATE_KEY = os.environ.get('STRIPE_PRIVATE_KEY')
+STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
 STRIPE_CURRENCY = 'eur'
 
 # Pydot configuration for auto-generating database schema

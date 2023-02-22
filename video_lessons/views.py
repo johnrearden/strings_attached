@@ -76,13 +76,31 @@ class CreateStripeCheckoutSessionView(View):
         subscription = Subscription.objects.get(pk=subscription_id)
         stripe_lookup_id = subscription.stripe_lookup_id
         stripe.api_key = settings.STRIPE_PRIVATE_KEY
+        metadata = {
+            'test': 'test_data',
+        }
+        base_url = 'http://localhost:8000'
         session = stripe.checkout.Session.create(
-            success_url='https://localhost:8000/',
-            cancel_url='https://localhost:8000/',
+            success_url=f'{base_url}/video_lessons/subscription_success/',
+            cancel_url=f'{base_url}/video_lessons/subscription_cancelled/',
             mode='subscription',
+            currency=settings.STRIPE_CURRENCY,
             line_items=[{
                 'price': stripe_lookup_id,
                 'quantity': 1,
             }],
+            customer_email='mickey@mouse.com',
+            metadata=metadata,
         )
+        print(session.last_response.body)
         return redirect(session.url)
+
+
+class SubscriptionSuccessView(View):
+    def get(self, request):
+        return render(request, 'video_lessons/subscription_success.html')
+
+
+class SubscriptionCancelledView(View):
+    def get(self, request):
+        return render(request, 'video_lessons/subscription_cancelled.html')

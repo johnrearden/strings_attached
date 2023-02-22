@@ -283,6 +283,9 @@ https://stackoverflow.com/questions/39493749/django-tests-for-sending-email
 Generate database schema diagram from project models
 https://django-extensions.readthedocs.io/en/latest/graph_models.html
 
+Make a Django class based view CSRF exempt
+https://www.programmersought.com/article/2914850608/
+
 
 # Acknowledgements
 

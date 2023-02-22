@@ -27,6 +27,11 @@ class UserLearningProfile(models.Model):
                                 related_name='learning_profile')
     subscriber = models.BooleanField(default=False)
     subscription_paid = models.BooleanField(default=False)
+    stripe_subscription_id = models.CharField(max_length=1024, null=True,
+                                              blank=True)
+    stripe_customer_id = models.CharField(max_length=1024, null=True,
+                                          blank=True)
+    subscription_expiration_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return (f'{self.user.username} (Subscriber:{self.subscriber})'

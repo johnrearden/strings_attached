@@ -14,8 +14,12 @@ class VideoLessonAdmin(admin.ModelAdmin):
 
 
 class UserLearningProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'subscriber', 'subscription_paid',)
-    list_editable = ('user', 'subscriber', 'subscription_paid',)
+    list_display = ('id', 'user', 'subscriber', 'subscription_paid',
+                    'stripe_subscription_id', 'stripe_customer_id',
+                    'subscription_expiration_date',)
+    list_editable = ('user', 'subscriber', 'subscription_paid',
+                     'stripe_subscription_id', 'stripe_customer_id',
+                     'subscription_expiration_date',)
 
 
 class SubscriptionAdmin(admin.ModelAdmin):
