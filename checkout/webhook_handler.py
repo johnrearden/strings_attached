@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from video_lessons.models import UserLearningProfile
+from datetime import datetime
 
 
 class StripeWH_Handler:
@@ -30,7 +31,7 @@ class StripeWH_Handler:
 
     def handle_checkout_session_completed(self, event):
         """ Handle the Stripe checkout.session.completed webhook, which
-            indicates that an initial payment has been received and a 
+            indicates that an initial payment has been received and a
             subscription has been created. """
         print('Handling checkout session completed')
         metadata = event.data.object.metadata
@@ -49,7 +50,7 @@ class StripeWH_Handler:
         """ Handle the Stripe invoice.paid webhook, which indicates that
             a recurring payment has been made."""
         print('Handling invoice paid')
-        print(event.data)
+        print(event.data.object)
         customer_id = event.data.object.customer
         subscription_id = event.data.object.subscription
         user_learning_profile = UserLearningProfile.objects.get(
@@ -57,8 +58,12 @@ class StripeWH_Handler:
             stripe_subscription_id=subscription_id
         )
         user_learning_profile.subscription_paid = True
+
+        # Set/reset the expiration date on the subscription
+        timestamp = event.data.object.lines.data[0].period.end
+        expiration = datetime.utcfromtimestamp(timestamp)
+        user_learning_profile.subscription_expiration_date = expiration
         user_learning_profile.save()
-        print(user_learning_profile)
         return HttpResponse('Handling invoice paid')
 
     def handle_invoice_payment_failed(self, event):

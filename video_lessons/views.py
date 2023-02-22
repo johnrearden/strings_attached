@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.conf import settings
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 from .models import LessonSeries, VideoLesson, UserLearningProfile,\
      Subscription
 import stripe
@@ -110,6 +112,18 @@ class CreateStripeCheckoutSessionView(View):
 class SubscriptionSuccessView(View):
     def get(self, request):
         return render(request, 'video_lessons/subscription_success.html')
+
+    def post(self, request):
+        profile = get_object_or_404(UserLearningProfile, user=request.user)
+        stripe.api_key = settings.STRIPE_PRIVATE_KEY
+        base_url = 'http://localhost:8000'
+        return_url = f'{base_url}{reverse("all_lessons")}'
+        session = stripe.billing_portal.Session.create(
+            customer=profile.stripe_customer_id,
+            return_url=return_url,
+        )
+        print(f'session_url == {session.url}')
+        return HttpResponseRedirect(session.url)
 
 
 class SubscriptionCancelledView(View):

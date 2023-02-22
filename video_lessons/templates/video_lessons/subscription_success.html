@@ -17,12 +17,35 @@
                     Browse Lessons
                 </span>
             </a>
-            <a href="#">
-                <span class="btn btn-cherry">
+            <form id='form' method="POST" action="{% url 'subscription_success' %}">
+                {% csrf_token %}
+                <button id="submit" type="submit" class="btn btn-cherry">
                     Manage Subscription
-                </span>
-            </a>
+                </button>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script>
+    const form = document.getElementById('form');
+    const csrfToken = document.getElementByName('csrfmiddlewaretoken');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        url = 'video_lessons/subscription_succeeded/';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+            },
+        }).then((response) => {
+            window.location = response.url;
+        });
+    });
+
+</script>
 {% endblock %}
