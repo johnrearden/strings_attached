@@ -91,7 +91,7 @@ class CreateStripeCheckoutSessionView(View):
         metadata = {
             'user_id': profile.id,
         }
-        base_url = 'http://localhost:8000'
+        base_url = settings.BASE_URL
         email = request.user.email
         session = stripe.checkout.Session.create(
             success_url=f'{base_url}/video_lessons/subscription_success/',
@@ -116,7 +116,7 @@ class SubscriptionSuccessView(View):
     def post(self, request):
         profile = get_object_or_404(UserLearningProfile, user=request.user)
         stripe.api_key = settings.STRIPE_PRIVATE_KEY
-        base_url = 'http://localhost:8000'
+        base_url = settings.BASE_URL
         return_url = f'{base_url}{reverse("all_lessons")}'
         session = stripe.billing_portal.Session.create(
             customer=profile.stripe_customer_id,

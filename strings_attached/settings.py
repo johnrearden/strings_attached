@@ -98,6 +98,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'strings_attached.wsgi.application'
 """ X_FRAME_OPTIONS = 'SAMEORIGIN' """
 SITE_ID = 2
+BASE_URL = os.environ.get('BASE_URL')
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
