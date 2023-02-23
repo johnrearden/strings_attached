@@ -99,14 +99,14 @@ form.addEventListener('submit', (event) => {
                         errorDiv.innerHTML = html;
                         paymentElement.disabled = "false";
                     } else {
-                        url = '/checkout/payment_confirmed/';
-                        data = {
+                        const url = '/checkout/payment_confirmed/';
+                        const info = {
                             'payment_confirmed': 'True',
                             'client_secret': stripeClientSecret,
                         }
-                        data = {
+                        const data = {
                             method: 'POST',
-                            body: JSON.stringify(data),
+                            body: JSON.stringify(info),
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-CSRFToken': csrfToken,
