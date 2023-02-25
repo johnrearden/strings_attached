@@ -1,7 +1,11 @@
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from video_lessons.models import UserLearningProfile
+from .models import Order, OrderLineItem
+from products.models import Product
 from datetime import datetime
+from decimal import Decimal
+import json
 
 
 class StripeWH_Handler:
@@ -22,13 +26,51 @@ class StripeWH_Handler:
 
     def handle_payment_intent_succeeded(self, event):
         """ Handle the Stripe payment_intent.succeeded webhook """
-        print('Handling payment intent succeeded')
-        return HttpResponse(status=200)
+        metadata = event.data.object.metadata
+        shipping_data = event.data.object.shipping
+        order_number = metadata.order_number
+        order_set = Order.objects.filter(order_number=order_number)
+
+        # If there is a corresponding order in the database, ensure that
+        # the payment_confirmed flag is set. If not, set it.
+        if order_set:
+            order = order_set[0]
+            order.payment_confirmed = True
+            order.save()
+            return HttpResponse(status=200)
+        else:
+            # There is not order on the system. Create one from the information
+            # in the metadata.basket field
+            data = json.loads(metadata.basket_summary)
+            order = Order.objects.create(
+                full_name=shipping_data.get('name', ''),
+                phone_number=shipping_data.get('phone', ''),
+                email=metadata['email'],
+                country=shipping_data['address'].get('country', ''),
+                postcode=shipping_data['address'].get('postal_code', ''),
+                town_or_city=shipping_data['address'].get('city', ''),
+                street_address1=shipping_data['address'].get('line1', ''),
+                street_address2=shipping_data['address'].get('line2', ''),
+                county=shipping_data.get('phone', ''),
+                date=datetime.now(),
+                delivery_cost=Decimal(data['delivery'] / 100),
+                discount=Decimal(data['discount'] / 100),
+                order_total=Decimal(data['subtotal'] / 100),
+                grand_total=Decimal(data['total'] / 100),
+                pid=event.data.object.id,
+                payment_confirmed=True,
+            )
+            for item in data['items']:
+                OrderLineItem.objects.create(
+                    order=order,
+                    product=Product.objects.get(pk=int(item['id'])),
+                    quantity=item['quantity'],
+                )
+            return HttpResponse(status=200)
 
     def handle_payment_intent_failed(self, event):
         """ Handle the Stripe payment_intent.failed webhook """
-        print('Handling payment intent failed')
-        return HttpResponse('Handling payment intent failed')
+        return HttpResponse(status=200)
 
     def handle_checkout_session_completed(self, event):
         """ Handle the Stripe checkout.session.completed webhook, which

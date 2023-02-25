@@ -28,6 +28,7 @@ class Order(models.Model):
                                       null=False, default=0)
     pid = models.CharField(max_length=256, editable=False, default='None')
     payment_confirmed = models.BooleanField(default=False, null=False)
+    fulfilled = models.BooleanField(default=False, null=False)
 
     def _create_order_number(self):
         """ Create a random, unique order number using UUID """

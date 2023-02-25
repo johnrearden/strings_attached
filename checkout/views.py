@@ -136,10 +136,26 @@ class SaveOrderView(APIView):
                     prof.county = order.county
                     prof.save()
 
+            # Create a dictionary from the basket summary, and convert
+            # all Decimal amounts to ints, as these objects
+            # can't be JSON-serialized and sent with the metadata to Stripe.
+            basket_dict = {}
+            basket_dict['items'] = []
+            for item in basket_summary['basket_items']:
+                copy = {}
+                copy['id'] = item['id']
+                copy['quantity'] = item['quantity']
+                copy['item_cost'] = int(item['item_cost'] * 100)
+                basket_dict['items'].append(copy)
+            basket_dict['subtotal'] = int(basket_summary['subtotal'] * 100)
+            basket_dict['delivery'] = int(basket_summary['delivery'] * 100)
+            basket_dict['total'] = int(basket_summary['total'] * 100)
+            basket_dict['discount'] = int(basket_summary['discount'] * 100)
             metadata = {
+                'email': data['email'],
                 'order_number': order.order_number,
                 'save_personal_info': save_info,
-                'basket': json.dumps(basket),
+                'basket_summary': json.dumps(basket_dict),
             }
             stripe.api_key = settings.STRIPE_PRIVATE_KEY
             try:
@@ -168,7 +184,8 @@ class PaymentConfirmedView(APIView):
                            order.postcode, order.country]
             address = ''.join([f'{fd}\n' if fd else '' for fd in addr_fields])
             items = OrderLineItem.objects.filter(order=order)
-            item_str = ''.join([f'{i.product.name} x {i.quantity}\n' for i in items])
+            item_str = \
+                ''.join([f'{i.product.name} x {i.quantity}\n' for i in items])
 
             message = (f'Your order #{order_number} is confirmed, and will be '
                        f'dispatched shortly.\nYour order details are as '
