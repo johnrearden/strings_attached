@@ -105,7 +105,6 @@ class CreateStripeCheckoutSessionView(View):
             customer_email=email,
             metadata=metadata,
         )
-        print(session.last_response.body)
         return redirect(session.url)
 
 

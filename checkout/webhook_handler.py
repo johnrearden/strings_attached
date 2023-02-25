@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.core.mail import send_mail
 from video_lessons.models import UserLearningProfile
 from datetime import datetime
 
@@ -33,7 +34,6 @@ class StripeWH_Handler:
         """ Handle the Stripe checkout.session.completed webhook, which
             indicates that an initial payment has been received and a
             subscription has been created. """
-        print('Handling checkout session completed')
         metadata = event.data.object.metadata
         profile_id = metadata.user_id
         user_learning_profile = UserLearningProfile.objects.get(pk=profile_id)
@@ -49,8 +49,6 @@ class StripeWH_Handler:
     def handle_invoice_paid(self, event):
         """ Handle the Stripe invoice.paid webhook, which indicates that
             a recurring payment has been made."""
-        print('Handling invoice paid')
-        print(event.data.object)
         customer_id = event.data.object.customer
         subscription_id = event.data.object.subscription
         user_learning_profile = UserLearningProfile.objects.get(
@@ -69,5 +67,27 @@ class StripeWH_Handler:
     def handle_invoice_payment_failed(self, event):
         """ Handle the Stripe invoice.payment_failed webhook, which
             indicates that a recurring payment has failed. """
-        print('Handling invoice payment_failed')
+        customer_id = event.data.object.customer
+        subscription_id = event.data.object.subscription
+        user_learning_profile = UserLearningProfile.objects.get(
+            stripe_customer_id=customer_id,
+            stripe_subscription_id=subscription_id
+        )
+        user_learning_profile.subscription_paid = False
+
+        # Send an email to the customer to let them know their payment has 
+        # failed, with a link to their profile page to enable them to manage
+        # their subscription with Stripe.
+        email = user_learning_profile.user.email
+        message = ('Hi! We\'d just like to let you know that a payment for'
+                   ' your subscription to our Guitar School has failed. You'
+                   ' can click the link below to visit your profile page.'
+                   '\n')
+        send_mail(
+                subject='Subscription payment failed!',
+                message=message,
+                from_email=None,
+                recipient_list={email},
+            )
+
         return HttpResponse('Handling invoice payment_failed')

@@ -65,7 +65,7 @@ form.addEventListener('submit', (event) => {
 
     // Post all of the form-data, the shouldSaveInfo flag and the Stripe client secret
     // to the backend so that this can all be saved before attempting to confirm payment.
-    let url = '/checkout/save_order/';
+    const url = '/checkout/save_order/';
     const formData = new FormData(form);
     formData.append('client_secret', stripeClientSecret)
     const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
@@ -99,20 +99,26 @@ form.addEventListener('submit', (event) => {
                         errorDiv.innerHTML = html;
                         paymentElement.disabled = "false";
                     } else {
-                        const url = '/checkout/payment_confirmed/';
-                        const info = {
+                        const confirm_url = '/checkout/payment_confirmed/';
+                        const payload = {
                             'payment_confirmed': 'True',
                             'client_secret': stripeClientSecret,
                         }
-                        const data = {
+                        const fetchData = {
                             method: 'POST',
-                            body: JSON.stringify(info),
+                            body: JSON.stringify(payload),
                             headers: {
+                                'Accept': 'application/json',
                                 'Content-Type': 'application/json',
                                 'X-CSRFToken': csrfToken,
                             }
                         }
-                        fetch(url, data).then((res => window.location = res.url));
+                        fetch(confirm_url, fetchData).then(
+                            response => {
+                                console.log(response);
+                                console.log(response.url);
+                                window.location = response.url;
+                            });
                     }
                 });
             }

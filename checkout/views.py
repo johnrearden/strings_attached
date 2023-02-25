@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.views import View
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import send_mail
 from rest_framework import status
 from rest_framework.response import Response
