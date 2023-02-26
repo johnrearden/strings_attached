@@ -121,7 +121,6 @@ class SubscriptionSuccessView(View):
             customer=profile.stripe_customer_id,
             return_url=return_url,
         )
-        print(f'session_url == {session.url}')
         return HttpResponseRedirect(session.url)
 
 
