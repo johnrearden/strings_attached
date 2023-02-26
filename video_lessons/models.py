@@ -16,9 +16,9 @@ class LessonSeries(models.Model):
 
 class VideoLesson(models.Model):
     """
-    Represents one video lesson, belonging to a series, with a 
+    Represents one video lesson, belonging to a series, with a
         video file and an image file to show as a thumbnail for display. The
-        ordinal field represents its place in the sequence of lessons. 
+        ordinal field represents its place in the sequence of lessons.
     """
     series = models.ForeignKey(LessonSeries, on_delete=models.CASCADE,
                                related_name='video_lessons')
@@ -37,7 +37,7 @@ class UserLearningProfile(models.Model):
     """
     Holds information about a user's subscribtion status. Includes flags for
     whether they are/have been a subscriber, and whether they are currently
-    fully paid up. The expiration date is updated each time a payment is 
+    fully paid up. The expiration date is updated each time a payment is
     received through the Stripe invoice.paid webhook. If the user is deleted,
     the profile remains, as it is possible that payments may still be being
     taken automatically by Stripe, and the ex-user may wish to recover their
@@ -59,6 +59,10 @@ class UserLearningProfile(models.Model):
 
 
 class Subscription(models.Model):
+    """
+    Represents a single subscription plan. The stripe_lookup_id field
+    corresponds to the Stripe product created on the subscription dashbord.
+    """
     date_created = models.DateField(auto_now_add=True)
     name = models.CharField(max_length=256)
     description = models.CharField(max_length=256)

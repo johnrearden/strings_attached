@@ -286,6 +286,12 @@ https://django-extensions.readthedocs.io/en/latest/graph_models.html
 Make a Django class based view CSRF exempt
 https://www.programmersought.com/article/2914850608/
 
+Testing a DoesNotExist exception on a query
+https://stackoverflow.com/questions/11109468/how-do-i-import-the-django-doesnotexist-exception
+
+Mocking stripe methods in a view to enable testing
+https://stackoverflow.com/questions/31284622/mock-stripe-methods-in-python-for-testing
+
 
 # Acknowledgements
 

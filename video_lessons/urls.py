@@ -10,10 +10,8 @@ urlpatterns = [
     path('subscribe/', login_required(views.SubscriptionOptionsView.as_view()),
          name='subscribe'),
     path('create_checkout_session/<int:subscription_id>',
-         views.CreateStripeCheckoutSessionView.as_view(),
+         login_required(views.CreateStripeCheckoutSessionView.as_view()),
          name='create_subscription_checkout_session'),
     path('subscription_success/', views.SubscriptionSuccessView.as_view(),
          name='subscription_success'),
-    path('subscription_cancelled/', views.SubscriptionCancelledView.as_view(),
-         name='subscription_cancelled'),
     ]
