@@ -219,6 +219,11 @@ class PaymentConfirmedView(APIView):
                 recipient_list={order.email},
             )
             redirect_url = f'/checkout/checkout_succeeded/{order_number}'
+
+            # Empty the shopping basket before redirecting
+            if request.session['basket']:
+                request.session['basket'] = {}
+
         return HttpResponseRedirect(redirect_url)
 
 
