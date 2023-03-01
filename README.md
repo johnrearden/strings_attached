@@ -175,6 +175,52 @@ Alternitively, the Epics and Stories are individually linked here :
 - [Epics and Stories](#development-process)
 
 ---
+## Stripe Webhook Testing
+
+
+### Stripe Payment Flow
+The payment flow handling differs from the Boutique Ado project. I decided that the application would be more robust if orders were saved to the database _before_ the Stripe payment process was initiated, with a flag, 
+payment_confirmed set to false. This ensures that any order made is recorded before the network back and forth begins. It also allows the application to send the order_number field from the order instance to Stripe as metadata for later retrieval, so that the order does not need to be built from the basket contents. When the Stripe confirmPayment method (called from stripe_payments.js) promise is fulfilled, the front-end then sends a POST request back to the endpoint, which sets the payment_confirmed flag to True. 
+
+In the event that the promise is rejected, or the POST request fails, the Stripe webhook event (stripe.payment_intent.succeeded) will pass the metadata back to the webhook handler. If the order is present in the database, the handler ensures that the payment_confirmed flag is set to True. If it is not present, the handler will construct a new order from the basket information encoded in the metadata as an insurance policy.
+
+Another advantage of this approach is that orders whose payments are not processed remain on the system, and can be retrieved by staff and users if necessary at a later point (although this is not implemented in the project).
+
+### Webhook Tests
+The application listens for 5 Stripe webhook events, and takes appropriate action based on each. The events
+were tested by adding a local listener on the dashboard webhook page, which forwards the webhook events
+to the development server on localhost:8000. The webhook for the deployed project on Heroku was disabled for these tests, as the deployed and development versions of the project both use the production database. Tests for each webhook are manual rather than automated.
+
+- stripe.payment_intent.succeeded:
+    - The handler retrieves the order_number from the event metadata and checks that the order exists. If
+    so, it ensures that the payment confirmed flag is set to True. This was tested by commenting out the code in checkout.views.PaymentConfirmedView that sets the flag to True and then, after the payment has been processed and the webhook event received, checking the flag in the admin panel. Results as follows :
+        - With webhook forwarding disabled : payment_confirmed flag is False
+        - With webhook forwarding enabled : payment_confirmed flag is True.
+    So, the handler is working correctly when an order is already on the system. Next the code in the handler is altered by setting the value of the result_set returned by the search to None, creating an order on the site and then initiating a payment. This should result in a duplicate order being created, the same in all respects as the original except for its order_number. The results were as follows : 
+        - With webhook forwarding disabled : Only one order exists in the database.
+        - With webhook forwarding enabled : A duplicate order also exists in the database.
+    So, we can conclude that this webhook handler is working as intended.
+
+- stripe.payment_intent.payment_failed
+    - This handler just returns a HTTP 200 response code to Stripe. The stripe webhook dashboard confirmed that
+    the event had been fired and that the 200 response had been received.
+
+- stripe.checkout.session.completed
+    - Unlike the payment_intent.succeeded webhook, this hook plays a crucial role in confirming a subscription payment has been processed by Stripe, as it is the only means by which notice of a successful payment will be sent. We need to confirm that subscriber flag is set to True, and that the stripe_customer_id and stripe_subscription_id fields are set correctly on the UserOrderProfile record. The test consists of examining the UserOrderProfile record created when the user chooses a subscription plan, and comparing it with the same record after the payment has been processed. Results as follows (with invoice_paid webhook disabled in order to isolate this webhook) :
+        - With webhook forwarding disabled : subscriber flag set to False, stripe_subscription_id and stripe_customer_id fields unfilled.
+        - With webhook forwarding enabled : subscriber flag set to True, stripe_subscription_id and stripe_customer_id filled correctly (compared to stripe webhook event detailed on dashboard).
+    So, we can conclude that this handler is working correctly.
+
+- stripe.invoice_paid
+    - This handlers task is simply to set the UserOrderProfile's subscription_paid flag to True, so
+    that the subscription is live and all video content is available to the user. The test consists of checking the UserOrderProfile record before proceeding to process payment for a subscription, and confirming that the flag is set afterwards. Results as follows :
+        - With webhook forwarding disabled : subscription_paid flag set to False following payment.
+        - With webhook forwarding enabled : subscription_paid flag set to True following payment.
+
+- stripe.invoice.payment_failed
+    - This handler sets the subscription_paid flag to false when it is received. Unfortunatly it is not possible to trigger this webhook either from the Stripe dashboard or from the CLI, so the only way to test it is to supply stripe with a test card with a short expiration date, and wait for the subscription period to end and the test to fail! A bit of research uncovered [this project](https://github.com/stripe/stripe-mock), released by Stripe, but the time required to get the mock HTTP server up and running and the fact that it is stateless anyway(the responses to mock API calls are hardcoded) means that I'll reluctantly have to leave this handler untested. In a production situation, I would set up a fake product on the backend and a corresponding product on the Stripe dashboard with a subscription period of 1 day (the shortest option Stripe currently offers) and show up punctually to observe the handler fire 24 hours later.
+---
+
 
 ## Automated Testing
 

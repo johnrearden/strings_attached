@@ -98,6 +98,8 @@ form.addEventListener('submit', (event) => {
                         const errorDiv = document.getElementById('card-errors');
                         errorDiv.innerHTML = html;
                         paymentElement.disabled = "false";
+                        document.getElementById('payment-overlay').classList.add('d-none');
+                        document.getElementById('payment-overlay').classList.remove('d-flex');
                     } else {
                         const confirm_url = '/checkout/payment_confirmed/';
                         const payload = {
@@ -115,8 +117,6 @@ form.addEventListener('submit', (event) => {
                         }
                         fetch(confirm_url, fetchData).then(
                             response => {
-                                console.log(response);
-                                console.log(response.url);
                                 window.location = response.url;
                             });
                     }

@@ -100,10 +100,10 @@ class TestVideoLessonViews(TestCase):
     @mock.patch('stripe.checkout.Session.create')
     def test_create_stripe_session_view_creates_user_learning_profile_if_none_exists(self, create_mock):
 
-        # We're testing a side effect here, so we just need to prevent the stripe api
+        # We're testing a side effect here, so we just need to mock the stripe api
         # call from being made.
         temp_user = User.objects.create(
-            username='u', 
+            username='u',
             password='p',
             email='u@mail.com')
         self.client.force_login(temp_user)
