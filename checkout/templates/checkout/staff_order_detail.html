@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-auto text-center">
+            <h1>Order Detail</h1>
+            <h5>Order number : {{ order.order_number }}</h5>
+        </div>
+    </div>
+    <div class="row mt-5 d-flex align-items-stretch">
+        <div class="col-12 col-md-6 justify-content-center">
+            <div class="card w-auto">
+                <div class="card-body">
+                    <h5 class="card-title text-center bg-cherry text-white py-3">
+                        <i class="fa-solid fa-truck"></i>&nbsp;&nbsp;Delivery Details
+                    </h5>
+                    <p class="card-text">
+                        <hr>
+                        
+                        {{ order.full_name }},<br>
+                        {{ order.street_address1 }},<br>
+                        {% if order.street_address2 %}{{ order.street_address2 }},<br>{% endif %}
+                        {{ order.town_or_city }},<br>
+                        {% if order.county %}{{ order.county }},<br>{% endif %}
+                        {{ order.country }}{% if order.postcode %}, {{ order.postcode }}{% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card w-auto">
+                <div class="card-body">
+                    <h5 class="card-title text-center bg-cherry text-white py-3">
+                        <i class="fa-solid fa-cart-shopping fa-lg"></i>&nbsp;&nbsp;Order Line Items
+                    </h5>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Qty.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in line_items %}
+                            <tr>
+                                <td>{{ item.product.name}}</td>
+                                <td>{{ item.quantity}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card w-auto">
+                <div class="card-body text-center">
+                    {% if order.payment_confirmed %}
+                    <h3 class="alert-success p-2">Payment Confirmed</h3>
+                    {% else %}
+                    <h3 class="alert-warning p-2">Payment Failed</h3>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-auto text-center">
+            {% if order.fulfilled %}
+            <h1>Order already fulfilled</h1>
+            <a href="{% url 'staff_order_list' %}">
+                <span class="btn btn-cherry">Back</span>
+            </a>
+            {% else %}
+            <a href="{% url 'staff_order_list' %}">
+                <span class="btn btn-cherry">Back</span>
+            </a>
+                {% if order.payment_confirmed %}
+                <form method="POST" action="{% url 'staff_order_detail' %}" class="mt-2">
+                    {% csrf_token %}
+                    <button class="btn btn-cherry" name="fulfilled" value="{{ order.id }}">
+                        Mark as Fulfilled
+                    </button>
+                </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

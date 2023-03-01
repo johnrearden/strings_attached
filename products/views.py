@@ -54,8 +54,10 @@ class ProductDetail(View):
         p_list = [ap.associated_product for ap in associated_products]
 
         # Get any special offer applying to this product.
+        now = datetime.now()
+        queries = Q(start_date__lte=now) & Q(end_date__gte=now)
         special_offers = SpecialOffer.objects.filter(product=product) \
-            .order_by('-start_date')
+            .filter(queries).order_by('-start_date')
         offer = special_offers[0] if special_offers else None
         reduction = product.price - offer.reduced_price if offer else 0
 

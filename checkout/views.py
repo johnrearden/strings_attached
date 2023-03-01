@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib import messages
 from django.views import View
 from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
+from django.contrib.auth.mixins import UserPassesTestMixin
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -18,6 +19,12 @@ import json
 
 
 class CheckoutView(View):
+    """
+    This view displays an Order Form to the user, pre-populated if the user
+    has previously saved their order profile. It creates a Stripe payment
+    intent for the order, and passes the Stripe public key and client secret
+    to the page so that the payment form can be submitted by stripe_payments.js
+    """
     def get(self, request):
         basket = request.session.get('basket', {})
         if not basket:
@@ -69,6 +76,14 @@ class CheckoutView(View):
 
 
 class SaveOrderView(APIView):
+    """
+    This view accepts a POST request from stripe_payments.js which contains
+    the order form data and the save-info flag that the user can set to
+    request that their order profile be saved. It creates the order in the
+    database, and modifies the paymentIntent metadata so that it contains
+    the order_number, user email (not stored in Stripe shipping attribute), the
+    value of the save-info flag and a JSON encoded summary of the basket.
+    """
     def post(self, request):
         data = request.POST
         basket_summary = basket_contents(request)
@@ -168,6 +183,12 @@ class SaveOrderView(APIView):
 
 
 class PaymentConfirmedView(APIView):
+    """
+    This view accepts a POST request from stripe_payments.js when the Stripe
+    confirmPayment promise is fulfilled. It retrieves the order, sets the
+    payment confirmed flag to True and sends an email to the customer
+    confirming that the order will shortly be dispatched.
+    """
     def post(self, request):
         if request.data['payment_confirmed'] == 'True':
             pid = request.data.get('client_secret').split('_secret')[0]
@@ -202,6 +223,13 @@ class PaymentConfirmedView(APIView):
 
 
 class CheckoutSucceededView(View):
+    """
+    This view is displayed when Stripe, having successfully completed the
+    payment process, fulfills the promise in stripe_payments.js which
+    then sets the window.location attribute to the 'checkout_succeeded' url.
+    It allows the user to view a summary of their order and their delivery
+    details.
+    """
     def get(self, request, order_number):
         order = Order.objects.get(order_number=order_number)
         line_items = OrderLineItem.objects.filter(order=order)
@@ -212,3 +240,53 @@ class CheckoutSucceededView(View):
             'item_count': item_count,
         }
         return render(request, 'checkout/checkout_succeeded.html', context)
+
+
+class StaffOrderList(View, UserPassesTestMixin):
+    """
+    This view, available only to staff, displays a list of all orders in the
+    database, ordered by date, whether or not they are fulfilled, and whether
+    or not their payment in confirmed. Unfulfilled orders with confirmed
+    payments appear at the top of the list, ordered by ascending date.
+    """
+    def get(self, request):
+        orders = Order.objects.all().order_by(
+            '-payment_confirmed',
+            'fulfilled',
+            'date',
+            )
+
+        context = {
+            'orders': orders,
+        }
+        return render(request, 'checkout/staff_order_list.html', context)
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class StaffOrderDetail(View, UserPassesTestMixin):
+    """
+    This view is available only to staff.
+    """
+    def get(self, request, order_id):
+        """ Displays the details of the specified order """
+        order = get_object_or_404(Order, pk=order_id)
+        line_items = order.items.all()
+        context = {
+            'order': order,
+            'line_items': line_items,
+        }
+        return render(request, 'checkout/staff_order_detail.html', context)
+
+    def post(self, request):
+        """ Marks the order specified in the POST request as fulfilled """
+        id = request.POST.get('fulfilled')
+        order = get_object_or_404(Order, pk=id)
+        order.fulfilled = True
+        order.save()
+
+        return redirect(reverse('staff_order_list'))
+
+    def test_func(self):
+        return self.request.user.is_staff
