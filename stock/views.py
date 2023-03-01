@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from .forms import ProductAddForm
 from products.models import Product, SpecialOffer
 from itertools import chain
+from datetime import datetime
 
 
 class ProductAddView(UserPassesTestMixin, FormView):
@@ -61,8 +62,11 @@ class StaffProductList(UserPassesTestMixin, View):
 
         # Check for special offers and adjust price accordingly.
         items = []
+        now = datetime.now()
+        queries = Q(start_date__lte=now) & Q(end_date__gte=now)
         for prod in product_list:
             offers = SpecialOffer.objects.filter(product=prod) \
+                .filter(queries) \
                 .order_by('reduced_price')
             on_offer = True if offers else False
             price = offers[0].reduced_price if on_offer else prod.price
