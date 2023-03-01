@@ -1,8 +1,9 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core import mail
+from django.urls import reverse
 from products.models import Category, Product
-from checkout.models import UserOrderProfile, Order
+from checkout.models import UserOrderProfile, Order, OrderLineItem
 
 
 class TestCheckoutView(TestCase):
@@ -369,3 +370,95 @@ class TestCheckoutSucceededView(TestCase):
         response = self.client.get(url)
         self.assertTemplateUsed('checkout/checkout_succeeded.html')
         self.assertEqual(response.status_code, 200)
+
+
+class TestStaffOrderList(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.test_user = User.objects.create(
+            username='user',
+            password='pass',
+            email='admin@test.com',
+            is_staff=True)
+
+    def test_staff_order_list_redirects_for_non_staff_user(self):
+        url = '/checkout/staff_order_list/'
+        response = self.client.get(url, follow=True)
+        self.assertIn('accounts/login', str(response.redirect_chain[0]))
+
+    def test_staff_order_list_template_and_status_code(self):
+        self.client.force_login(self.test_user)
+        url = '/checkout/staff_order_list/'
+        response = self.client.get(url)
+        self.assertTemplateUsed('checkout/staff_order_list.html')
+        self.assertEqual(response.status_code, 200)
+
+
+class TestStaffOrderDetail(TestCase):
+
+    test_standard_price = 20
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.order = Order.objects.create(
+            full_name='name',
+            email='name@email.com',
+            phone_number='1234',
+            country="countr",
+            town_or_city="town",
+            street_address1="1",
+        )
+        cls.test_user = User.objects.create(
+            username='user',
+            password='pass',
+            email='admin@test.com',
+            is_staff=True)
+        cls.test_category = Category.objects.create(
+            name='Instruments',
+            friendly_name='Instruments')
+        cls.test_product = Product.objects.create(
+            name='Guitar',
+            category=cls.test_category,
+            description='A cool guitar.',
+            price=cls.test_standard_price,
+            stock_level=10,
+            reorder_threshold=10,
+            product_owner=cls.test_user)
+        cls.line_item = OrderLineItem.objects.create(
+            order=cls.order,
+            product=cls.test_product,
+            quantity=1, 
+        )
+
+    def test_staff_order_list_redirects_for_non_staff_user(self):
+        url = f'/checkout/staff_order_detail/{self.order.id}/'
+        response = self.client.get(url, follow=True)
+        self.assertIn('accounts/login', str(response.redirect_chain[0]))
+
+    def test_staff_order_detail_template_and_status_code(self):
+        self.client.force_login(self.test_user)
+        url = f'/checkout/staff_order_detail/{self.order.id}/'
+        response = self.client.get(url)
+        self.assertTemplateUsed('checkout/staff_order_detail.html')
+        self.assertEqual(response.status_code, 200)
+
+    def test_staff_order_detail_post_method_updates_order_fullfilled_flag(self):
+        self.client.force_login(self.test_user)
+        url = '/checkout/staff_order_detail/'
+        data = {
+            'fulfilled': {self.order.pk},
+        }
+        response = self.client.post(url, data)
+        id = self.order.pk
+        order = Order.objects.get(pk=id)
+        self.assertTrue(order.fulfilled)
+
+    def test_staff_order_detail_post_method_redirects_to_order_list_page(self):
+        self.client.force_login(self.test_user)
+        url = '/checkout/staff_order_detail/'
+        data = {
+            'fulfilled': {self.order.pk},
+        }
+        response = self.client.post(url, data)
+        self.assertRedirects(response=response, expected_url=reverse('staff_order_list'))

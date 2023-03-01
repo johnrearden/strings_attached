@@ -242,7 +242,7 @@ class CheckoutSucceededView(View):
         return render(request, 'checkout/checkout_succeeded.html', context)
 
 
-class StaffOrderList(View, UserPassesTestMixin):
+class StaffOrderList(UserPassesTestMixin, View):
     """
     This view, available only to staff, displays a list of all orders in the
     database, ordered by date, whether or not they are fulfilled, and whether
@@ -265,7 +265,7 @@ class StaffOrderList(View, UserPassesTestMixin):
         return self.request.user.is_staff
 
 
-class StaffOrderDetail(View, UserPassesTestMixin):
+class StaffOrderDetail(UserPassesTestMixin, View):
     """
     This view is available only to staff.
     """
@@ -281,7 +281,7 @@ class StaffOrderDetail(View, UserPassesTestMixin):
 
     def post(self, request):
         """ Marks the order specified in the POST request as fulfilled """
-        id = request.POST.get('fulfilled')
+        id = int(request.POST.get('fulfilled'))
         order = get_object_or_404(Order, pk=id)
         order.fulfilled = True
         order.save()
