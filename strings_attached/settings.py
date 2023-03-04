@@ -94,7 +94,6 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'strings_attached.wsgi.application'
 """ X_FRAME_OPTIONS = 'SAMEORIGIN' """
 SITE_ID = 2

@@ -119,6 +119,7 @@ as much as possible, to make it easier to switch to a different payment processo
 
 # Testing
 - Manual testing
+
 - Automated testing
 - In-app testing
 - User story testing
@@ -129,9 +130,21 @@ as much as possible, to make it easier to switch to a different payment processo
 ## Manual Testing
 
 ### Feature Testing
-
+The manual testing of features is organised by app below.
+#### _Basket App_
 |Page|Feature|Action|Effect|
 |---|---|---|---|
+|/basket/view_basket/|All items appear in list|Add item to list in product_detail page|Item appears on table
+|/basket/view_basket/|Item quantities are correct|Add n items in product_detail page|n items appear on table
+|/basket/view_basket/|Increment button increases quantity|Click increment button|Quantity increases by 1
+|/basket/view_basket/|Decrement button decreases quantity|Click decrement button|Quantity decreases by 1
+|/basket/view_basket/|Minimum quantity is 1|Decrement quantity as far as 1|Decrement button becomes inactive
+|/basket/view_basket/|Maximum quantity is 10|Increment quantity as far as 10|Increment button becomes inactive
+|/basket/view_basket/|Multiple quantity changes allowed before reload|Click incr. and decr. buttons in quick succession|Clicking the incr and decr buttons repeatedly does not reload page. After a short pause, upon ceasing clicking, page reloads.
+|/basket/view_basket/|Bin icon empties basket|Click bin icon|Basket is emptied
+|/basket/view_basket/|'You have nothing in your basket' message displayed if basket is empty|Navigate to page by clicking basket icon in navbar without any items|Message appears correctly
+|/basket/view_basket/|
+
 
 
 

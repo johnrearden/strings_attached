@@ -35,6 +35,7 @@
             <h1 class="">Your Basket</h1>
         </div>
     </row>
+    {% if basket %}
     <row>
         <div class="col-md-8 offset-md-2 mt-3">
             <table class="table table-sm">
@@ -109,8 +110,16 @@
             <hr>
         </div>
     </row>
+    {% else %}
+    <div class="row justify-content-center my-4">
+        <div class="col-auto text-center">
+            <h2>(You don't have any items in your basket).</h2>
+            <h3>Why not have a look through our well-stocked shop!</h3>
+        </div>
+    </div>
+    {% endif %}
 
-
+    {% if basket %}
     <div class="row">
         <div class="col-4 offset-2 d-flex justify-content-around align-items-center bg-light-grey">
             <a href="{% url 'product_display' %}">
@@ -154,6 +163,8 @@
         </div>
         {% endif %}
     </div>
+    {% endif %}
+    {% if checkout %}
     <div class="row justify-content-center mt-5">
         <div class="col-md-4">
             <a href="{% url 'checkout' %}">
@@ -162,8 +173,18 @@
                 </span>
             </a>
         </div>
-        
     </div>
+    {% else %}
+    <div class="row justify-content-center">
+        <div class="col-auto text-center">
+            <a href="{% url 'product_display' %}">
+                <span class="btn btn-cherry">
+                    <i class="fa-solid fa-store"></i></i>&nbsp;&nbsp;Shop
+                </span>
+            </a>
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}
