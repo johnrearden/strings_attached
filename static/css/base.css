@@ -247,6 +247,14 @@ audio {
     color: black;
 }
 
+.special-offer-tag {
+    background-image: linear-gradient(#f79032, #fdca37);
+    color: white;
+    font-weight: bold;
+    font-size: 0.8em;
+    border-radius: 5px;
+}
+
 .slanted-tag {
     position: absolute;
     transform: translate(1rem,2rem) rotate(-45deg);

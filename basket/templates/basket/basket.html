@@ -56,6 +56,9 @@
                         </td>
                         <td class="align-middle">
                             <h5>{{ item.product.name }}</h5>
+                            {% if item.on_special %}
+                            <span class="special-offer-tag p-1">Special Offer!</span>
+                            {% endif %}
                         </td>
                         <td class="align-middle">
                             <form method="POST" action="{% url 'replace_item_quantity' item.product.id %}" 
@@ -164,7 +167,7 @@
         {% endif %}
     </div>
     {% endif %}
-    {% if checkout %}
+    {% if basket %}
     <div class="row justify-content-center mt-5">
         <div class="col-md-4">
             <a href="{% url 'checkout' %}">

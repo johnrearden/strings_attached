@@ -29,6 +29,7 @@ class ViewBasket(View):
             item['quantity'] = quantity
             price = offer.reduced_price if offer else product.price
             item['subtotal'] = price * quantity
+            item['on_special'] = offer
             items.append(item)
 
             if offer:

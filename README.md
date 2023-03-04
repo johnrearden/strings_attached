@@ -141,9 +141,19 @@ The manual testing of features is organised by app below.
 |/basket/view_basket/|Minimum quantity is 1|Decrement quantity as far as 1|Decrement button becomes inactive
 |/basket/view_basket/|Maximum quantity is 10|Increment quantity as far as 10|Increment button becomes inactive
 |/basket/view_basket/|Multiple quantity changes allowed before reload|Click incr. and decr. buttons in quick succession|Clicking the incr and decr buttons repeatedly does not reload page. After a short pause, upon ceasing clicking, page reloads.
-|/basket/view_basket/|Bin icon empties basket|Click bin icon|Basket is emptied
+|/basket/view_basket/|Message is displayed when page reloads after quantity change|Click incr. button and wait for short pause|Page reloads and message displayed with new quantity
+|/basket/view_basket/|Bin icon removes item entirely|Click bin icon|Item is removed.
 |/basket/view_basket/|'You have nothing in your basket' message displayed if basket is empty|Navigate to page by clicking basket icon in navbar without any items|Message appears correctly
-|/basket/view_basket/|
+|/basket/view_basket/|Shop link returns user to products page|Clicked on shop link|User is redirected to products page
+|/basket/view_basket/|Clear all link empties basket and returns user to products page|Click on 'clear all' link|User is redirected to products page, and basket is now empty
+|/basket/view_basket/|Subtotal is displayed correctly|Add 2 products to basket|Subtotal is sum of both product prices
+|/basket/view_basket/|Delivery charge displayed correctly|Add instrument to basket|No delivery charge appears
+|/basket/view_basket/|Delivery charge displayed correctly|Add non-instrument item to basket|Standard delivery charge is displayed
+|/basket/view_basket/|Item price displayed correctly|Add item to basket and compare price with that on product_detail page|Prices are equal
+|/basket/view_basket/|Special offer price displayed correctly|Add item on special offer to basket and compare price with price on product_detail page|Prices are equal
+|/basket/view_basket/|Checkout button redirects user to /checkout/ page|Click button|Page redirects appropriately
+|/basket/view_basket/|Special offer banner displays at top of screen if basket item is on offer|Add special offer item to basket| Banner displays with correct special offer price
+
 
 
 
