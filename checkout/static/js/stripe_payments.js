@@ -45,10 +45,14 @@ paymentElement.addEventListener('change', (event) => {
 const form = document.getElementById('payment-form');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
+
+  // Disable all interactive elements on page while payment is processing
   paymentElement.update({ readOnly: true });
   document.getElementById('submit-button').disabled = true;
   document.getElementById('payment-overlay').classList.remove('d-none');
   document.getElementById('payment-overlay').classList.add('d-flex');
+  document.getElementById('view-basket-link').style.pointerEvents = 'none';
+  document.getElementById('cancel-purchase-link').style.pointerEvents = 'none';
 
   const shippingDetails = {
     name: form.full_name.value,
@@ -99,9 +103,15 @@ form.addEventListener('submit', (event) => {
                     `;
             const errorDiv = document.getElementById('card-errors');
             errorDiv.innerHTML = html;
+
+            // Reenable all interactive elements on page.
             paymentElement.disabled = 'false';
+            paymentElement.update({ readOnly: false });
+            document.getElementById('submit-button').disabled = false;
             document.getElementById('payment-overlay').classList.add('d-none');
             document.getElementById('payment-overlay').classList.remove('d-flex');
+            document.getElementById('view-basket-link').style.pointerEvents = 'auto';
+            document.getElementById('cancel-purchase-link').style.pointerEvents = 'auto';
           } else {
             // If there are no errors, make a POST request to the payment
             // confirmed view, and then redirect as indicated by the view.

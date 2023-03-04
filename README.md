@@ -183,6 +183,35 @@ The manual testing of features is organised by app below.
 |/product_detail/|Associated product cards contain link to add item to card without redirection|Click on cart increment button on item card|Basket now contains 1 extra of this item; message displayed to user instead of redirection
 |/product_detail/|Edit product button appears for staff only|Login as staff; then logout|Button appears when logged in, and is hidden when logged out
 
+#### _checkout app_
+|Page|Feature|Action|Effect|
+|---|---|---|---|
+|/checkout/|Personal details fieldset is filled if UserOrderProfile exists|Create UserOrderProfile in admin panel|Details are filled correctly
+|/checkout/|Stripe payment form appears|Click checkout on /view_basket/ page|Stripe element appears correctly|
+|/checkout/|Pay now button initiates purchase process with valid card details|Fill in card details; click PayNow button|Spiiner and overlay appear; Stripe payment initiated.
+|/checkout/|Summary of basket displays correctly|Add items to basket and proceed to checkout|Item names, quantities and costs appear correctly
+|/checkout/|ViewBasket button links back to /view_basket/ page|Click button|User is redirected to page
+|/checkout/|Cancel purchase button redirects to /product_display/ page|Click button|User is redirected successfully|
+|/checkout/|Stripe errors display below each field in payment fieldset|Enter invalid card number|Error appears below card input|
+|/checkout/|Stripe errors display below each field in payment fieldset|Enter invalid date|Error appears below expiration input|
+|/checkout/|Stripe errors display below each field in payment fieldset|Enter invalid CVC|Error appears below CVC input|
+|/checkout/|Stripe message appears at bottom of payment fieldset if card is declined|Enter card number 40000000000000002 to simulate declined card|Error message appears correctly|
+|/checkout/|Interactive elements disabled when PayNow button is clicked|Click button|No buttons are clickable while payment process is ongoing|
+|/checkout/|Interactive elements reenabled if Stripe error is returned|Click PayNow button with Stripe decline card number|When overlay is removed and error message appears, all elements are clickable again|
+|/checkout/checkout_succeeded/|Delivery details displayed|Complete payment on /checkout/ page|Delivery details are summarized in a table|
+|/checkout/checkout_succeeded/|Order summary displayed|Complete payment|Order summary displayed including line items, delivery cost and total with item count|
+|/checkout/checkout_succeeded/|VideoLesson button links to /all_lessons/ page|Click button|User is redirected to page with all available video lessons|
+|/checkout/staff_order_list/|All orders displayed, ordered first by whether they are paid, then by whether fulfilled, and lastly by date|Load page, having entered some order on the DB|Orders display correctly, corresponding to their fields in the admin panel|
+|/checkout/staff_order_list/|Paid and fulfilled orders are greyed out|Select order, click on row, mark as fulfilled|Order row is now greyed out in the table|
+|/checkout/staff_order_list/|Orders display in correct order|Load page with orders in DB|Orders appear ordered by paid, then fulfilled, then by date.
+|/checkout/staff_order_list/|Clicking on an order's row in the table links to the /staff_order_detail/ page|Click on row|Order detail for that row is displayed|
+|/checkout/staff_order_detail/|Delivery details displayed correctly|Navigate to page|Delivery details are displayed as required|
+|/checkout/staff_order_detail/|Order line items displayed|Navigate to page|Line items for order displayed correctly|
+|/checkout/staff_order_detail/|Payment Confirmed message displayed|Complete purchase and then navigate to page|Message displays correctly
+|/checkout/staff_order_detail/|Payment Failed message displayed|Attempt purchase with Stripe invalid card code, navigate to page|Payment failed message displayed below order line items.
+|/checkout/staff_order_detail/|MarkAsFulfilled button switches boolean fulfilled flag to True|Click on button, navigate back to /staff_order_list/|Order now marked as fulfilled, greyed out|
+|/checkout/staff_order_detail/|MarkAsFulfilled button does not appear if payment has failed|Attempt purchase with Stripe invalid card code and navigate to page|Button does not appear|
+
 
 
 ### Responsiveness

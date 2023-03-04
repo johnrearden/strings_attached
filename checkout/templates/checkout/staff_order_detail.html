@@ -6,9 +6,11 @@
     <div class="row justify-content-center mt-5">
         <div class="col-auto text-center">
             <h1>Order Detail</h1>
-            <h5>Order number : {{ order.order_number }}</h5>
+            <p>Order number : {{ order.order_number }}</p>
         </div>
     </div>
+
+    <!-- Display the order's delivery details -->
     <div class="row mt-5 d-flex align-items-stretch">
         <div class="col-12 col-md-6 justify-content-center">
             <div class="card w-auto">
@@ -16,19 +18,20 @@
                     <h5 class="card-title text-center bg-cherry text-white py-3">
                         <i class="fa-solid fa-truck"></i>&nbsp;&nbsp;Delivery Details
                     </h5>
-                    <p class="card-text">
+                    <div class="card-text">
                         <hr>
-                        
                         {{ order.full_name }},<br>
                         {{ order.street_address1 }},<br>
                         {% if order.street_address2 %}{{ order.street_address2 }},<br>{% endif %}
                         {{ order.town_or_city }},<br>
                         {% if order.county %}{{ order.county }},<br>{% endif %}
                         {{ order.country }}{% if order.postcode %}, {{ order.postcode }}{% endif %}
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Display the order line items in a table -->
         <div class="col-12 col-md-6">
             <div class="card w-auto">
                 <div class="card-body">
@@ -53,6 +56,8 @@
                     </table>
                 </div>
             </div>
+
+            <!-- Indicate whether payment has been confirmed or not -->
             <div class="card w-auto">
                 <div class="card-body text-center">
                     {% if order.payment_confirmed %}
@@ -64,6 +69,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Indicate if order is fulfilled -->
     <div class="row justify-content-center mt-5">
         <div class="col-auto text-center">
             {% if order.fulfilled %}

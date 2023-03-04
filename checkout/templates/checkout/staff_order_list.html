@@ -2,33 +2,40 @@
 {% load static %}
 
 {% block content %}
+<!-- Display a table containing all the orders on the system -->
 <div class="container-fluid">
     <div class="row mt-3 text-center justify-content-center">
-        <div class="col-auto">
+        <div class="col">
             <h3>Staff Product List</h3>
             <span>Click item to see detail.</span>
             <table class="table table-hover border mt-3">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col" onclick="">
+                        <th scope="col">
                             Order No.
                         </th>
-                        <th scope="col">
+                        <th scope="col" class="d-none d-md-table-cell">
                             Paid
                         </th>
-                        <th scope="col">
+                        <th scope="col" class="d-table-cell d-md-none"> 
+                            Pd
+                        </th>
+                        <th scope="col" class="d-none d-md-table-cell">
                             Fulfilled
                         </th>
-                        <th scope="col" onclick="">
+                        <th scope="col" class="d-table-cell d-md-none"> 
+                            Ffld
+                        </th>
+                        <th scope="col" class="d-none d-lg-table-cell">
                             Name
                         </th>
-                        <th scope="col" onclick="">
+                        <th scope="col" class="d-none d-lg-table-cell">
                             Email
                         </th>
-                        <th scope="col" onclick="">
+                        <th scope="col" class="d-none d-xl-table-cell">
                             Country
                         </th>
-                        <th scope="col" onclick="">
+                        <th scope="col">
                             Date
                         </th>
                         <th scope="col">
@@ -41,8 +48,11 @@
                     {% for order in orders %}
                     <tr onclick="onRowClick(event, '{{ order.id }}')"
                         class="{% if order.fulfilled or not order.payment_confirmed %}text-muted bg-light-grey{% endif %}">
-                        <td>
+                        <td class="d-none d-md-table-cell">
                             {{ order.order_number }}
+                        </td>
+                        <td class="d-table-cell d-md-none">
+                            ...{{ order.order_number|slice:":6"}}
                         </td>
                         <td>
                             {% if order.payment_confirmed %}
@@ -58,13 +68,13 @@
                             &#x274C;
                             {% endif %}
                         </td>
-                        <td>
+                        <td class="d-none d-lg-table-cell">
                             {{ order.full_name }}
                         </td>
-                        <td>
+                        <td class="d-none d-lg-table-cell">
                             {{ order.email }}
                         </td>
-                        <td>
+                        <td class="d-none d-xl-table-cell">
                             {{ order.country }}
                         </td>
                         <td>

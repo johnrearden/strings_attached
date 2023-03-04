@@ -339,3 +339,8 @@ audio {
     user-select: none !important;
     z-index: 10;
 }
+
+.spinner-icon {
+    font-size: 2rem;
+    font-weight: bold;
+}
