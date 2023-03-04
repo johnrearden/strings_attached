@@ -20,11 +20,13 @@ class SpecialOffer(models.Model):
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE,
                                 related_name='products')
     reduced_price = models.DecimalField(max_digits=6, decimal_places=2,
-                                        validators=[MinValueValidator(0),])
+                                        validators=[MinValueValidator(0), ])
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
 
     def is_live(self):
+        """ Returns true if the current date falls between the special offer
+            start and end dates"""
         now = datetime.now()
         return self.start_date < now < self.end_date
 
@@ -33,6 +35,8 @@ class SpecialOffer(models.Model):
                 f'until {self.end_date}')
 
     def clean(self):
+        """ Prevents a staff member inadvertently creating an invalid offer
+            date range"""
         if self.start_date > self.end_date:
             raise ValidationError('Start date can\'t be after end date!')
 
@@ -64,6 +68,9 @@ class Product(models.Model):
         return f'{self.name} (cat. {self.category.name})'
 
     def save(self, *args, **kwargs):
+        """ Sends an email to the staff member designated as the product
+            owner in the event that the stock level falls below the
+            reorder threshold """
         if self.stock_level < self.reorder_threshold:
             send_mail(
                 subject='Urgent! : Stock low',
@@ -97,12 +104,14 @@ class ProductAssociation(models.Model):
                                      related_name='from_product')
     associated_product = models.ForeignKey(Product, on_delete=models.CASCADE,
                                            related_name='associated_products')
-    weight = models.IntegerField(default=1, validators=[MinValueValidator(1),])
+    weight = models.IntegerField(default=1,
+                                 validators=[MinValueValidator(1), ])
 
     def __str__(self):
         return (f'Association : from {self.base_product.name} to '
                 f'{self.associated_product.name}')
 
     def clean(self):
+        """ Prevents a product from being associated with itself """
         if self.base_product == self.associated_product:
             raise ValidationError('You can\'t associate a product with itself')

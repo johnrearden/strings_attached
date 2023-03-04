@@ -1,32 +1,10 @@
 {% extends 'base.html' %}
-
 {% load static %}
-
-<div class="col-12 special-offer-banner py-2 text-center">
-    <h1 class="font-weight-bold text-white text-uppercase d-inline">
-        Special Offer
-    </h1>
-    <span class="font-bold mx-3">
-        {{ offer.product.name }} for only &euro;{{ offer.reduced_price }}
-        {% if offer.required_product %}
-        when you buy a {{ offer.required_product.name }}
-        {% endif %}
-    </span>
-    <span class="text-white font-bold">
-        Better hurry! Offer ends {{ offer.end_date }}
-    </span>
-    <form method="POST" action="{% url 'add_to_basket' offer.product.id %}" class="form-inline d-inline ml-3">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-cherry" value="ADD">
-        <input type="hidden" name="quantity" value="1">
-        <input type="hidden" name="redirect_url" value="{{ request.path }}">
-    </form>
-</div>
 
 {% block subheader %}
 {{ block.super }}
 {% if special_offers %}
-
+<!-- Special offer banner : cycles through all current offers -->
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         {% for offer in special_offers %}
@@ -60,6 +38,7 @@
 {% endblock %}
 
 {% block content %}
+<!-- Category links -->
 <div class="container-fluid w-75">
     <div class="row py-2 text-center justify-content-center">
         <div class="col-auto">
@@ -80,17 +59,24 @@
         {% endfor %}
     </div>
     <hr>
+
+    <!-- Product display grid -->
     <div class="row pt-3">
         {% for product in products %}
         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
             <a href="{% url 'product_detail' product.id %}">
-                <div class="card border-1">
+                <div class="card border-1 position-relative">
                     <img src="{{ product.image.url }}" class="img-fluid w-75 p-1 mx-auto"
                         alt="Image of {{ product.name }}">
+                    {% for offer in special_offers %}
+                        {% if product == offer.product %}
+                        <span class="special-offer-large-tag p-1">Special Offer</span>
+                        {% endif %}
+                    {% endfor %}
                     <div class="card-body">
                         <h6 class="card-title font-weight-bolder product-name text-cherry">{{ product.name }}</h6>
                         <span class="card-text product-description d-block">{{ product.description }}</span>
-                        <span class="card-text float-left">&euro;{{ product.price }}</span>
+                        <span class="card-text float-left">&euro;{{ product.get_current_price }}</span>
                         <span class="card-text text-muted float-right">
                             <i class="fas fa-tag mr-2"></i>{{ product.category.friendly_name }}
                         </span>
@@ -123,6 +109,15 @@
         </div>
         {% endif %}
         {% endfor %}
+    </div>
+
+    <!-- Show message if search criteria result in no matches -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-auto text-center">
+            {% if not products %}
+            <h3>No products match your search criteria! Please try again.</h3>
+            {% endif %}
+        </div>
     </div>
 </div>
 

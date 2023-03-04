@@ -5,7 +5,9 @@
 
 <div class="container-fluid">
     <div class="row mt-4">
-        <div class="col-xs-8 offset-xs-2 col-md-5 col-lg-4 border-dark d-flex align-items-center justify-content-center">
+        <!-- Product image div -->
+        <div
+            class="col-xs-8 offset-xs-2 col-md-5 col-lg-4 border-dark d-flex align-items-center justify-content-center">
             <div class="position-relative">
                 <img src="{{ product.image.url }}" class="img-fluid p-3" alt="Image of {{ product.name }}">
             </div>
@@ -15,40 +17,49 @@
             {% endif %}
         </div>
 
-        <div class="col-xs-10 offset-xs-1 col-md-7 col-lg-8 mt-2">
-            <h2 class="card-title font-weight-bolder">{{ product.name }}</h2>
-            <p class="card-text">{{ product.description }}</p>
-            {% if offer %}
-            <h5 class="special-offer-banner p-2 text-center">Special Offer! Valid until {{ offer.end_date }}</h5>
-            <h4>Only &euro;{{ offer.reduced_price }}!!</h4>
-            <h6>Reduced from &euro;{{ product.price }} ... save &euro;{{ reduction }}!</h6>
-            {% else %}
-            <h4 class="card-text">&euro;{{ product.price }}</h4>
-            {% endif %}
+        <!-- Product details -->
+        <div class="col-xs-10 offset-xs-1 col-md-7 col-lg-7 mt-2">
+            <div class="row px-2">
+                <h2 class="card-title font-weight-bolder">{{ product.name }}</h2>
+                <p class="card-text">{{ product.description }}</p>
+                {% if offer %}
+                <h5 class="special-offer-banner p-2 text-center w-100">
+                    Special Offer! Valid until {{ offer.end_date }}
+                </h5>
+                {% endif %}
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 col-md-6">
+                    {% if offer %}
+                    <h4>Only &euro;{{ offer.reduced_price }}!!</h4>
+                    <h6>Reduced from &euro;{{ product.price }} ... save &euro;{{ reduction }}!</h6>
+                    {% else %}
+                    <h4 class="card-text">&euro;{{ product.price }}</h4>
+                    {% endif %}
+                    <span class="card-text text-muted">
+                        <i class="fas fa-tag mr-2"></i>{{ product.category.friendly_name }}
+                    </span>
 
-            <span class="card-text text-muted">
-                <i class="fas fa-tag mr-2"></i>{{ product.category.friendly_name }}
-            </span>
-            <div class="row">
-                {% if product.stock_level > 0 %}
-                <div class="col-6">
+                    {% if product.stock_level > 0 %}
+                    <!-- Quantity input controls : only display if product is in stock -->
                     <p class="mt-3"><strong>Quantity:</strong></p>
-
-                    <form method="POST" action="{% url 'add_to_basket' product.id %}"
+                    <form method="POST" action="{% url 'add_to_basket' product.id %}" 
                         id="form_{{ item.product.id }}">
                         {% csrf_token %}
                         <div class="form-group text-center quantity-form-element">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button class="decrement-qty btn btn-quantity" data-item_id="{{ product.id }}"
+                                    <button class="decrement-qty btn btn-quantity" 
+                                        data-item_id="{{ product.id }}"
                                         id="decrement-{{ product.id }}">
                                         <span class="icon">
                                             <i class="fas fa-minus"></i>
                                         </span>
                                     </button>
                                 </div>
-                                <input class="form-control quantity-input text-center" type="text" inputmode="numeric"
-                                    name="quantity" value="1" min="1" max="10" data-item_id="{{ product.id }}"
+                                <input class="form-control quantity-input text-center" type="text"
+                                    name="quantity" value="1" data-min="1" data-max="10" 
+                                    data-item_id="{{ product.id }}"
                                     data-should_submit="false" id="quantity-input-{{ product.id }}">
                                 <div class="input-group-append">
                                     <button class="increment-qty btn btn-quantity" data-item_id="{{ product.id }}"
@@ -60,27 +71,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-left">
-                            <a href="{% url 'product_display' %}">
-                                <span class="btn btn-cherry">Back to Shop</span>
-                            </a>
-                            {% if request.user.is_staff %}
-                            <a href="{% url 'update_product' product.id %}">
-                                <span class="btn btn-cherry">Edit product</span>
-                            </a>
-                            {% endif %}
-                            <input type="submit" class="btn btn-cherry" value="Add to Basket">
-                            <a href="{% url 'view_basket' %}">
-                                <span class="btn btn-cherry">
-                                    View Basket
-                                </span>
-                            </a>
-                        </div>
+                        <input type="submit" class="btn btn-cherry d-inline" value="Add to Basket">
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     </form>
-                </div>
-                {% else %}
-                <div class="col-12 py-3">
+                    {% else %}
+                    <!-- Display out of stock message to user -->
                     <h3 class="out-of-stock-bg p-1 mb-3">Sorry - will be back in stock soon!</h3>
                     <a href="{% url 'product_display' %}">
                         <span class="btn btn-cherry">Back to Shop</span>
@@ -90,21 +85,41 @@
                         <span class="btn btn-cherry">Edit product</span>
                     </a>
                     {% endif %}
+                    {% endif %}
                 </div>
-                {% endif %}
+                <div class="col-12 col-md-6">
+                    {% if product.audio_clip %}
+                    <div class="text-center border p-2 text-cherry">
+                        <h1 class="text-center"><i class="fa-solid fa-headphones"></i></h1>
+                        <h2>Listen</h2>
+                        <audio src="{{ product.audio_clip.url }}" class="w-100" controls></audio>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
 
-                {% if product.audio_clip %}
-                <div class="col-5 text-center border p-2 text-cherry">
-                    <h1 class="text-center"><i class="fa-solid fa-headphones"></i></h1>
-                    <h2>Listen</h2>
-                    <audio src="{{ product.audio_clip.url }}" class="w-100" controls></audio>
-                </div>
+            <!-- Navigation links -->
+            <div class="row justify-content-center">
+                <a href="{% url 'product_display' %}">
+                    <span class="btn btn-cherry mx-2">Back to Shop</span>
+                </a>
+                {% if request.user.is_staff %}
+                <a href="{% url 'update_product' product.id %}">
+                    <span class="btn btn-cherry mx-2">Edit product</span>
+                </a>
                 {% endif %}
+                
+                <a href="{% url 'view_basket' %}">
+                    <span class="btn btn-cherry mx-2">
+                        View Basket
+                    </span>
+                </a>
             </div>
         </div>
     </div>
 
     <hr>
+    <!-- Associated products div -->
     {% if associated_products %}
     <div class="container associated-products-display p-3">
         <div class="row justify-content-center">
@@ -114,7 +129,7 @@
         </div>
         <div class="row justify-content-center">
             {% for prod in associated_products %}
-            <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-2">
                 <div class="card border-1">
                     <img src="{{ prod.image.url }}"
                         class="card-img-top img-fluid mt-2 position-relative w-50 align-self-center"
@@ -138,7 +153,6 @@
                             <input type="hidden" name="quantity" value="1">
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         </form>
-                        
                     </div>
                 </div>
             </div>
@@ -146,9 +160,7 @@
         </div>
     </div>
     {% endif %}
-
 </div>
-
 {% endblock %}
 
 {% block postloadjs %}

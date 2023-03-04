@@ -153,8 +153,35 @@ The manual testing of features is organised by app below.
 |/basket/view_basket/|Special offer price displayed correctly|Add item on special offer to basket and compare price with price on product_detail page|Prices are equal
 |/basket/view_basket/|Checkout button redirects user to /checkout/ page|Click button|Page redirects appropriately
 |/basket/view_basket/|Special offer banner displays at top of screen if basket item is on offer|Add special offer item to basket| Banner displays with correct special offer price
+|/basket/view_basket/|Special offer tag appears below product name if basket item is on offer|Add special offer item to basket|Tag displays correctly
+|/basket/view_basket/|Direct input of invalid quantity should be corrected|Try to type out of range number in quantity input directly|Javascript on page changes quantity input value to fall within legal range
 
-
+#### _products app_
+|Page|Feature|Action|Effect|
+|---|---|---|---|
+|/products/|Special offer banner appears|Ensure there are live special offers in DB|Banner appears correctly
+|/products/|Special offer banner cycles between all available offers|Ensure multiple offers in DB|Banner cycles correctly between offers
+|/products/|Special offer add button adds 1 item to basket|Click add button|Basket contains 1 item
+|/products/|Category links filter products by correct category|Click each link|Only items of this category are displayed
+|/products/|Entering text in search field limits results|Entered search term 'ernie'|Only Ernie ball products returned
+|/products/|Entering nonsense text string in search field gives no results|Entered 'asdfkasdj' in search field|No results were returned, message displayed to user
+|/products/|Clicking on product card links to product detail page|Clicked on card|Product detail page displayed correctly
+|/products/|Out of stock items are displayed greyed out, with out-of-stock badge|Reduce stock level of a product to 0 in admin panel|Item appears as intended
+|/products/|Items on special offer should have special offer badge|Create a special offer for a product in admin panel|Badge appears correctly
+|/products/|Items on special offer should display special offer price|Create a special offer for a product in admin panel|Special offer price displays instead of normal price
+|/product_detail/|Product image, name and description should appear|Select product from products/ page|Image, name and description appear correctly
+|/product_detail/|Price of product should appear|Select product|Price and category displayed correctly
+|/product_detail/|Special offer banner should appear below description|Assign special offer to product|Banner appears correctly
+|/product_detail/|Out of stock products should show grey out-of-stock banner instead of quantity input and buttons|Select product with stock_level == 0|Grey banner appears; no input or buttons appear
+|/product_detail/|Add to basket button should not appear for out-of-stock items|Select product with stock_level == 0|Add to basket button is hidden
+|/product_detail/|Back to shop button links to product_display page|Click on button|User redirected to product_display page
+|/product_detail/|Add to basket increments quantity in basket by quantity in quantity input|Increment quantity to 3, click AddToBasket button, check basket contents|Basket contents incremented by 3
+|/product_detail/|View basket button links to /basket/view_basket page|Click ViewBasket button|User is redirected to correct page
+|/product_detail/|Audio clip appears and can be played if exists|Select product with audio clip|Audio player element appears on page, and plays instrument audio clip correctly
+|/product_detail/|Associated products appear below main content if exist|Select product with associated products assigned|Products appear correctly, with price tag, image and name
+|/product_detail/|Associated product cards contain link to detail page for that item|Click on information button on associated product card|User is redirected to the product_detail page for that item
+|/product_detail/|Associated product cards contain link to add item to card without redirection|Click on cart increment button on item card|Basket now contains 1 extra of this item; message displayed to user instead of redirection
+|/product_detail/|Edit product button appears for staff only|Login as staff; then logout|Button appears when logged in, and is hidden when logged out
 
 
 

@@ -10,6 +10,8 @@
             <p>Your order will be dispatched shortly</p>
         </div>
     </div>
+
+    <!-- Display the delivery details for the user's order -->
     <div class="row mt-5 d-flex align-items-stretch">
         <div class="col-12 col-md-4 justify-content-center">
             <div class="card w-auto">
@@ -17,7 +19,7 @@
                     <h5 class="card-title text-center bg-cherry text-white py-3">
                         <i class="fa-solid fa-truck"></i>&nbsp;&nbsp;Your Delivery Details
                     </h5>
-                    <p class="card-text">
+                    <div class="card-text">
                         <hr>
                         {{ order.full_name }},<br>
                         {{ order.street_address1 }},<br>
@@ -25,14 +27,17 @@
                         {{ order.town_or_city }},<br>
                         {% if order.county %}{{ order.county }},<br>{% endif %}
                         {{ order.country }}{% if order.postcode %}, {{ order.postcode }}{% endif %}
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-2">
-            <img src="{{ MEDIA_URL }}crowd_tall_bw.webp" alt="Black and white image of rock concert"
-                class="img-fluid">
+
+        <!-- Display a photo on larger screens-->
+        <div class="col-2 d-none d-md-block">
+            <img src="{{ MEDIA_URL }}crowd_tall_bw.webp" alt="Black and white image of rock concert" class="img-fluid">
         </div>
+
+        <!-- Display a summary of the order -->
         <div class="col-12 col-md-6">
             <div class="card w-auto">
                 <div class="card-body">

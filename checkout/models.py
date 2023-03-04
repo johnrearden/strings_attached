@@ -7,6 +7,13 @@ from products.models import Product
 
 
 class Order(models.Model):
+    """
+    Models an order, including shipping details and other required fields
+    for the Stripe checkout process. The order is saved on the system before
+    the confirmPayment call is made to Stripe. There are boolean flags to
+    indicate that the order payment has been confirmed, and whether or not
+    the order has been fulfilled.
+    """
     order_number = models.CharField(max_length=32, editable=False)
     full_name = models.CharField(max_length=64)
     email = models.EmailField(max_length=254)
@@ -21,7 +28,7 @@ class Order(models.Model):
     delivery_cost = models.DecimalField(max_digits=8, decimal_places=2,
                                         null=False, default=0)
     discount = models.DecimalField(max_digits=3, decimal_places=2,
-                                   null=False, default=0)                                        
+                                   null=False, default=0)
     order_total = models.DecimalField(max_digits=8, decimal_places=2,
                                       null=False, default=0)
     grand_total = models.DecimalField(max_digits=8, decimal_places=2,
@@ -61,6 +68,9 @@ class Order(models.Model):
 
 
 class OrderLineItem(models.Model):
+    """
+    Models an item (product and quantity) that appears in an order.
+    """
     order = models.ForeignKey(Order, null=False, blank=False,
                               on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, null=False, blank=False,
@@ -81,6 +91,10 @@ class OrderLineItem(models.Model):
 
 
 class UserOrderProfile(models.Model):
+    """
+    Models a user's order information, so that it can be reused in
+    subsequent purchases (with the user's opt-in consent)
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE,
                                 related_name='order_profile')
     full_name = models.CharField(max_length=64)

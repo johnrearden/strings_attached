@@ -33,7 +33,7 @@ class StripeWH_Handler:
         # a subscription, we don't need to handle it here.
         if event.data.object.description == 'Subscription creation':
             return HttpResponse(status=200)
-        
+
         metadata = event.data.object.metadata
         shipping_data = event.data.object.shipping
         order_number = metadata.order_number
@@ -126,7 +126,7 @@ class StripeWH_Handler:
         )
         user_learning_profile.subscription_paid = False
 
-        # Send an email to the customer to let them know their payment has 
+        # Send an email to the customer to let them know their payment has
         # failed, with a link to their profile page to enable them to manage
         # their subscription with Stripe.
         email = user_learning_profile.user.email

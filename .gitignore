@@ -2,7 +2,7 @@ env.py
 venv/
 __pycache__/
 node_modules
-node_modules
+node_modules/
 strings_attached.code-workspace
 db.sqlite3
 datadump.json

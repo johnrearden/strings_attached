@@ -255,6 +255,17 @@ audio {
     border-radius: 5px;
 }
 
+.special-offer-large-tag {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-image: linear-gradient(#f79032, #fdca37);
+    color: white;
+    font-weight: bold;
+    font-size: 1.3em;
+    border-radius: 5px;
+}
+
 .slanted-tag {
     position: absolute;
     transform: translate(1rem,2rem) rotate(-45deg);

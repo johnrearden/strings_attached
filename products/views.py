@@ -2,13 +2,15 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, ProductAssociation, Category, SpecialOffer
 from django.views import View
 from django.db.models import Q
-from django.contrib import messages
 from datetime import datetime
 
 
 class ProductDisplay(View):
     """
-    Blah
+    Provides the user with a list of all products in the database. The list
+    can be filtered by category. The list can also be filtered to match a
+    search term provided by the user, where the search term appears either
+    in the name or the description of the product.
     """
 
     def get(self, request):

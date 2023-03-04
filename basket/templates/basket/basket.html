@@ -3,7 +3,7 @@
 
 {% block subheader %}
 {% if special_offers %}
-
+<!-- If any product in the basket in on offer, display the offer here -->
 <div class="container-fluid">
     <div class="row align-items-center">
         {% for offer in special_offers %}
@@ -28,16 +28,16 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="container-fluid text-black mt-5">
-    <row>
+    <div class="row">
         <div class="col-md-6 offset-md-3 text-center">
             <h1 class="">Your Basket</h1>
         </div>
-    </row>
+    </div>
     {% if basket %}
-    <row>
+    <div class="row">
         <div class="col-md-8 offset-md-2 mt-3">
+            <!-- Table to display each item in the basket-->
             <table class="table table-sm">
                 <thead class="bg-cherry text-white">
                     <tr class="text-center font-weight-bolder">
@@ -76,8 +76,8 @@
                                             </button>
                                         </div>
                                         <input class="form-control quantity-input text-center" type="text"
-                                            inputmode="numeric" name="quantity" value="{{ item.quantity }}" min="1"
-                                            max="10" data-item_id="{{ item.product.id }}" data-should_submit="true"
+                                            name="quantity" value="{{ item.quantity }}" data-min="1"
+                                            data-max="10" data-item_id="{{ item.product.id }}" data-should_submit="true"
                                             id="quantity-input-{{ item.product.id }}">
                                         <div class="input-group-append">
                                             <button class="increment-qty btn btn-quantity"
@@ -112,8 +112,9 @@
             </table>
             <hr>
         </div>
-    </row>
+    </div>
     {% else %}
+    <!-- Display message to user if basket is empty -->
     <div class="row justify-content-center my-4">
         <div class="col-auto text-center">
             <h2>(You don't have any items in your basket).</h2>
@@ -135,10 +136,11 @@
                 <button type='submit' class="btn btn-cherry">
                     Clear All&nbsp;&nbsp;<i class="fa-regular fa-trash-can"></i>
                 </button>
-            </a>
+            </form>
             
         </div>
 
+        <!-- Display cost of items (subtotal), delivery and grand total -->
         {% if total %}
         <div class="col-4">
             <div class="row">
