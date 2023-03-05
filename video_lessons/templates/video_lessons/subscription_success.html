@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container mt-3">
-    <div class="row text-center mt-5">
+    <div class="row text-center mt-3">
         <div class="col">
             <h1>Subscription Successful!</h1>
             <h2>Welcome to the Strings Attached Guitar School</h2>
@@ -12,16 +12,18 @@
                 below to see all the available lessons. You can manage your subscription by clicking
                 on the Manage Subscription link below.
             </p>
+            <img class="img-fluid" src="{{ MEDIA_URL }}/concert-crowd-crop.webp" alt="Image of rock concert crowd">
             <a href="{% url 'all_lessons' %}">
-                <span class="btn btn-cherry">
+                <span class="btn btn-cherry mt-2">
                     Browse Lessons
                 </span>
             </a>
             <form id='form' method="POST" action="{% url 'subscription_success' %}">
                 {% csrf_token %}
-                <button id="submit" type="submit" class="btn btn-cherry">
+                <button id="submit" type="submit" class="btn btn-cherry mt-2">
                     Manage Subscription
                 </button>
+            </form>
         </div>
     </div>
 </div>
