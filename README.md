@@ -212,6 +212,61 @@ The manual testing of features is organised by app below.
 |/checkout/staff_order_detail/|MarkAsFulfilled button switches boolean fulfilled flag to True|Click on button, navigate back to /staff_order_list/|Order now marked as fulfilled, greyed out|
 |/checkout/staff_order_detail/|MarkAsFulfilled button does not appear if payment has failed|Attempt purchase with Stripe invalid card code and navigate to page|Button does not appear|
 
+#### _welcome app and navbar_
+|Page|Feature|Action|Effect|
+|---|---|---|---|
+|/|Hero image and title appear|Navigate to page|Elements appear correctly|
+|/|Shop button links to /products/ page|Click button|User is redirected to correct page|
+|/|Subscribe button links to /video_lessons/all_lessons/ page|Click button|User is redirected to correct page|
+|/|Logo button causes page to reload|Click logo|Page reloads|
+|/|Typing term in search input opens /products/ page filtered to that search term|Type in term and hit Q button|/products/ page opens, with results filtered to that search term|
+|/|User is notified of login status on navbar|Login as user|Message 'logged in as {user}' appears on navbar|
+|/|Navbar - account dropdown button reveals login and register links|Click dropdown button|Correct links appear|
+|/|Navbar - account dropdown login link leads to allauth login page|Click link|User redirected to login page|
+|/|Navbar - account dropdown register link leads to allauth registration page|Click link|User redirected to registration page|
+|/|Navbar - basket icon appears, with current total amount of items in basket|Add item to basket and navigate back to landing page|Icon and correct balance displayed at right hand end of navbar
+|/|Navbar - when logged in as a staff member, a staff dropdown button appears|Login as admin|Staff dropdown button appears|
+|/|Navbar - staff dropdown contains working link to /stock/add_product/ form|Click dropdown button|Add product form appears correctly|
+|/|Navbar - staff dropdown contains working link to /stock/staff_product_list/all|Click dropdown button|Staff product list appears with all products displayed|
+|/|Navbar - staff dropdown contains working link to /checkout/staff_order_list/|Click dropdown button|Staff Order List appears correctly|
+
+#### _stock app_
+|Page|Feature|Action|Effect|
+|---|---|---|---|
+|/stock/add_product/|Staff members can create new product using a form|Navigate to page, fill out form|New product appears in admin panel|
+|/stock/add_product/|Staff member is redirected to /staff_product_list/ after adding a new product|Add a new product|Staff member is redirected successfully
+|/stock/update_product/|Staff members can update an existing product using a form|Navigate to page, alter fields on form|Updated product visible in /staff_product_list/ page|
+|/stock/update_product/|Staff member is redirected to /staff_product_list/ after adding a new product|Add a new product|Staff member is redirected successfully
+|/stock/add_product/|Staff member can see error message when field validation requirements are not met|Enter negative amounts for stock_level, reorder_threshold and price|Error messages appear beneath each form field & product is not saved
+|/stock/update_product/|Staff member can see error message when field validation requirements are not met|Enter negative amounts for stock_level, reorder_threshold and price|Error messages appear beneath each form field & product is not saved|
+|/stock/staff_product_list/|Staff can see each product displayed in a table|Navigate to page|Each product appears in the table|
+|/stock/staff_product_list/|Special offer badge appears on products with live special offers|Set special offer on product in admin panel|Green special offer badge appears next to product name|
+|/stock/staff_product_list/|Out-of-stock badge appears on products with stock_level == 0|Set stock level on test product to 0|Red 'o/s' badge appears next to product name|
+|/stock/staff_product_list/|Quantity cell for out-of-stock product has red backround|Set stock level on test product to 0|Red background appears successfully|
+|/stock/staff_product_list/|Quantity cell for low-stock product has orange background|Set stock level on test product to below reorder_threshold|Background on quantity cell is orange|
+|/stock/staff_product_list/|Clicking on Product header orders products alternately alphabetically and reverse-alphabetically|Click on header|Products are ordered correctly in alternating sequence|
+|/stock/staff_product_list/|Clicking on Price header orders products alternately by increasing and decreasing price|Click on header|Products are ordered correctly in alternating sequence|
+|/stock/staff_product_list/|Click on Stk header orders products by 1-out-of-stock, 2-low-stock, 3-stock-normal|Click on header|Out-of-stock products appear first, followed by low-stock, followed by everything else|
+|/stock/staff_product_list/|Click on category header orders products alternately by increasing and decreasing category id|Click on header|Products appear in correct order (this is to facilitate grouping products in the list by category)|
+
+#### _video lessons app_
+|Page|Feature|Action|Effect|
+|---|---|---|---|
+|/video_lessons/all_lessons/|Page displays all available lessons in order, categorized by course|View page|All lessons are present, each in order under its own course heading|
+|/video_lessons/all_lessons/|For non-subscribers, only the first 2 lessons link to the video_player page|View page while logged out, while logged in as non-subscriber, while logged in as non-paid-up subscriber|Only first 2 lessons are clickable|
+|/video_lessons/all_lessons/|For paid-up subscribers, all lessons are clickable and redirect to the video player for that lesson|View page while logged in as paid-up-subscriber|All lessons are clickable and link correctly to video_player|
+|/video_lessons/all_lessons/|Panel on left of lesson display shows a subscribe link which links to the Stripe subscription page|View page as logged in non-subscriber|Subscribe link appears and links to Stripe subscription page|
+|/video_lessons/all_lessons/|Subscribe link redirects to login/register page for anonymous user|View page as anonymous user|Subscribe link redirects to login/register page|
+|/video_lessons/video_player/|Page shows a video element with lesson video loaded and playable|Click lesson thumbnail on /all_lessons/ page|video element appears correctly|
+|/video_lessons/video_player/|Previous video button is disabled when viewing first video|Select first video|Button is disabled|
+|/video_lessons/video_player/|Next video button is disabled when viewing last video|Select last video|Button is disabled|
+|/video_lessons/video_player/|Next/previous buttons move forwards/backwards through lesson series one video at a time|Click next and previous buttons|Next/previous video appears in video element as appropriate|
+|/video_lessons/video_player/|See all lessons button links back to /all_lessons/ page|Click button|User is redirected to /all_lessons/ page|
+|/video_lessons/video_player/|All lesson thumbnail lessons are visible and clickable for paid up logged in subscribers|View page as paid up logged-in subscriber|All thumbnails are visible and clickable|
+|/video_lessons/video_player/|Only first 2 thumbnail lessons are clickable for users who are not paid-up subscribers|View page as anonymous user, as logged-in non-subscriber and as non-paid up logged in subscriber|Only first 2 videos shown|
+|/video_lessons/subscription_success/|Page has link back to /all_lessons/ page|Complete a test subscription|Link appears on page and functions correctly|
+|/video_lessons/subscription_success/|Page has working link to Stripe subscription management console|Click link|User is redirected to Stripe billing console, where they can change payment methods and cancel their subscription|
+
 
 
 ### Responsiveness

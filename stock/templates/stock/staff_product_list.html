@@ -1,4 +1,4 @@
-{% include 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -7,68 +7,69 @@
         <div class="col-auto">
             <h3>Staff Product List</h3>
             <span>Click header to sort or click item to edit.</span>
-            <table class="table table-hover border mt-3">
 
-                <thead class="thead-dark">
-                    <tr>
-                        <th></th>
-                        <th scope="col" onclick="onColHeaderClick(event, 'all')"
-                            data-order="{{ product_order }}" class="staff-product-title">
-                            Product&nbsp;&nbsp;<i class="fa-solid fa-sort"></i>
-                        </th>
-                        <th scope="col" onclick="onColHeaderClick(event, 'category')"
-                            data-order="{{ category_order }}">
-                            Category&nbsp;&nbsp;<i class="fa-solid fa-sort"></i>
-                        </th>
-                        <th scope="col" 
-                            onclick="onColHeaderClick(event, 'price')"
-                            data-order="{{ price_order }}">
-                            Price&nbsp;&nbsp;<i class="fa-solid fa-sort"></i>
-                        </th>
-                        <th scope="col" onclick="onColHeaderClick(event, 'stock-low')"
-                            data-order="">
-                            Stk <sub>low</sub>
-                        </th>
-                        <th scope="col">Threshold</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in products %}
-                    <tr onclick="onRowClick(event, '{{ item.id }}')">
-                        <td>
-                            <img src="{{ item.image }}" alt="Image of {{ item.name}}"
-                                class="thumbnail-tiny">
-                        </td>
-                        <td class="align-middle">{{ item.name }}
-                            {% if item.on_special %}
-                            <span class="badge badge-pill badge-success">
-                                offer
-                            </span>
-                            {% endif %}
-                            {% if item.stock_low %}
-                            <span class="badge badge-pill badge-warning">
-                                low
-                            </span>
-                            {% endif %}
-                            {% if item.out_of_stock %}
-                            <span class="badge badge-pill badge-danger">
-                                o/s
-                            </span>
-                            {% endif %}
-                        </td>
-                        <td class="align-middle">{{ item.category }}</td>
-                        <td class="text-right align-middle {% if item.on_special %}special-offer-badge{% endif %}">
-                            &euro;{{ item.price }}
-                        </td>
-                        <td class="text-center align-middle {% if item.stock_low %}stock-low-badge{% endif %}
+            <!-- Table responsive is used here to make the table horizontally scrollable
+                 on smaller screens. This is judged to be acceptable UX as the trade-off between
+                 appearance and useability is different for pages that are only seen by staff.-->
+            <div class="table-responsive">
+                <table class="table table-hover border mt-3">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th></th>
+                            <th scope="col" onclick="onColHeaderClick(event, 'all')" data-order="{{ product_order }}"
+                                class="staff-product-title">
+                                Product&nbsp;&nbsp;<i class="fa-solid fa-sort"></i>
+                            </th>
+                            <th scope="col" onclick="onColHeaderClick(event, 'category')"
+                                data-order="{{ category_order }}">
+                                Category&nbsp;&nbsp;<i class="fa-solid fa-sort"></i>
+                            </th>
+                            <th scope="col" onclick="onColHeaderClick(event, 'price')" data-order="{{ price_order }}">
+                                Price&nbsp;&nbsp;<i class="fa-solid fa-sort"></i>
+                            </th>
+                            <th scope="col" onclick="onColHeaderClick(event, 'stock-low')" data-order="">
+                                Stk <sub>low</sub>
+                            </th>
+                            <th scope="col">Threshold</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in products %}
+                        <tr onclick="onRowClick(event, '{{ item.id }}')">
+                            <td>
+                                <img src="{{ item.image }}" alt="Image of {{ item.name}}" class="thumbnail-tiny">
+                            </td>
+                            <td class="align-middle">{{ item.name }}
+                                {% if item.on_special %}
+                                <span class="badge badge-pill badge-success">
+                                    offer
+                                </span>
+                                {% endif %}
+                                {% if item.stock_low %}
+                                <span class="badge badge-pill badge-warning">
+                                    low
+                                </span>
+                                {% endif %}
+                                {% if item.out_of_stock %}
+                                <span class="badge badge-pill badge-danger">
+                                    o/s
+                                </span>
+                                {% endif %}
+                            </td>
+                            <td class="align-middle">{{ item.category }}</td>
+                            <td class="text-right align-middle {% if item.on_special %}special-offer-badge{% endif %}">
+                                &euro;{{ item.price }}
+                            </td>
+                            <td class="text-center align-middle {% if item.stock_low %}stock-low-badge{% endif %}
                             {% if item.out_of_stock %}out-of-stock-badge{% endif %}">
-                            {{ item.stock }}
-                        </td>
-                        <td class="text-center align-middle">{{ item.threshold }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                                {{ item.stock }}
+                            </td>
+                            <td class="text-center align-middle">{{ item.threshold }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -81,7 +82,7 @@
     }
     const onColHeaderClick = (event, name) => {
         const order = event.target.getAttribute('data-order');
-        event.target.setAttribute('data-order', order === '' ? '-': '');
+        event.target.setAttribute('data-order', order === '' ? '-' : '');
         window.location = `/stock/staff_product_list/${order}${name}`;
     }
 </script>

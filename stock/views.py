@@ -13,9 +13,17 @@ class ProductAddView(UserPassesTestMixin, FormView):
     """ A form to allow staff to add a new product """
     template_name = 'stock/product_add_form.html'
     form_class = ProductAddForm
-    success_url = '/'
+    success_url = '/stock/staff_product_list/all'
+
+    def form_valid(self, form):
+        form.save()
+        return super(ProductAddView, self).form_valid(form)
 
     def test_func(self):
+        """
+        User passes test mixin calls this function to ensure that the user
+        has the correct permission to see the content on the page
+        """
         return self.request.user.is_staff
 
 
@@ -26,9 +34,17 @@ class ProductUpdateView(UserPassesTestMixin, UpdateView):
     fields = ['name', 'category', 'description', 'price', 'image',
               'audio_clip', 'stock_level', 'reorder_threshold',
               'product_owner']
-    success_url = '/'
+    success_url = '/stock/staff_product_list/all'
+
+    def form_valid(self, form):
+        form.save()
+        return super(ProductUpdateView, self).form_valid(form)
 
     def test_func(self):
+        """
+        User passes test mixin calls this function to ensure that the user
+        has the correct permission to see the content on the page
+        """
         return self.request.user.is_staff
 
 
@@ -103,4 +119,8 @@ class StaffProductList(UserPassesTestMixin, View):
         return render(request, 'stock/staff_product_list.html', context)
 
     def test_func(self):
+        """
+        User passes test mixin calls this function to ensure that the user
+        has the correct permission to see the content on the page
+        """
         return self.request.user.is_staff

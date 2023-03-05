@@ -81,6 +81,10 @@
     max-height: 70vh;
 }
 
+.large-icon {
+    font-size: 2.2rem;
+}
+
 .card:hover a {
     color: white;
     background-color: #86424d;
@@ -94,6 +98,10 @@
 .thumbnail-tiny {
     width: 40px;
     height: 40px;
+}
+
+video {
+    width: 100%;
 }
 
 .video-thumbnail {
@@ -126,6 +134,14 @@
     max-height: 100%;
 }
 
+.crowd-image-bg {
+    background-image: url('/media/crowd_tall_colour.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 50vh !important;
+}
+
 body {
     padding-top: 96px;
     height: 100vh;
@@ -144,12 +160,36 @@ a, a:hover {
     background-color: #e6e3d388;
 }
 
-.hero-section {
+.hero-section-large-screen {
     background-image: url('/media/hero_image.webp');
-    background-size: cover;
-    background-position: contain;
+    background-size: contain;
+    background-position: right;
     background-repeat: no-repeat;
-    height: 60% !important;
+    height: 100% !important;
+}
+
+.hero-section-medium-screen {
+    background-image: url('/media/hero_image.webp');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 50vh !important;
+}
+
+.hero-section-small-screen {
+    background-image: url('/media/hero_image.webp');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 30vh !important;
+}
+
+.max-width-card {
+    max-width: 300px;
+}
+
+.ml-large {
+    margin-left: 20%;
 }
 
 .associated-products-display {
