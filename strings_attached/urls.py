@@ -14,3 +14,6 @@ urlpatterns = [
     path('video_lessons/', include('video_lessons.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Custom 404 error handler
+handler404 = 'strings_attached.views.handler404'

@@ -77,9 +77,21 @@ clips and comment on their progess.
 ### Colour
 
 ### Wireframes
+#### _Product Display page_
+
 ![products_display wireframe](/static/doc_images/products_display.png)
+
+#### _Product Detail page_
 ![products_detail wireframe](/static/doc_images/product_detail_screenshot.png)
-![display_basket wireframe](/static/doc_images/display_basket_screenshot.png)
+
+#### _Basket page_
+![checkout_page wireframe](/static/doc_images/wireframe_basket.png)
+
+#### _Checkout page_
+![checkout_page wireframe](/static/doc_images/wireframe_checkout.png)
+
+#### _Lessons page_
+![checkout_page wireframe](/static/doc_images/wireframe_lessons.png)
 
 [Return to top](#Strings_Attached)
 
@@ -375,8 +387,10 @@ There are (hopefully) no remaining bugs in the project.
 [Return to top](#Strings_attached)
 
 # Libraries and Programs Used
-1. [Lucid](https://www.lucidchart.com/pages/)
-    - Lucid charts were used to create the execution path diagrams.
+1. [Pencil](https://pencil.evolus.vn/)
+    - Pencil was used for wireframing some of the pages in the project.
+2. [Balsamiq](https://balsamiq.com/)
+    - Balsamiq was used for wireframing the initial pages in the project.
 2. [Heroku](https://www.heroku.com/)
     - Heroku was used to deploy the project
 3. [Git](https://git-scm.com/)
