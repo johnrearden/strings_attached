@@ -20,6 +20,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+
     {% endblock %}
 
     {% block extra_css %}
@@ -48,7 +50,10 @@
 <body>
     <header class="container-fluid fixed-top bg-cherry">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand text-white" href="{% url 'home' %}"><strong>Strings Attached</strong></a>
+            <a class="navbar-brand text-white" href="{% url 'home' %}">
+                <img src="{{ MEDIA_URL }}strings_attached_logo.png" alt="logo image" class="logo-image d-none d-md-block">
+                <img src="{{ MEDIA_URL }}logo_image_small.png" alt="logo image" class="logo-image-sm d-md-none">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

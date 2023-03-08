@@ -21,6 +21,14 @@ ul {
     opacity: 0.8;
 }
 
+.logo-image {
+    max-height: 70px;
+}
+
+.logo-image-sm {
+    max-height: 30px;
+}
+
 .text-cherry {
     color: #401c20;
 }

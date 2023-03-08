@@ -495,9 +495,8 @@ There are (hopefully) no remaining bugs in the project.
     - Pytest was used for automated testing.
 7. [GIMP](https://www.gimp.org/)
     - The GIMP graphic editing package was used to manipulate and export all images used in the project.
-8. [tooltip-sequence](https://github.com/SoorajSNBlaze333/tooltip-sequence)
-    - A handy javascript/css library for creating a sequence of modal tooltips, used in this project 
-    to create instructions for the Loop Editor.
+8. [GraphViz](https://graphviz.org/)
+    - This open-source graph visualization package was used along with the pydot package to generate ER diagrams from the models in the project.
 
 ---
 ---
