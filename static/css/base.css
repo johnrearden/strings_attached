@@ -61,6 +61,11 @@
     width: 150px;
 }
 
+.thumbnail {
+    width: 80px;
+    height: 80px;
+}
+
 .checkout-button {
     background-color: #000044;
     color: white;
@@ -90,10 +95,7 @@
     background-color: #86424d;
 }
 
-.thumbnail {
-    width: 80px;
-    height: 80px;
-}
+
 
 .thumbnail-tiny {
     width: 40px;
@@ -199,6 +201,8 @@ a, a:hover {
     background-repeat: no-repeat;
 }
 
+
+
 .card-body a {
     border: 1px solid black;
     border-radius: 5px;
@@ -245,7 +249,8 @@ a, a:hover {
     right: 50px;
     width: 300px;
     background-image: linear-gradient(#f79032, #fdca37);
-    color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+    color: black;
     font-weight: bold;
     border-radius: 10px;
     z-index: 10;
@@ -383,4 +388,57 @@ audio {
 .spinner-icon {
     font-size: 2rem;
     font-weight: bold;
+}
+
+/* Media queries for basket.html */
+@media screen and (max-width:576px) {
+    .quantity-form-element {
+        transform: scale(0.7);
+    }
+
+    .thumbnail {
+        width: 40px;
+        height: 40px;
+    }
+
+    td h5 {
+        font-size: 0.8rem;
+    }
+
+    .special-offer-tag {
+        font-size: 0.5em;
+    }
+
+    .trash-can-form {
+        transform: scale(0.8);
+    }
+
+    .basket-view-table td, th{
+        font-size: 0.8rem;
+    }
+
+    .category-link {
+        font-size: 0.8rem;
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+    }
+
+    .container-fluid {
+        width: 100% !important;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 56px;
+    }
+
+    .special-offer-banner {
+        font-size: 0.8rem;
+    }
+
+    .special-offer-banner h1 {
+        font-size: 1.2rem;
+    }
 }

@@ -10,7 +10,7 @@
         {% for offer in special_offers %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
             <div class="special-offer-banner py-2 text-center">
-                <h1 class="font-weight-bold text-white text-uppercase d-inline">
+                <h1 class="font-weight-bold text-white text-uppercase d-block d-md-inline">
                     Special Offer
                 </h1>
                 <span class="font-bold mx-3">
@@ -19,6 +19,7 @@
                     when you buy a {{ offer.required_product.name }}
                     {% endif %}
                 </span>
+                <br class="d-block d-md-none">
                 <span class="text-white font-bold">
                     Better hurry! Offer ends {{ offer.end_date }}
                 </span>
@@ -43,20 +44,18 @@
     <div class="row py-2 text-center justify-content-center">
         <div class="col-auto">
             <a href="{% url 'product_display' %}?category=all">
-                <span class="category-link w-100 font-weight-bolder mx-3">
+                <span class="category-link w-100 font-weight-bolder mx-3 category-link">
                     All
                 </span>
             </a>
-        </div>
-        {% for category in categories %}
-        <div class="col-auto">
+            {% for category in categories %}
             <a href="{% url 'product_display' %}?category={{ category.name }}">
-                <span class="category-link w-100 font-weight-bolder mx-3">
+                <span class="category-link w-100 font-weight-bolder mx-3 category-link">
                     {{ category.friendly_name }}
                 </span>
             </a>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
     <hr>
 
@@ -69,9 +68,9 @@
                     <img src="{{ product.image.url }}" class="img-fluid w-75 p-1 mx-auto"
                         alt="Image of {{ product.name }}">
                     {% for offer in special_offers %}
-                        {% if product == offer.product %}
-                        <span class="special-offer-large-tag p-1">Special Offer</span>
-                        {% endif %}
+                    {% if product == offer.product %}
+                    <span class="special-offer-large-tag p-1">Special Offer</span>
+                    {% endif %}
                     {% endfor %}
                     <div class="card-body">
                         <h6 class="card-title font-weight-bolder product-name text-cherry">{{ product.name }}</h6>
