@@ -74,7 +74,20 @@ clips and comment on their progess.
 
 ### Fonts 
 
+The Nunito font is used throughout the project. It's a simple, very legible sans-serif font, with a rounded appearance, particularly on headings and larger font sizes.
+
+---
+
+
 ### Colour
+The following colour palette was used in the project
+
+![colour_palette](/static/doc_images/colour_palette.png)
+
+The primary colours used are derived from the project's hero image, a cherry coloured electric guitar shown on the landing page. The orange is used wherever reference is made to a special offer, and the blue is used sparingly, only on large buttons which link to pages that are part of the payment process, i.e. the Checkout and PayNow buttons.
+
+---
+
 
 ### Wireframes
 #### _Product Display page_
@@ -107,9 +120,36 @@ onto which the issues were posted, moving them from 'Todo' to 'In Progress' to '
 were completed in turn. The iterations are documented here - [Iteration 1]
 
 The User Epics and their related User Stories are as follows:
-- Epic : [).
-    - Story : [)
-    - Story : [)
+- Epic : [Product Browsing](https://github.com/johnrearden/strings_attached/issues/1#issue-1524567245).
+    - Story : [View all products](https://github.com/johnrearden/strings_attached/issues/2#issue-1524569292)
+    - Story : [Search products by category](https://github.com/johnrearden/strings_attached/issues/3#issue-1524570978)
+    - Story : [Search products by keyword](https://github.com/johnrearden/strings_attached/issues/4#issue-1524572236)
+    - Story : [Listen to sound of instrument](https://github.com/johnrearden/strings_attached/issues/5#issue-1524585477)
+    - Story : [Watch video of instrument being played](https://github.com/johnrearden/strings_attached/issues/6#issue-1524586575)
+    - Story : [See any special offers currently available](https://github.com/johnrearden/strings_attached/issues/7#issue-1524588177)
+    - Story : [View associated products](https://github.com/johnrearden/strings_attached/issues/8)
+- Epic : [User Interaction with Basket](https://github.com/johnrearden/strings_attached/issues/9).
+    - Story : [Basket summary](https://github.com/johnrearden/strings_attached/issues/10#issue-1556662397)
+    - Story : [Alter quantity of item](https://github.com/johnrearden/strings_attached/issues/11#issue-1556673678)
+    - Story : [Remove item from basket](https://github.com/johnrearden/strings_attached/issues/12#issue-1556678557)
+- Epic : [Checkout](https://github.com/johnrearden/strings_attached/issues/19).
+    - Story : [See a summary of my basket](https://github.com/johnrearden/strings_attached/issues/20#issue-1575820431)
+    - Story : [User can enter payment details securely](https://github.com/johnrearden/strings_attached/issues/21#issue-1575830296)
+    - Story : [User can save their delivery information for future purchases](User can save their delivery information for future purchases)
+    - Story : [User should receive on-screen confirmation of their successful order](https://github.com/johnrearden/strings_attached/issues/23#issue-1575846062)
+    - Story : [User should receive email confimation of successful order](https://github.com/johnrearden/strings_attached/issues/24#issue-1575853763)
+    - Story : [Staff can see list of confirmed orders](https://github.com/johnrearden/strings_attached/issues/32#issue-1589991740)
+    - Story : [User can view and edit their UserOrderProfile](https://github.com/johnrearden/strings_attached/issues/43#issue-1609772299)
+- Epic : [Stock Management](https://github.com/johnrearden/strings_attached/issues/14).
+    - Story : [Staff can add and edit products](https://github.com/johnrearden/strings_attached/issues/25#issue-1575866913)
+    - Story : [Staff should receive email notification when stock levels are low](https://github.com/johnrearden/strings_attached/issues/27#issue-1575873891)
+    - Story : [User can see when product is out of stock](https://github.com/johnrearden/strings_attached/issues/28#issue-1575880747)
+    - Story : [Staff can view summary table of all products](https://github.com/johnrearden/strings_attached/issues/29#issue-1575889160)
+- Epic : [Video Lesson Subscription](https://github.com/johnrearden/strings_attached/issues/34).
+    - Story : [View all lessons](https://github.com/johnrearden/strings_attached/issues/33#issue-1599616289)
+    - Story : [Watch video lessons ](https://github.com/johnrearden/strings_attached/issues/35#issue-1599617919)
+    - Story : [Subscribe to unlock all videos](https://github.com/johnrearden/strings_attached/issues/36#issue-1599620411)
+    - Story : [Add new video courses](https://github.com/johnrearden/strings_attached/issues/37#issue-1599622016)
 
 ## Data Model
 ### Products App
@@ -118,20 +158,29 @@ The User Epics and their related User Stories are as follows:
 ### Checkout App
 ![Entity-relationship diagram for models](docs/checkout_app_db_schema.png)
 
+### Video_lessons App
+![Entity-relationship diagram for models](docs/video_lessons_app_db_schema.png)
+
+The entity-relationship diagrams above were created using the django-extensions graph_models command. For this command to execute correctly, the GraphViz package must be on the system path. For my Ubuntu machine, this is done as follows :
+
+`sudo apt install graphviz`
+
+The following python dependencies must be installed in the project environment :
+
+`pip3 install pyparsing pydot`
+
+The diagrams were created by specifying the models required for each .png file e.g.:
+
+`python3 manage.py graph_models -a -I LessonSeries,VideoLesson,UserLearningProfile,Subscription,User -o docs/video_lessons_app_db_schema.png`
+
+
 - Data validation
 
-# Payments Integration
-
-In thinking about the payment integration, I decided to try to decouple the Django backend from Stripe
-as much as possible, to make it easier to switch to a different payment processor without having to rewrite the app. To this end, the payment flow is as follows.
-    
-    - When the user clicks the Pay Now button, the order is posted to the backend and saved, with the payment_confirmed flag set to False. The The newly generated order number is returned to the page in
-    the ensuing response.
-    - The event handler then 
+---
+---
 
 # Testing
 - Manual testing
-
 - Automated testing
 - In-app testing
 - User story testing
@@ -299,7 +348,7 @@ The manual testing of features is organised by app below.
 JavaScript snippets which are more readable if confined to one line.
 
 #### JavaScript code :
-- All JavaScript code in the project was validated during development with the JSHint plugin for VSCode.
+- All JavaScript code in the project was validated during development with the ESLint plugin for VSCode.
 
 #### HTML Validation :
 - All HTML files in the project were validated using the W3C Narkup Validation Service.
@@ -314,7 +363,9 @@ https://jigsaw.w3.org/css-validator/
 The User Epics and Stories in this project are documented in three GitHub Projects, corresponding 
 to the iterations that comprised the development work of the project. These can be found here :
 
-- [Iteration 1]()
+- [Iteration 1](https://github.com/users/johnrearden/projects/7)
+- [Iteration 2](https://github.com/users/johnrearden/projects/8)
+- [Iteration 3](https://github.com/users/johnrearden/projects/9)
 
 Alternitively, the Epics and Stories are individually linked here :
 
@@ -371,20 +422,45 @@ to the development server on localhost:8000. The webhook for the deployed projec
 ## Automated Testing
 
 ### Testing django views, models and forms.
+A full suite of automated tests is included in the project. The tests for each app can be found in each apps test/ folder, and can be run with the following command :
+
+`python3 manage.py test`
+
+The most recent coverage report can be found in the htmlcov/ folder in the project's root folder, and can be accessed by running python's built in http.server from that root folder as follows :
+
+`python3 -m http.server`
+
+The coverage html report can be generated using the following commands :
+
+`coverage run manage.py test`
+
+`coverage html`
 
 
 
 [Return to top](#Strings_attached)
 
+---
+---
+
 # Bugs
 
 - A number of other bugs and their solution are documented in the issues tracker on GitHub, such as :
-    - https://github.com/
+    - [Special offer not flagged on products page](https://github.com/johnrearden/strings_attached/issues/42)
+    - [Special offer still displayed after expiry date](https://github.com/johnrearden/strings_attached/issues/41)
+    - [Application relies on order in which webhooks are received](https://github.com/johnrearden/strings_attached/issues/40)
+    - [Stripe subscription flow calls payment_intent.succeeded webhook](https://github.com/johnrearden/strings_attached/issues/39)
+    - [uri_mismatch error for Google social sign-in on Heroku](https://github.com/johnrearden/strings_attached/issues/38)
+    - [Payment submits with card errors](https://github.com/johnrearden/strings_attached/issues/30)
+    - [Repeating quick pressing of increment and decrement buttons loses click info](https://github.com/johnrearden/strings_attached/issues/13)
     
 ## Remaining Bugs
 There are (hopefully) no remaining bugs in the project.
 
 [Return to top](#Strings_attached)
+
+---
+---
 
 # Libraries and Programs Used
 1. [Pencil](https://pencil.evolus.vn/)
@@ -406,6 +482,10 @@ There are (hopefully) no remaining bugs in the project.
 8. [tooltip-sequence](https://github.com/SoorajSNBlaze333/tooltip-sequence)
     - A handy javascript/css library for creating a sequence of modal tooltips, used in this project 
     to create instructions for the Loop Editor.
+
+---
+---
+
 # Deployment
 
 ## Setting up a cloudinary account for static storage.
@@ -452,6 +532,10 @@ GitHub icon to connect your Heroku project to your GitHub repo. Enter your repos
 2. To test only the Django code, enter the command : <br/>`python3 manage.py test beats_app.test_views beats_app.test_models beats_app.test_forms`
 
 [Return to top](#Strings_attached)
+
+---
+---
+
 # Credits
 Structure of extensible base.html page largely copied from Boutique Ado Walkthrough
 https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/250e2c2b8e43cccb56b4721cd8a8bd4de6686546/templates/base.html
