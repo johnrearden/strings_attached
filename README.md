@@ -173,8 +173,24 @@ The diagrams were created by specifying the models required for each .png file e
 
 `python3 manage.py graph_models -a -I LessonSeries,VideoLesson,UserLearningProfile,Subscription,User -o docs/video_lessons_app_db_schema.png`
 
+---
 
-- Data validation
+## Data validation:
+
+The following decimal fields, representing currency amounts, are protected by Django's MinValueValidator, with the minimum value being set at 0.
+
+_video_lessons.models.Subscription.price_
+
+_products.models.Product.price_
+
+_products.models.SpecialOffer.reduced_price_
+
+As such, if a staff member attempts to add a product with a negative price field, the product_add form will be returned to them with the error highlighted. Similarly, the model fields representing product quantities have also been protected with a MinValueValidator.
+
+_products.models.Product.stock_level_
+
+_products.models.Product.reorder_threshold_
+
 
 ---
 ---
@@ -502,7 +518,7 @@ There are (hopefully) no remaining bugs in the project.
     - Return to Resources tab and click on the Heroku Postgres icon, then select the settings tab and click on Database Credentials. Copy the URI to your clipboard. Paste it to your env.py file using the key "DATABASE_URL". This will allow you to use the same database for development and production.
 5. Click the settings tab on the Dashboard, and click the button to Reveal Config Vars. Your database url should be populated here already. Add your Django secret key and your Cloudinary URL (see 1st section above) to the config variables.
 Set the PORT to 8000. I also have a GOOGLE-API-KEY config variable to enable Social-Sign-In with Google.
-6. In your local repository, add a Procfile to the root directory of the project, containing the following line :<br /> `web: gunicorn JUST_BEATS.wsgi`.
+6. In your local repository, add a Procfile to the root directory of the project, containing the following line :<br /> `web: gunicorn strings-attached.wsgi`.
 7. Add the url of your Heroku project to the `ALLOWED_HOSTS` list in `settings.py`.
 8. Set DEBUG to False, and commit your changes and push to GitHub.
 9. In Heroku, navigate to the Settings Tab, and within this the Buildpacks section, and click on Add Buildpack. Select the python buildpack, and save changes.
@@ -513,7 +529,7 @@ GitHub icon to connect your Heroku project to your GitHub repo. Enter your repos
 ## Making a local clone
 1. Open a terminal/command prompt on your local machine.
 2. Navigate to the folder on your local machine where you would like to clone the project.
-3. Enter the command : `git clone 'https://github.com/johnrearden/just-beats.git'`
+3. Enter the command : `git clone 'https://github.com/johnrearden/strings-attached.git'`
 
 ## Running the app in your local environment
 1. Create a virtual enviroment in the new project folder using the command `python3 -m venv venv`
@@ -526,10 +542,6 @@ GitHub icon to connect your Heroku project to your GitHub repo. Enter your repos
     - JUST-BEATS-GOOGLE-API-KEY - You need a Google cloud account to get the API key for social sign in.
     - SELENIUM_TEST_USERNAME, SELENIUM_TEST_PASSWORD, SELENIUM_FIXTURE_USERNAME, SELENIUM_FIXTURE_PASSWORD: 
         If you are the project assessor, these settings can be accessed through Code Institute. They are required to run the Selenium tests using the fixtures included in the project. Standard Django automated tests do not require these variables to run.
-
-## Testing the app locally
-1. Open a terminal and enter the command : `python3 manage.py test`. Testing the front-end with Selenium requires (on a linux system) requires both Chromium and chromedriver to be installed, and chromedriver must be added to the PATH variable. chromedriver version should match the version of Chrome installed on the system: most recent versions can be found here - https://chromedriver.chromium.org/downloads
-2. To test only the Django code, enter the command : <br/>`python3 manage.py test beats_app.test_views beats_app.test_models beats_app.test_forms`
 
 [Return to top](#Strings_attached)
 
