@@ -11,7 +11,7 @@ of a shop where instruments and accessories can be purchased, and subscriptions 
 can be signed up to. There is also a community on the site, within which users can post videos, sound
 clips and comment on their progess.
 
-![responsivenes_screenshot]()
+![responsivenes_screenshot](/static/doc_images/responsiveness_screenshot.png)
 
 ---
 
@@ -27,7 +27,6 @@ clips and comment on their progess.
 
 [**Development Process**](#Development-Process)
 - [Project Planning](#project-planning-and-documentation-in-github)
-- [Inline JavaScript](#inline-javascript-and-event-handlers)
 - [Data Model](#data-model)
 
 [**Testing**](#Testing)
@@ -135,7 +134,7 @@ The User Epics and their related User Stories are as follows:
 - Epic : [Checkout](https://github.com/johnrearden/strings_attached/issues/19).
     - Story : [See a summary of my basket](https://github.com/johnrearden/strings_attached/issues/20#issue-1575820431)
     - Story : [User can enter payment details securely](https://github.com/johnrearden/strings_attached/issues/21#issue-1575830296)
-    - Story : [User can save their delivery information for future purchases](User can save their delivery information for future purchases)
+    - Story : [User can save their delivery information for future purchases](https://github.com/johnrearden/strings_attached/issues/22#issue-1575839948)
     - Story : [User should receive on-screen confirmation of their successful order](https://github.com/johnrearden/strings_attached/issues/23#issue-1575846062)
     - Story : [User should receive email confimation of successful order](https://github.com/johnrearden/strings_attached/issues/24#issue-1575853763)
     - Story : [Staff can see list of confirmed orders](https://github.com/johnrearden/strings_attached/issues/32#issue-1589991740)
@@ -190,6 +189,8 @@ As such, if a staff member attempts to add a product with a negative price field
 _products.models.Product.stock_level_
 
 _products.models.Product.reorder_threshold_
+
+Also, the javascript running in [basket/static/js/quantity_buttons.js](https://github.com/johnrearden/strings_attached/blob/main/basket/static/js/quantity_buttons.js) checks the value of the quantity input on the page each time it changes, and disables the decrement button if the quantity <= 1, or the increment button if the quantity >= 10. It also prevents the user from typing an out-of-range value directly into the input. This code was copied from the Boutique Ado project.
 
 
 ---
@@ -360,8 +361,7 @@ The manual testing of features is organised by app below.
 ### Code Validation
 
 #### Python code : 
-- All python code is validated by both the Flake8 linter (installed in VSCode) and the external CodeInstitute validator @ https://pep8ci.herokuapp.com/. The sole exceptions are the test classes, some of which contain
-JavaScript snippets which are more readable if confined to one line.
+- All python code is validated by the Flake8 linter (installed in VSCode). The sole exceptions are the test classes, whose function names and implementation can be very verbose.
 
 #### JavaScript code :
 - All JavaScript code in the project was validated during development with the ESLint plugin for VSCode.

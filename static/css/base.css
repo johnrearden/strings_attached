@@ -292,6 +292,7 @@ a, a:hover {
 
 .product-name {
     height: 48px;
+    font-size: 1rem;
 }
 
 .increment-qty {
@@ -383,7 +384,7 @@ audio {
     position: absolute;
     left: 10px;
     top: 10px;
-    background-color: orange;
+    background-color: rgb(132, 86, 1);
     font-weight: bold;
     text-transform: uppercase;
     font-size: 1.1rem;
