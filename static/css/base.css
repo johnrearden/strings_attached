@@ -4,6 +4,10 @@
     font-family: 'Nunito', sans-serif;
 }
 
+ul {
+    text-decoration: none;
+}
+
 .bg-light-grey {
     background-image: radial-gradient(#eeeeeeaa, #eeeeeedd);
 }
@@ -34,6 +38,22 @@
     background-color:#401c20;
     border: 1px solid #401c20;
 }   
+
+.btn-cherry-inverted {
+    background-color: #401c20;
+    color: white;
+    border: 1px solid #401c20;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.btn-cherry-inverted:hover {
+    background-color: white;
+    color:#401c20;
+    border: 1px solid #401c20;
+}   
+
+
 
 .btn-quantity {
     color: white;

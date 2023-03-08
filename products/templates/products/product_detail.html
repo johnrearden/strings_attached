@@ -71,20 +71,12 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="submit" class="btn btn-cherry d-inline" value="Add to Basket">
+                        <input type="submit" class="btn btn-cherry-inverted" value="Add to Basket">
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     </form>
                     {% else %}
                     <!-- Display out of stock message to user -->
                     <h3 class="out-of-stock-bg p-1 mb-3">Sorry - will be back in stock soon!</h3>
-                    <a href="{% url 'product_display' %}">
-                        <span class="btn btn-cherry">Back to Shop</span>
-                    </a>
-                    {% if request.user.is_staff %}
-                    <a href="{% url 'update_product' product.id %}">
-                        <span class="btn btn-cherry">Edit product</span>
-                    </a>
-                    {% endif %}
                     {% endif %}
                 </div>
                 <div class="col-12 col-md-6">

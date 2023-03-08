@@ -8,31 +8,31 @@
 
 {% block content %}
 
-<h1>{% trans "Sign In, Man" %}</h1>
+<div class="container-fluid mt-3 mt-md-5">
+    <div class="row d-flex justify-content-center text-center">
+        <div class="col-12 col-md-6 col-lg-4">
+            <h1>{% trans "Sign In" %}</h1>
 
-{% get_providers as socialaccount_providers %}
+            {% get_providers as socialaccount_providers %}
 
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-    of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-    for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+            {% if socialaccount_providers %}
+            <p class="text-center">{% blocktrans with site.name as site_name %}Please sign in with one
+                of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+                for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
-<div class="socialaccount_ballot">
+            <div class="socialaccount_ballot">
 
-    <ul class="socialaccount_providers">
-        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-    </ul>
+                <ul class="socialaccount_providers list-unstyled">
+                    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                </ul>
 
-    <div class="login-or">{% trans 'or' %}</div>
+                <div class="login-or">{% trans 'or' %}</div>
 
-</div>
+            </div>
 
-{% include "socialaccount/snippets/login_extra.html" %}
+            {% include "socialaccount/snippets/login_extra.html" %}
 
-{% else %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-4 offset-4 text-center">
+            {% else %}
             <p>{% blocktrans %}If you have not created an account yet, then please
                 <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
             </p>
@@ -52,6 +52,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 {% endblock %}
