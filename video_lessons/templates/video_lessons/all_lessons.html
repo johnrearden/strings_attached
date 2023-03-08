@@ -42,7 +42,7 @@
                     {% if forloop.counter > ser.lesson_count %}
                     <img src="{{ lesson.image.url }}" alt="Thumbnail image of {{ lesson.name }}"
                         class="video-thumbnail img-fluid">
-                    <img src="{{ MEDIA_URL }}/video_locked_overlay.png" alt="overlay image of padlock"
+                    <img src="{{ MEDIA_URL }}video_locked_overlay.png" alt="overlay image of padlock"
                         class="video-locked-overlay img-fluid">
                     {% else %}
                     <a href="{% url 'video_player' lesson.id %}">
