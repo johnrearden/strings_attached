@@ -16,6 +16,7 @@ from basket.contexts import basket_contents
 
 import stripe
 import json
+import time
 
 
 class CheckoutView(View):
@@ -179,6 +180,7 @@ class SaveOrderView(APIView):
                     metadata=metadata)
             except Exception:
                 print('cant save metadata in payment intent')
+                time.sleep(5)
             return Response(status=status.HTTP_200_OK)
         else:
             return Response(404)
@@ -225,6 +227,7 @@ class PaymentConfirmedView(APIView):
             # Empty the shopping basket before redirecting
             if request.session['basket']:
                 request.session['basket'] = {}
+        time.sleep(5)
 
         return HttpResponseRedirect(redirect_to=redirect_url)
 

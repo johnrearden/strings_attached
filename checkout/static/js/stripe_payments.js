@@ -80,22 +80,30 @@ form.addEventListener('submit', (event) => {
       'X-CSRFToken': csrfToken,
     },
   };
-  fetch(url, data).then(
-    (response) => {
-      console.log('received response from /save_order/');
-      // If the backend response returns ok, confirm the payment with Stripe.
-      if (response.status === 200) {
-        stripe.confirmPayment({
-          elements,
-          confirmParams: {
-            shipping: shippingDetails,
-          },
-          redirect: 'if_required',
-        }).then((result) => {
-          console.log('received response from stripe confirmPayment');
-          // Handle any errors.
-          if (result.error) {
-            const html = `
+  fetch(url, data)
+    .then(
+      (response) => {
+        console.log('received response from /save_order/');
+        console.log(response);
+        // If the backend response returns ok, confirm the payment with Stripe.
+        if (response.status === 200) {
+          return stripe.confirmPayment({
+            elements,
+            confirmParams: {
+              shipping: shippingDetails,
+            },
+            redirect: 'if_required',
+          });
+        }
+        return Promise.reject(response);
+      },
+    )
+    .then((result) => {
+      console.log('received response from stripe confirmPayment');
+      console.log(result);
+      // Handle any errors.
+      if (result.error) {
+        const html = `
                         <span class="icon" role="alert">
                             <i class="fas fa-times"></i>
                         </span>
@@ -103,43 +111,42 @@ form.addEventListener('submit', (event) => {
                             ${result.error.message}
                         </span>
                     `;
-            const errorDiv = document.getElementById('card-errors');
-            errorDiv.innerHTML = html;
+        const errorDiv = document.getElementById('card-errors');
+        errorDiv.innerHTML = html;
 
-            // Reenable all interactive elements on page.
-            paymentElement.disabled = 'false';
-            paymentElement.update({ readOnly: false });
-            document.getElementById('submit-button').disabled = false;
-            document.getElementById('payment-overlay').classList.add('d-none');
-            document.getElementById('payment-overlay').classList.remove('d-flex');
-            document.getElementById('view-basket-link').style.pointerEvents = 'auto';
-            document.getElementById('cancel-purchase-link').style.pointerEvents = 'auto';
-          } else {
-            // If there are no errors, make a POST request to the payment
-            // confirmed view, and then redirect as indicated by the view.
-            const confirmURL = '/checkout/payment_confirmed/';
-            const payload = {
-              payment_confirmed: 'True',
-              client_secret: stripeClientSecret,
-            };
-            const fetchData = {
-              method: 'POST',
-              body: JSON.stringify(payload),
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken,
-              },
-            };
-            fetch(confirmURL, fetchData).then(
-              (res) => {
-                console.log('received response from /confirm_payment/');
-                window.location = res.url;
-              },
-            );
-          }
-        });
+        // Reenable all interactive elements on page.
+        paymentElement.disabled = 'false';
+        paymentElement.update({ readOnly: false });
+        document.getElementById('submit-button').disabled = false;
+        document.getElementById('payment-overlay').classList.add('d-none');
+        document.getElementById('payment-overlay').classList.remove('d-flex');
+        document.getElementById('view-basket-link').style.pointerEvents = 'auto';
+        document.getElementById('cancel-purchase-link').style.pointerEvents = 'auto';
+        return Promise.reject(result);
       }
-    },
-  );
+      // If there are no errors, make a POST request to the payment
+      // confirmed view, and then redirect as indicated by the view.
+      const confirmURL = '/checkout/payment_confirmed/';
+      const payload = {
+        payment_confirmed: 'True',
+        client_secret: stripeClientSecret,
+      };
+      const fetchData = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken,
+        },
+      };
+      return fetch(confirmURL, fetchData);
+    })
+    .then(
+      (res) => {
+        console.log('received response from backend /confirm_payment/');
+        console.log(res);
+        window.location = res.url;
+      },
+    );
 });
