@@ -131,7 +131,9 @@ form.addEventListener('submit', (event) => {
             };
             fetch(confirmURL, fetchData).then(
               (res) => {
-                window.location = res.url;
+                console.log(res);
+                console.log(res.url);
+                // window.location = res.url;
               },
             );
           }
