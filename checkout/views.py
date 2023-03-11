@@ -180,6 +180,8 @@ class SaveOrderView(APIView):
             except Exception:
                 print('cant save metadata in payment intent')
             return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(404)
 
 
 class PaymentConfirmedView(APIView):
@@ -224,7 +226,7 @@ class PaymentConfirmedView(APIView):
             if request.session['basket']:
                 request.session['basket'] = {}
 
-        return HttpResponseRedirect(redirect_url)
+        return HttpResponseRedirect(redirect_to=redirect_url)
 
 
 class CheckoutSucceededView(View):

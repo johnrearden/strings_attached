@@ -1,0 +1,473 @@
+* {
+    box-sizing: border-box;
+    transition: 0.2s all;
+    font-family: 'Nunito', sans-serif;
+}
+
+ul {
+    text-decoration: none;
+}
+
+.bg-light-grey {
+    background-image: radial-gradient(#eeeeeeaa, #eeeeeedd);
+}
+
+.bg-cherry {
+    background-image: linear-gradient(#86424d, #401c20);
+}
+
+.bg-radial-cherry {
+    background-image: radial-gradient(#401c20, #86424d);
+    opacity: 0.8;
+}
+
+.logo-image {
+    max-height: 70px;
+}
+
+.logo-image-sm {
+    max-height: 30px;
+}
+
+.text-cherry {
+    color: #401c20;
+}
+
+.btn-cherry {
+    color: #401c20;
+    background-color: white;
+    border: 1px solid #401c20;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.btn-cherry:hover {
+    color: white;
+    background-color:#401c20;
+    border: 1px solid #401c20;
+}   
+
+.btn-cherry-inverted {
+    background-color: #401c20;
+    color: white;
+    border: 1px solid #401c20;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.btn-cherry-inverted:hover {
+    background-color: white;
+    color:#401c20;
+    border: 1px solid #401c20;
+}   
+
+
+
+.btn-quantity {
+    color: white;
+    background-color:#401c20;
+    height: 40px;
+}
+
+.btn-quantity:hover {
+    background-color: #890d0d;
+    color: white;
+}
+
+.btn-inactive {
+    color: #bbbbbb;
+    border: 1px solid #bbbbbb;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.quantity-input {
+    height: 40px;
+}
+
+.quantity-form-element {
+    width: 150px;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+}
+
+.checkout-button {
+    background-color: #000044;
+    color: white;
+    text-transform: uppercase;
+    border: 1px solid #000044;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 2.1em;
+    width: 100%;
+}
+
+.checkout-button:hover {
+    color: #000044;
+    background-color: white;
+}
+
+.checkout-panel-img {
+    max-height: 70vh;
+}
+
+.large-icon {
+    font-size: 2.2rem;
+}
+
+.card:hover a {
+    color: white;
+    background-color: #86424d;
+}
+
+
+
+.thumbnail-tiny {
+    width: 40px;
+    height: 40px;
+}
+
+video {
+    width: 100%;
+}
+
+.video-thumbnail {
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+.video-thumbnail:hover {
+    border: 1px solid orange;
+    box-shadow: 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 10px !important;
+}
+
+.video-thumbnail-selected {
+    border: 3px solid #f16b7a;
+    border-radius: 5px;
+}
+
+.video-locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border: 1px solid grey;
+    border-radius: 5px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.crowd-image-bg {
+    background-image: url('/media/crowd_tall_colour.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 50vh !important;
+}
+
+body {
+    padding-top: 96px;
+    height: 100vh;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.site-header {
+    height: 70px;
+}
+
+.bg-subtle {
+    background-color: #e6e3d388;
+}
+
+.hero-section-large-screen {
+    background-image: url('/media/hero_image.webp');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 100% !important;
+}
+
+.hero-section-medium-screen {
+    background-image: url('/media/hero_image.webp');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 50vh !important;
+}
+
+.hero-section-small-screen {
+    background-image: url('/media/hero_image.webp');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 30vh !important;
+}
+
+.max-width-card {
+    max-width: 300px;
+}
+
+.ml-large {
+    margin-left: 20%;
+}
+
+.associated-products-display {
+    background-image: url('/media/gig_monochrome.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+.card-body a {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    font-size: 1.3rem;
+}
+/* These elements override standard bootstrap classes */
+.card-title {
+    margin-bottom: 0 !important;
+}
+
+.card-body {
+    padding: 0.8rem !important;
+}
+
+.card:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+}
+
+.card {
+    background-color: #ffffffdd;
+}
+
+.thick-border-bottom {
+    border-bottom: 2px solid gray !important;
+}
+
+.category-link {
+    font-size: 1.5rem;
+    color: #401c20;
+}
+
+.category-link:hover {
+    text-decoration: underline;
+}
+
+/* Styling for the messages div */
+.message-container {
+    position: fixed;
+    top: 150px;
+    right: 50px;
+    width: 300px;
+    background-image: linear-gradient(#f79032, #fdca37);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+.message-container .btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* These elements style the product display page */
+.product-description {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.product-name {
+    height: 48px;
+    font-size: 1rem;
+}
+
+.increment-qty {
+    border-radius: 0 50% 50% 0 !important;
+}
+
+.decrement-qty {
+    border-radius: 50% 0 0 50% !important;
+}
+
+audio {
+    background-color: #401c20;
+}
+
+/* These elements style the basket page */
+.special-offer-banner {
+    background-image: linear-gradient(#f79032, #fdca37);
+    color: black;
+}
+
+.special-offer-tag {
+    background-image: linear-gradient(#f79032, #fdca37);
+    color: white;
+    font-weight: bold;
+    font-size: 0.8em;
+    border-radius: 5px;
+}
+
+.special-offer-large-tag {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-image: linear-gradient(#f79032, #fdca37);
+    color: white;
+    font-weight: bold;
+    font-size: 1.3em;
+    border-radius: 5px;
+}
+
+.slanted-tag {
+    position: absolute;
+    transform: translate(1rem,2rem) rotate(-45deg);
+    background-color: orange;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.out-of-stock-overlay {
+    background-image: radial-gradient(#00000033, #00000066);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.staff-product-title {
+    cursor: pointer;
+}
+
+.out-of-stock-bg {
+    background-image: radial-gradient(#00000033, #00000066);
+}
+
+.stock-low-badge {
+    background-image: linear-gradient(#f79032, #fdca37);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.out-of-stock-badge {
+    background-image: linear-gradient(#910c03, #ff5e5b);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.special-offer-badge {
+    color: green;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.out-of-stock-tag {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: rgb(132, 86, 1);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.payment-spinner {
+    background-image: radial-gradient(#000000cc, #000000aa);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    pointer-events: none !important;
+    cursor: none !important;
+    user-select: none !important;
+    z-index: 10;
+}
+
+.spinner-icon {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Media queries for basket.html */
+@media screen and (max-width:576px) {
+    .quantity-form-element {
+        transform: scale(0.7);
+    }
+
+    .thumbnail {
+        width: 40px;
+        height: 40px;
+    }
+
+    td h5 {
+        font-size: 0.8rem;
+    }
+
+    .special-offer-tag {
+        font-size: 0.5em;
+    }
+
+    .trash-can-form {
+        transform: scale(0.8);
+    }
+
+    .basket-view-table td, th{
+        font-size: 0.8rem;
+    }
+
+    .category-link {
+        font-size: 0.8rem;
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+    }
+
+    .container-fluid {
+        width: 100% !important;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 56px;
+    }
+
+    .special-offer-banner {
+        font-size: 0.8rem;
+    }
+
+    .special-offer-banner h1 {
+        font-size: 1.2rem;
+    }
+}
