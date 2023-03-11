@@ -131,9 +131,8 @@ form.addEventListener('submit', (event) => {
             };
             fetch(confirmURL, fetchData).then(
               (res) => {
-                console.log(res);
-                console.log(res.url);
-                // window.location = res.url;
+                window.location = res.url;
+                // A random comment
               },
             );
           }
