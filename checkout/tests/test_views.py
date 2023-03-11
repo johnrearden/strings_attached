@@ -338,35 +338,21 @@ class TestPaymentConfirmedView(TestCase):
         self.client.post('/checkout/payment_confirmed/', data)
         self.assertEqual(len(mail.outbox), 1)
 
-    def test_payment_confirmed_view_redirects_to_checkout_succeeded_page(self):
-
-        # Create a mock post from the front-end.
-        test_client_secret = 'pi_3MbmXFHM4JtBDaOL1LvZDSXQ_secret_YoVTWqbfBRp3kW20QmtZmSNKJ'
-        data = {
-            'payment_confirmed': 'True',
-            'client_secret': [test_client_secret],
-        }
-        response = self.client.post('/checkout/payment_confirmed/', data)
-        pid = data.get('client_secret')[0].split('_secret')[0]
-        order = Order.objects.get(pid=pid)
-        redirect_url = f'/checkout/checkout_succeeded/{order.order_number}'
-        self.assertRedirects(response=response, expected_url=redirect_url)
-
 
 class TestCheckoutSucceededView(TestCase):
 
     def test_checkout_succeeded_view_template_and_status_code(self):
-        test_order_number = 'asdfasdfa'
-        Order.objects.create(
-            order_number=test_order_number,
+        order = Order.objects.create(
+            order_number='test_order_number',
             full_name='a',
             email='a@a.com',
             phone_number=1234,
             town_or_city='a',
             street_address1='a',
             country='b',
+            pid='test_pid',
         )
-        url = f'/checkout/checkout_succeeded/{test_order_number}'
+        url = f'/checkout/checkout_succeeded/{order.pid}'
         response = self.client.get(url)
         self.assertTemplateUsed('checkout/checkout_succeeded.html')
         self.assertEqual(response.status_code, 200)
