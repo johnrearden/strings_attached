@@ -219,7 +219,7 @@ class PaymentConfirmedView(APIView):
                 subject=f'Order #{order_number} confirmed',
                 message=message,
                 from_email=None,
-                recipient_list={order.email},
+                recipient_list=[order.email],
             )
 
             # Empty the shopping basket before redirecting

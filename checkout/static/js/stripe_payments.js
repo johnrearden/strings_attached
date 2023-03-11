@@ -46,6 +46,8 @@ const form = document.getElementById('payment-form');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
+  
+
   // Disable all interactive elements on page while payment is processing
   paymentElement.update({ readOnly: true });
   document.getElementById('submit-button').disabled = true;
@@ -84,8 +86,6 @@ form.addEventListener('submit', (event) => {
   fetch(url, data)
     .then(
       (response) => {
-        console.log('received response from /save_order/');
-        console.log(response);
         // If the backend response returns ok, confirm the payment with Stripe.
         if (response.status === 200) {
           return stripe.confirmPayment({
@@ -100,7 +100,6 @@ form.addEventListener('submit', (event) => {
       },
     )
     .then((result) => {
-      console.log('received response from stripe confirmPayment');
       pid = result.paymentIntent.id;
       // Handle any errors.
       if (result.error) {
