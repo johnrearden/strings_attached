@@ -131,6 +131,7 @@ form.addEventListener('submit', (event) => {
             };
             fetch(confirmURL, fetchData).then(
               (res) => {
+                const randomComment = 'This is a random non-comment comment';
                 window.location = res.url;
                 // A random comment
               },
