@@ -180,7 +180,6 @@ class SaveOrderView(APIView):
                     metadata=metadata)
             except Exception:
                 print('cant save metadata in payment intent')
-                time.sleep(5)
             return Response(status=status.HTTP_200_OK)
         else:
             return Response(404)
@@ -222,14 +221,12 @@ class PaymentConfirmedView(APIView):
                 from_email=None,
                 recipient_list={order.email},
             )
-            redirect_url = f'/checkout/checkout_succeeded/{order_number}'
 
             # Empty the shopping basket before redirecting
             if request.session['basket']:
                 request.session['basket'] = {}
-        time.sleep(5)
 
-        return HttpResponseRedirect(redirect_to=redirect_url)
+        return Response(status=200)
 
 
 class CheckoutSucceededView(View):
@@ -240,8 +237,8 @@ class CheckoutSucceededView(View):
     It allows the user to view a summary of their order and their delivery
     details.
     """
-    def get(self, request, order_number):
-        order = Order.objects.get(order_number=order_number)
+    def get(self, request, pid):
+        order = Order.objects.get(pid=pid)
         line_items = OrderLineItem.objects.filter(order=order)
         item_count = sum([item.quantity for item in line_items])
         context = {

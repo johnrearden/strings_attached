@@ -9,7 +9,7 @@ urlpatterns = [
     path('save_order/', views.SaveOrderView.as_view(), name='save_order'),
     path('payment_confirmed/', views.PaymentConfirmedView.as_view(),
          name='payment_confirmed'),
-    path('checkout_succeeded/<str:order_number>',
+    path('checkout_succeeded/<str:pid>',
          views.CheckoutSucceededView.as_view(),
          name='checkout_succeeded'),
     path('wh/', csrf_exempt(WebhookView.as_view()), name='webhook'),

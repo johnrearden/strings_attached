@@ -80,6 +80,7 @@ form.addEventListener('submit', (event) => {
       'X-CSRFToken': csrfToken,
     },
   };
+  let pid;
   fetch(url, data)
     .then(
       (response) => {
@@ -100,7 +101,7 @@ form.addEventListener('submit', (event) => {
     )
     .then((result) => {
       console.log('received response from stripe confirmPayment');
-      console.log(result);
+      pid = result.paymentIntent.id;
       // Handle any errors.
       if (result.error) {
         const html = `
@@ -142,11 +143,7 @@ form.addEventListener('submit', (event) => {
       };
       return fetch(confirmURL, fetchData);
     })
-    .then(
-      (res) => {
-        console.log('received response from backend /confirm_payment/');
-        console.log(res);
-        window.location = res.url;
-      },
-    );
+    .then(() => {
+      window.location = `/checkout/checkout_succeeded/${pid}`;
+    });
 });
