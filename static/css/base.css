@@ -8,6 +8,10 @@ ul {
     text-decoration: none;
 }
 
+.text-grey {
+    color: #888888 !important;
+}
+
 .bg-light-grey {
     background-image: radial-gradient(#eeeeeeaa, #eeeeeedd);
 }
@@ -60,8 +64,6 @@ ul {
     color:#401c20;
     border: 1px solid #401c20;
 }   
-
-
 
 .btn-quantity {
     color: white;
@@ -122,8 +124,6 @@ ul {
     color: white;
     background-color: #86424d;
 }
-
-
 
 .thumbnail-tiny {
     width: 40px;
@@ -207,7 +207,7 @@ a, a:hover {
 }
 
 .hero-section-small-screen {
-    background-image: url('/media/hero_image.webp');
+    background-image: url('/media/hero_image_small_screen.webp');
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;

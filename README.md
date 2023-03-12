@@ -27,6 +27,7 @@ clips and comment on their progess.
 
 [**Development Process**](#Development-Process)
 - [Project Planning](#project-planning-and-documentation-in-github)
+- [Search Engine Optimization](#search-engine-optimization)
 - [Data Model](#data-model)
 
 [**Testing**](#Testing)
@@ -43,7 +44,6 @@ clips and comment on their progess.
     - [User Stories](#user-stories)
 - [Automated Testing](#automated-testing)
     - [Django testing](#testing-django-views-models-and-forms)
-    - [Selenium testing](#testing-page-functionality-with-selenium)
 
 [**Bugs**](#Bugs)
 
@@ -149,6 +149,62 @@ The User Epics and their related User Stories are as follows:
     - Story : [Watch video lessons ](https://github.com/johnrearden/strings_attached/issues/35#issue-1599617919)
     - Story : [Subscribe to unlock all videos](https://github.com/johnrearden/strings_attached/issues/36#issue-1599620411)
     - Story : [Add new video courses](https://github.com/johnrearden/strings_attached/issues/37#issue-1599622016)
+
+## Search Engine Optimization
+A set of long and short tail keywords was developed. The initial set was generated from a combination of brainstorming and examining the related searches returned by Google for these terms. This was then culled back to a smaller set of more targeted short- and long-tail keywords, which were each trialled on [wordtracker.com](https://wordtracker.com). This resulted in the following list of terms, ordered by volume:
+|Term|Short/long-tail|Volume|Competition|
+|---|---|---|---|
+|'Guitar'|Short|226000|55.44|
+|'Musical Instruments'|Short|20000|27.15|
+|'Guitarist'|Short|7300|30.52|
+|'Learn guitar'|Short|4900|15.45|
+|'Online guitar lessons'|Long|4400|14.46|
+|'Guitar Shop'|Short|4200|14.85|
+|'Learn to play guitar'|Long|2400|12.76|
+|'Music shop'|Short|2200|19.44|
+|'Six string'|Short|630|15.56|
+|'Buy Guitar online'|Long|440|5.63|
+|'Teach yourself guitar'|Long|400|8.48|
+|'Best instrument'|Short|360|8.80|
+|'Best instrument to learn'|Long|320|4.61|
+|'How to master guitar'|Long|200|-|
+|'I want to learn guitar'|Long|150|-|
+|'Guitar purchase'|Short|70|-|
+|'How to improve my guitar playing|Long|55|-|
+|'Beautiful sound guitar'|Long|12|-|
+
+After completing this research, I returned to the project's templates, and made the following changes:
+
+- &lt;title> tag in base.html:
+    - Set to 'Everything a guitarist needs - Strings Attached'. This gets a high volume short-tail keyword in one of the most important SEO locations, as well as mentioning the site name. 
+- &lt;meta> description tag in base.html:
+    - 'The _guitar_ is the most _beautiful musical instrument_. Join us here at Strings
+    Attached, where you can _learn guitar_ with our _online guitar lessons_. Of all the _musical instruments_, our passion is the _Six String_, and you can find a wide selection of gorgeous instruments in our online _Guitar Shop_.' While keeping the description reasonably short, I managed to squeeze in 7 of the chosen keywords.
+- &lt;meta> keywords in base.html:
+    - The following terms were added to the keywords meta tag: guitar, guitarist, guitar shop, six string, online guitar lessons.
+- Heading elements:
+    - On the landing page, welcome.html, the &lt;h1> element text was changed to 'For Guitarists, by Guitarists (shortened to 'For Guitarists' on smaller screens).
+    - On the product detail page, the product name appears as the content of the &lt;h2> tag.
+- &lt;img> tag alt attributes:
+    - On the product display page, I decided to leave the alt tags for each product image as 'Image of {{ product.name }} to ensure that the product names would be indexed if a shopper happened to do a Google search using the specific name of a product.
+- Image filenames:
+    - The product image filenames were already changed from the source filenames to describe the product contained within them. The lesson images are all titled according to the type of guitar taught in the lesson.
+- Emphasized text:
+    - On the CheckoutSuccess page, the words 'video lessons' were placed within &lt;strong> tags.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Data Model
 ### Products App
