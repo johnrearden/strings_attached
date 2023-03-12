@@ -4,6 +4,65 @@
     font-family: 'Nunito', sans-serif;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding-top: 96px;
+    margin-bottom: 420px;
+}
+
+footer {
+    background-color: #401c20;
+    color: white;
+    height: 400px;
+    max-height: 400px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    overflow-y: hidden;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.site-header {
+    height: 70px;
+}
+
+.bg-subtle {
+    background-color: #e6e3d388;
+}
+
+.hero-section-large-screen {
+    background-image: url('/media/hero_image.webp');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 100% !important;
+}
+
+.hero-section-medium-screen {
+    background-image: url('/media/hero_image.webp');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 50vh !important;
+}
+
+.hero-section-small-screen {
+    background-image: url('/media/hero_image_small_screen.webp');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 30vh !important;
+}
+
 ul {
     text-decoration: none;
 }
@@ -20,9 +79,18 @@ ul {
     background-image: linear-gradient(#86424d, #401c20);
 }
 
+.bg-cherry-dark {
+    background-image: linear-gradient(#2a0009, #401c20);
+}
+
 .bg-radial-cherry {
     background-image: radial-gradient(#401c20, #86424d);
     opacity: 0.8;
+}
+
+
+footer i {
+    color: white;
 }
 
 .logo-image {
@@ -37,6 +105,14 @@ ul {
     color: #401c20;
 }
 
+.text-white {
+    color: white !important;
+}
+
+.border-white {
+    border-color: white;
+}
+
 .btn-cherry {
     color: #401c20;
     background-color: white;
@@ -47,9 +123,9 @@ ul {
 
 .btn-cherry:hover {
     color: white;
-    background-color:#401c20;
+    background-color: #401c20;
     border: 1px solid #401c20;
-}   
+}
 
 .btn-cherry-inverted {
     background-color: #401c20;
@@ -61,13 +137,13 @@ ul {
 
 .btn-cherry-inverted:hover {
     background-color: white;
-    color:#401c20;
+    color: #401c20;
     border: 1px solid #401c20;
-}   
+}
 
 .btn-quantity {
     color: white;
-    background-color:#401c20;
+    background-color: #401c20;
     height: 40px;
 }
 
@@ -172,47 +248,7 @@ video {
     height: 50vh !important;
 }
 
-body {
-    padding-top: 96px;
-    height: 100vh;
-}
 
-a, a:hover {
-    text-decoration: none;
-    color: black;
-}
-
-.site-header {
-    height: 70px;
-}
-
-.bg-subtle {
-    background-color: #e6e3d388;
-}
-
-.hero-section-large-screen {
-    background-image: url('/media/hero_image.webp');
-    background-size: contain;
-    background-position: right;
-    background-repeat: no-repeat;
-    height: 100% !important;
-}
-
-.hero-section-medium-screen {
-    background-image: url('/media/hero_image.webp');
-    background-size: contain;
-    background-position: right;
-    background-repeat: no-repeat;
-    height: 50vh !important;
-}
-
-.hero-section-small-screen {
-    background-image: url('/media/hero_image_small_screen.webp');
-    background-size: contain;
-    background-position: right;
-    background-repeat: no-repeat;
-    height: 30vh !important;
-}
 
 .max-width-card {
     max-width: 300px;
@@ -240,6 +276,7 @@ a, a:hover {
     color: black;
     font-size: 1.3rem;
 }
+
 /* These elements override standard bootstrap classes */
 .card-title {
     margin-bottom: 0 !important;
@@ -342,7 +379,7 @@ audio {
 
 .slanted-tag {
     position: absolute;
-    transform: translate(1rem,2rem) rotate(-45deg);
+    transform: translate(1rem, 2rem) rotate(-45deg);
     background-color: orange;
     font-weight: bold;
     font-size: 1.1rem;
@@ -419,6 +456,16 @@ audio {
     font-weight: bold;
 }
 
+/* Mailchimp styles */
+#mc_embed_signup {
+    background: #fff;
+    color: #401c20;
+    clear: left;
+    font: 14px Helvetica, Arial, sans-serif;
+    width: 600px;
+    max-width: 100%;
+}
+
 /* Media queries for basket.html */
 @media screen and (max-width:576px) {
     .quantity-form-element {
@@ -442,7 +489,8 @@ audio {
         transform: scale(0.8);
     }
 
-    .basket-view-table td, th{
+    .basket-view-table td,
+    th {
         font-size: 0.8rem;
     }
 

@@ -13,6 +13,10 @@ clips and comment on their progess.
 
 ![responsivenes_screenshot](/static/doc_images/responsiveness_screenshot.png)
 
+## Web Marketing
+![facebook_page1](/static/doc_images/facebook_page.png)
+![facebook_page2](/static/doc_images/facebook_page2.png)
+
 ---
 
 ## Links to content
