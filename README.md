@@ -416,6 +416,17 @@ The manual testing of features is organised by app below.
 
 ### Lighthouse
 
+The lighthouse best practices tab returned a lower than ideal value due to the presence of 3 vulnerabilities in JQuery 3.3.1. I checked the actual vulnerabilities themselves on [www.cve.org](https://cve.org):
+- CVE-2020-11022 : jQuery >= 1.2, <3.5.0
+    - _Passing HTML from untrusted sources in DOM manipulation methods may execute untrusted code._
+- CVE-2020-11023 : jQuery >= 1.2, <3.5.0
+    - _Passing HTML containing &lt;option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code._ 
+- CVE-2019-11358 : jQuery < 3.4.0
+    - _jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution. If an unsanitized source object contained an enumerable __proto__ property, it could extend the native Object.prototype._
+
+jQuery is used in this project only as a dependency of Bootstrap 4.3.1, and without going through the Bootstrap source code, I can't be confident that these functions are not used by the Bootstrap JavaScript-based components. Unfortunately, I only discovered these vulnerabilities late in the project, and would prefer not to run the risk of using a more recent version of Bootstrap at this late stage, which might break various elements in the project. In any future projects, I'll be using Bootstrap 5, which has the added benefit of no longer depending on jQuery at all.
+
+
 ![loop_rating_page](media/docs/create_review_lighthouse_report.png)
 
 ### Code Validation
