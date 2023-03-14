@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import Sum
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from products.models import Product
 
 
@@ -62,6 +63,29 @@ class Order(models.Model):
         self.grand_total = self.order_total + self.delivery_cost
         self.grand_total -= self.discount
         self.save()
+
+    def adjust_product_stock_levels(self):
+        """ Update the stock levels of the line_item products after
+            the order is fulfilled. Email product_owner if not enough
+            stock is available to fulfill the order."""
+        line_items = OrderLineItem.objects.filter(order=self)
+        for item in line_items:
+            prod = item.product
+            prod.stock_level -= item.quantity
+            if prod.stock_level < 0:
+                # Stock level cannot be below 0. If the order can't be
+                # fulfilled due to lack of stock, email the product owner.
+                prod.stock_level = 0
+                send_mail(
+                    subject='Urgent! : Order unfulfilled, product o/o stock!',
+                    message=(f'Please reorder {prod.name}\nThe following order'
+                             f'cant currently be fulfilled : '
+                             f'{self.order_number}\nThis order requires '
+                             f'{item.quantity} x {prod.name}'),
+                    from_email=None,
+                    recipient_list=[prod.product_owner.email]
+                )
+            prod.save()
 
     def __str__(self):
         return f'Order {self.order_number} - total={self.grand_total}'

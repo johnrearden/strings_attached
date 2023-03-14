@@ -222,6 +222,9 @@ class PaymentConfirmedView(APIView):
                 recipient_list=[order.email],
             )
 
+            # Update the product stock_levels of the order_line_items
+            order.adjust_product_stock_levels()
+
             # Empty the shopping basket before redirecting
             if request.session['basket']:
                 request.session['basket'] = {}

@@ -8,8 +8,7 @@ The live project can be viewed [here](https://strings-attached-jr.herokuapp.com)
 ## Purpose of Project
 The aim of the project is to help users on their journey to musical proficency. The website consists
 of a shop where instruments and accessories can be purchased, and subscriptions to music lesson videos 
-can be signed up to. There is also a community on the site, within which users can post videos, sound
-clips and comment on their progess.
+can be signed up to. 
 
 ![responsivenes_screenshot](/static/doc_images/responsiveness_screenshot.png)
 

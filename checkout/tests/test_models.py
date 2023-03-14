@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core import mail
 from checkout.models import Order, OrderLineItem, UserOrderProfile
 from products.models import Category, Product
 
@@ -63,6 +64,76 @@ class TestOrderModel(TestCase):
         self.test_order.update_total()
         self.assertEqual(total, self.test_order.grand_total)
 
+    def test_adjust_product_stock_levels_correctly_reduces_stock_level(self):
+        initial_stock_level = 10
+        temp_prod = Product.objects.create(
+            name='Guitartemp',
+            category=self.test_category,
+            description='A cool guitar.',
+            price=self.test_standard_price,
+            stock_level=initial_stock_level,
+            reorder_threshold=10,
+            product_owner=self.test_user)
+        temp_order = Order.objects.create(
+            full_name='name',
+            email='name@name.com',
+            phone_number='08123456789',
+            country='transylvania',
+            postcode='A234P234',
+            town_or_city='town',
+            street_address1='street',
+            street_address2='street2',
+            county='county',
+        )
+        OrderLineItem.objects.create(
+            order=temp_order,
+            product=temp_prod,
+            quantity=1,
+        )
+        temp_order.adjust_product_stock_levels()
+        # Fetch the updated instance from the db
+        temp_prod = Product.objects.get(pk=temp_prod.pk)
+        self.assertEqual(temp_prod.stock_level, initial_stock_level - 1)
+
+    def test_adjust_product_stock_levels_sends_email_if_level_lte_0(self):
+        initial_stock_level = 1
+        temp_prod = Product.objects.create(
+            name='Guitartemp',
+            category=self.test_category,
+            description='A cool guitar.',
+            price=self.test_standard_price,
+            stock_level=initial_stock_level,
+            reorder_threshold=10,
+            product_owner=self.test_user)
+        temp_order = Order.objects.create(
+            full_name='name',
+            email='name@name.com',
+            phone_number='08123456789',
+            country='transylvania',
+            postcode='A234P234',
+            town_or_city='town',
+            street_address1='street',
+            street_address2='street2',
+            county='county',
+        )
+        OrderLineItem.objects.create(
+            order=temp_order,
+            product=temp_prod,
+            quantity=2,
+        )
+        temp_order.adjust_product_stock_levels()
+        # Fetch the updated instance from the db
+        temp_prod = Product.objects.get(pk=temp_prod.pk)
+        self.assertEqual(temp_prod.stock_level, 0)
+
+        # There should be 3 emails in the outbox. 1 for the unfulfilled order
+        # warning, 2 for the stock low warning (prod.save() is called twice)
+        warning_email_sent = False
+        for sent_mail in mail.outbox:
+            if 'Order unfulfilled'.upper() in sent_mail.subject.upper():
+                warning_email_sent = True
+        self.assertTrue(warning_email_sent)
+
 
 class TestOrderLineItem(TestCase):
     test_standard_price = 20
@@ -102,13 +173,16 @@ class TestOrderLineItem(TestCase):
         )
 
     def test_order_line_item_string_method(self):
-        self.assertIn(self.test_order_line_item.product.name, self.test_order_line_item.__str__())
-        self.assertIn(self.test_order_line_item.order.order_number, self.test_order_line_item.__str__())
+        self.assertIn(self.test_order_line_item.product.name,
+                      self.test_order_line_item.__str__())
+        self.assertIn(self.test_order_line_item.order.order_number,
+                      self.test_order_line_item.__str__())
 
     def test_order_line_item_save_method_calculates_price_correctly(self):
         # No price was specified in the test_order_line_item creation above.
         # It should be present
-        price = self.test_order_line_item.product.get_current_price() * self.test_order_line_item.quantity
+        price = self.test_order_line_item.product.get_current_price() * \
+            self.test_order_line_item.quantity
         self.assertEqual(price, self.test_order_line_item.line_item_total)
 
 
@@ -134,5 +208,7 @@ class TestUserOrderProfile(TestCase):
         )
 
     def test_user_order_profile_string_method(self):
-        self.assertIn(self.test_user_profile.full_name, self.test_user_profile.__str__())
-        self.assertIn(self.test_user_profile.email, self.test_user_profile.__str__())
+        self.assertIn(self.test_user_profile.full_name,
+                      self.test_user_profile.__str__())
+        self.assertIn(self.test_user_profile.email,
+                      self.test_user_profile.__str__())

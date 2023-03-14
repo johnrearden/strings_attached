@@ -74,6 +74,10 @@ class StripeWH_Handler:
                     product=Product.objects.get(pk=int(item['id'])),
                     quantity=item['quantity'],
                 )
+            
+            # Update the product stock_levels of the order_line_items
+            order.adjust_product_stock_levels()
+            
             return HttpResponse(status=200)
 
     def handle_payment_intent_failed(self, event):
