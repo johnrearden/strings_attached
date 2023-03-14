@@ -65,10 +65,8 @@ class ProductDetail(View):
 
         # Get quantity of product already in basket:
         basket = request.session.get('basket', {})
-        print(basket)
         quantity_in_basket = basket.get(str(product.id), 0)
         quantity_available = product.stock_level - quantity_in_basket
-        print(f'quantity available of {product.name} == {quantity_available}')
 
         context = {
             'product': product,

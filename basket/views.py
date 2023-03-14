@@ -36,7 +36,6 @@ class ViewBasket(View):
             if offer:
                 special_offers.append(offer)
 
-        print(items)
         context = {
             'basket': items,
             'special_offers': special_offers,
