@@ -78,7 +78,8 @@
                                         </div>
                                         <input class="form-control quantity-input text-center" type="text"
                                             name="quantity" value="{{ item.quantity }}" data-min="1"
-                                            data-max="10" data-item_id="{{ item.product.id }}" data-should_submit="true"
+                                            data-max="{{ item.quantity_available }}" 
+                                            data-item_id="{{ item.product.id }}" data-should_submit="true"
                                             id="quantity-input-{{ item.product.id }}">
                                         <div class="input-group-append">
                                             <button class="increment-qty btn btn-quantity"

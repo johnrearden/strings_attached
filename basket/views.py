@@ -27,6 +27,7 @@ class ViewBasket(View):
             product = get_object_or_404(Product, pk=int(id))
             item['product'] = product
             item['quantity'] = quantity
+            item['quantity_available'] = product.stock_level
             price = offer.reduced_price if offer else product.price
             item['subtotal'] = price * quantity
             item['on_special'] = offer
@@ -35,6 +36,7 @@ class ViewBasket(View):
             if offer:
                 special_offers.append(offer)
 
+        print(items)
         context = {
             'basket': items,
             'special_offers': special_offers,

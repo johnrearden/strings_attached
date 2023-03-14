@@ -63,8 +63,17 @@ class ProductDetail(View):
         offer = special_offers[0] if special_offers else None
         reduction = product.price - offer.reduced_price if offer else 0
 
+        # Get quantity of product already in basket:
+        basket = request.session.get('basket', {})
+        print(basket)
+        quantity_in_basket = basket.get(str(product.id), 0)
+        quantity_available = product.stock_level - quantity_in_basket
+        print(f'quantity available of {product.name} == {quantity_available}')
+
         context = {
             'product': product,
+            'stock_level': product.stock_level,
+            'max_quantity': min(quantity_available, 10),
             'associated_products': p_list,
             'offer': offer,
             'reduction': reduction,

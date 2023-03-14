@@ -39,6 +39,11 @@
                     <span class="card-text text-muted">
                         <i class="fas fa-tag mr-2"></i>{{ product.category.friendly_name }}
                     </span>
+                    {% if max_quantity > 0 %}
+                    <span class="card-text ml-2">| Stock: {{ max_quantity }}</span>
+                    {% else %}
+                    <span class="card-text ml-2">| None remaining</span>
+                    {% endif %}
 
                     {% if product.stock_level > 0 %}
                     <!-- Quantity input controls : only display if product is in stock -->
@@ -58,7 +63,7 @@
                                     </button>
                                 </div>
                                 <input class="form-control quantity-input text-center" type="text"
-                                    name="quantity" value="1" data-min="1" data-max="10" 
+                                    name="quantity" value="1" data-min="1" data-max="{{ max_quantity }}" 
                                     data-item_id="{{ product.id }}"
                                     data-should_submit="false" id="quantity-input-{{ product.id }}">
                                 <div class="input-group-append">
