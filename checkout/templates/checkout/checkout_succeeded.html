@@ -12,7 +12,7 @@
     </div>
 
     <!-- Display the delivery details for the user's order -->
-    <div class="row mt-5 d-flex align-items-stretch">
+    <div class="row mt-2 d-flex align-items-stretch">
         <div class="col-12 col-md-4 justify-content-center">
             <div class="card w-auto">
                 <div class="card-body">
@@ -78,15 +78,21 @@
     </div>
     <div class="row justify-content-center mt-5">
         <div class="col-auto text-center">
-            <h3>Thank you for shopping with us!</h3>
+            <h2>Thank you for shopping with us!</h2>
         </div>
     </div>
     <div class="row justify-content-center mt-1 mt-md-3">
-        <div class="col-auto border p-3">
-            <h1>Next Step :</h1>
+        <div class="col-12 col-md-6 col-lg-4 order-2 order-md-1">
+            <img src="{{ MEDIA_URL }}soulful_guitarist.webp" alt="soulful guitarist"
+                class="img-fluid position-relative">
+                <h3 class="position-absolute text-white" style="left: 30px; bottom: 10px;">Next Step</h3>
+        </div>
+        <div class="col-12 col-md-4 order-1 order-md-2 border p-3 text-center my-auto">
             <p>Why not check out our <strong>video lessons</strong> and start your learning journey right now!</p>
             <a href="{% url 'all_lessons' %}">
-                <span class="btn btn-cherry">Video Lessons</span>
+                <span class="btn btn-cherry-inverted">
+                    <i class="fa-solid fa-video"></i>&nbsp;&nbsp;Video Lessons
+                </span>
             </a>
         </div>
     </div>
