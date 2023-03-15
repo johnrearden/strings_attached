@@ -49,9 +49,9 @@
                     <!-- Quantity input controls : only display if product is in stock -->
                     <p class="mt-3"><strong>Quantity:</strong></p>
                     <form method="POST" action="{% url 'add_to_basket' product.id %}" 
-                        id="form_{{ item.product.id }}">
+                        id="form_{{ item.product.id }}" class="form-inline">
                         {% csrf_token %}
-                        <div class="form-group text-center quantity-form-element">
+                        <div class="form-group text-center quantity-form-element mr-3 mt-md-2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <button class="decrement-qty btn btn-quantity" 
@@ -76,7 +76,11 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="submit" class="btn btn-cherry-inverted" value="Add to Basket">
+                        <button type="submit" class="btn btn-cherry-inverted mt-md-2">
+                            <i class="fa-solid fa-cart-plus"></i>&nbsp;&nbsp;
+                            <span class="d-none d-md-inline">Add to basket</span>
+                            <span class="d-inline d-md-none">Add</span>
+                        </button>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     </form>
                     {% else %}
@@ -86,7 +90,7 @@
                 </div>
                 <div class="col-12 col-md-6">
                     {% if product.audio_clip %}
-                    <div class="text-center border p-2 text-cherry">
+                    <div class="text-center border p-2 text-cherry mt-2">
                         <h1 class="text-center"><i class="fa-solid fa-headphones"></i></h1>
                         <h2>Listen</h2>
                         <audio src="{{ product.audio_clip.url }}" class="w-100" controls></audio>
@@ -96,7 +100,8 @@
             </div>
 
             <!-- Navigation links -->
-            <div class="row justify-content-center">
+            <hr>
+            <div class="row justify-content-center mt-4">
                 <a href="{% url 'product_display' %}">
                     <span class="btn btn-cherry mx-2">Back to Shop</span>
                 </a>
