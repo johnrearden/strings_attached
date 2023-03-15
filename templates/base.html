@@ -70,13 +70,13 @@
                     <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search all products"
                         aria-label="Search input">
                     <button class="btn my-2 my-sm-0" type="submit" aria-label="Search button">
-                        <i class="fa-sharp fa-solid fa-q button-icon text-white"></i>
+                        <i class="fa-solid fa-magnifying-glass button-icon text-white border rounded p-2"></i>
                     </button>
                 </form>
                 <ul class="navbar-nav ml-auto mr-5 align-items-center">
                     {% if request.user.is_authenticated %}
                     <li class="nav-item mr-3 text-white">
-                        Logged in as {{ request.user.username }}
+                        Logged in as <strong><em>{{ request.user.username|title }}</em></strong>
                     </li>
                     {% endif %}
                     {% if request.user.is_staff %}
@@ -118,7 +118,7 @@
                                 <div><i class="fa-solid fa-cart-shopping fa-lg"></i></div>
                                 <p>
                                     {% if total %}
-                                    ${{ total|floatformat:2 }}
+                                    &euro;{{ total|floatformat:2 }}
                                     {% else %}
                                     $0.00
                                     {% endif %}

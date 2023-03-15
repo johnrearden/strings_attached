@@ -16,12 +16,12 @@
                 {{ form.price | as_crispy_field }}
                 <div class="border p-2">
                     {{ form.image | as_crispy_field }}
-                    <img width="200" id="image-preview" src="{{ MEDIA_URL }}/{{form.image.value}}" 
+                    <img width="200" id="image-preview" src="{{ MEDIA_URL }}{{form.image.value}}" 
                         alt="Product image">
                 </div>
                 <div class="border p-2 my-3">
                     {{ form.audio_clip | as_crispy_field }}
-                    <audio controls src="{{ MEDIA_URL }}/{{ form.audio_clip.value }}"
+                    <audio controls src="{{ MEDIA_URL }}{{ form.audio_clip.value }}"
                         id="audio-preview"></audio>
                 </div>
                 {{ form.stock_level | as_crispy_field }}

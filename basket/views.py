@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib import messages
+from django.conf import settings
+from django.db.models import Q
+
 from products.models import Product, SpecialOffer
 from datetime import datetime
-from django.db.models import Q
 
 
 class ViewBasket(View):
@@ -25,9 +27,10 @@ class ViewBasket(View):
             offer = offers[0] if offers else None
             item = {}
             product = get_object_or_404(Product, pk=int(id))
+            MAX_QUANTITY = settings.MAX_QUANTITY_FOR_SINGLE_ORDER
             item['product'] = product
             item['quantity'] = quantity
-            item['quantity_available'] = product.stock_level
+            item['quantity_available'] = min(MAX_QUANTITY, product.stock_level)
             price = offer.reduced_price if offer else product.price
             item['subtotal'] = price * quantity
             item['on_special'] = offer

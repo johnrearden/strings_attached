@@ -224,6 +224,7 @@ if os.environ.get('DEBUG') == 'False':
 # Business Logic configuration
 DEFAULT_DELIVERY_CHARGE = 5
 FREE_LESSONS = 2
+MAX_QUANTITY_FOR_SINGLE_ORDER = 10
 
 # Payments configuration
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')

@@ -26,10 +26,17 @@
                 <form method="POST" action="{% url 'add_to_basket' offer.product.id %}"
                     class="form-inline d-inline ml-3">
                     {% csrf_token %}
-                    <input type="submit" class="btn btn-cherry" value="ADD">
+                    <button type="submit" class="btn btn-cherry-inverted" aria-label="Add to basket">
+                        <i class="fa-solid fa-cart-plus"></i>
+                    </button>
                     <input type="hidden" name="quantity" value="1">
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                 </form>
+                <a href="{% url 'product_detail' offer.product.id %}">
+                    <span class="btn btn-cherry-inverted ml-2" aria-label="View product">
+                        <i class="fa-regular fa-eye"></i>
+                    </span>
+                </a>
             </div>
         </div>
         {% endfor %}

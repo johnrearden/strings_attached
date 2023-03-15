@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, ProductAssociation, Category, SpecialOffer
 from django.views import View
 from django.db.models import Q
+from django.conf import settings
 from datetime import datetime
 
 
@@ -65,9 +66,13 @@ class ProductDetail(View):
 
         # Get quantity of product already in basket:
         basket = request.session.get('basket', {})
+        MAX_QUANTITY = settings.MAX_QUANTITY_FOR_SINGLE_ORDER
         quantity_in_basket = basket.get(str(product.id), 0)
-        quantity_available = product.stock_level - quantity_in_basket
+        quantity_available = min(MAX_QUANTITY, product.stock_level) \
+            - quantity_in_basket
 
+        # A maximum of 10 items is shown as available to any single customer,
+        # to ensure that one order doesn't clear out the stock.
         context = {
             'product': product,
             'stock_level': product.stock_level,
