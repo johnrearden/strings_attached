@@ -5,14 +5,36 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-6 offset-3">
-            <form method="POST">
+        <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 mt-2 mt-md-4">
+            <h1>Add a New Product</h1>
+            <hr>
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form|crispy }}
+                {{ form.name | as_crispy_field }}
+                {{ form.category | as_crispy_field }}
+                {{ form.description | as_crispy_field }}
+                {{ form.price | as_crispy_field }}
+                <div class="border p-2">
+                    {{ form.image | as_crispy_field }}
+                    <img width="200" class="" id="image-preview" src="{{ MEDIA_URL }}/{{form.image.value}}" 
+                        alt="Product image">
+                </div>
+                <div class="border p-2 my-3">
+                    {{ form.audio_clip | as_crispy_field }}
+                    <audio controls src="{{ MEDIA_URL }}/{{ form.audio_clip.value }}"
+                        id="audio-preview"></audio>
+                </div>
+                {{ form.stock_level | as_crispy_field }}
+                {{ form.reorder_threshold | as_crispy_field }}
                 <input type="submit">
             </form>
         </div>
     </div>
 </div>
 
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'js/generate_previews.js' %}"></script>
 {% endblock %}
