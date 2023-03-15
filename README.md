@@ -385,6 +385,9 @@ The manual testing of features is organised by app below.
 |/stock/staff_product_list/|Clicking on Price header orders products alternately by increasing and decreasing price|Click on header|Products are ordered correctly in alternating sequence|
 |/stock/staff_product_list/|Click on Stk header orders products by 1-out-of-stock, 2-low-stock, 3-stock-normal|Click on header|Out-of-stock products appear first, followed by low-stock, followed by everything else|
 |/stock/staff_product_list/|Click on category header orders products alternately by increasing and decreasing category id|Click on header|Products appear in correct order (this is to facilitate grouping products in the list by category)|
+|/stock/staff_product_list/|Click on trash icon brings up confirmation modal|Click on icon|Modal appears|
+|/stock/staff_product_list/|Click on 'No, wait!' button dismisses model without deleting product|Click button|Modal vanishes, product remains|
+|/stock/staff_product_list/|Click on 'Go ahead and delete it' button in confirmation modal deletes product and reloads page with confirmation message|Click button|Modal vanishes, product gone, message appears, page reloads|
 
 #### _video lessons app_
 |Page|Feature|Action|Effect|

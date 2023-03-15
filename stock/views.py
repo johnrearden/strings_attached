@@ -117,7 +117,6 @@ class StaffProductList(UserPassesTestMixin, View):
             'category_order': category_order,
             'price_order': price_order,
         }
-        messages.success(request, 'test message')
         return render(request, 'stock/staff_product_list.html', context)
 
     def test_func(self):

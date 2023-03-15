@@ -163,4 +163,54 @@ class TestStaffProductList(TestCase):
         sorted_list = sorted(products, key=lambda p: p['category'], reverse=True)
         self.assertEqual(products, sorted_list)
 
+    def test_staff_product_list_trash_button_deletes_product_from_db(self):
+        temp_user = User.objects.create(
+            username='usertemp',
+            password='pass',
+            email='admintemp@test.com',
+            is_staff=True)
+        temp_category = Category.objects.create(
+            name='Instruments',
+            friendly_name='Instruments')
+        temp_product = Product.objects.create(
+            name='Guitar',
+            category=temp_category,
+            description='A cool guitar.',
+            price=20,
+            stock_level=10,
+            reorder_threshold=10,
+            product_owner=temp_user)
+        self.client.force_login(temp_user, backend=None)
+        data = {
+            'redirect_url': '/',
+            'product-id': str(temp_product.id),
+        }
+        self.client.post('/stock/delete_product/', data)
+        product_remains = Product.objects.filter(pk=temp_product.id).exists()
+        self.assertFalse(product_remains)
 
+    def test_staff_product_list_trash_button_redirects_to_specified_url(self):
+        temp_user = User.objects.create(
+            username='usertemp',
+            password='pass',
+            email='admintemp@test.com',
+            is_staff=True)
+        temp_category = Category.objects.create(
+            name='Instruments',
+            friendly_name='Instruments')
+        temp_product = Product.objects.create(
+            name='Guitar',
+            category=temp_category,
+            description='A cool guitar.',
+            price=20,
+            stock_level=10,
+            reorder_threshold=10,
+            product_owner=temp_user)
+        self.client.force_login(temp_user, backend=None)
+        redirect_url = '/'
+        data = {
+            'redirect_url': redirect_url,
+            'product-id': str(temp_product.id),
+        }
+        response = self.client.post('/stock/delete_product/', data)
+        self.assertRedirects(response=response, expected_url=redirect_url)
