@@ -7,4 +7,6 @@ urlpatterns = [
          name='update_product'),
     path('staff_product_list/<str:sort_key>', views.StaffProductList.as_view(),
          name='staff_product_list'),
+    path('delete_product/', views.DeleteProduct.as_view(),
+         name="delete_product"),
     ]

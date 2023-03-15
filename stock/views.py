@@ -1,8 +1,9 @@
 from django.views.generic.edit import FormView, UpdateView
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.db.models import F, Q
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib import messages
 from .forms import ProductAddForm
 from products.models import Product, SpecialOffer
 from itertools import chain
@@ -116,7 +117,29 @@ class StaffProductList(UserPassesTestMixin, View):
             'category_order': category_order,
             'price_order': price_order,
         }
+        messages.success(request, 'test message')
         return render(request, 'stock/staff_product_list.html', context)
+
+    def test_func(self):
+        """
+        User passes test mixin calls this function to ensure that the user
+        has the correct permission to see the content on the page
+        """
+        return self.request.user.is_staff
+
+
+class DeleteProduct(UserPassesTestMixin, View):
+    """
+    Deletes a product from the database permanently.
+    """
+    def post(self, request):
+        product_id = request.POST.get('product-id')
+        redirect_url = request.POST.get('redirect_url')
+        product = get_object_or_404(Product, pk=product_id)
+        msg = f'Removed "{product.name}" from the product list'
+        messages.success(request, msg)
+        product.delete()
+        return redirect(redirect_url)
 
     def test_func(self):
         """

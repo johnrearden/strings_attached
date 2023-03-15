@@ -651,6 +651,9 @@ https://stackoverflow.com/questions/11109468/how-do-i-import-the-django-doesnote
 Mocking stripe methods in a view to enable testing
 https://stackoverflow.com/questions/31284622/mock-stripe-methods-in-python-for-testing
 
+Prevent a table cell event listener from also firing its table row event listener
+https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
+
 
 # Acknowledgements
 
