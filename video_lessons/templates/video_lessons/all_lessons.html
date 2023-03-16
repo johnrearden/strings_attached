@@ -13,11 +13,12 @@
         {% if not full_access %}
         <div class="col-12 col-md-3 col-lg-2 order-last order-md-first crowd-image-bg py-5 mb-2">
             <a href="{% url 'subscribe' %}">
-                <h2 class="text-white">Subscribe</h2>
-                <p class="text-white">Become a member.</p>
-                <p class="text-white">Unlock all videos.</p>
-                <p class="text-white">Begin your journey.</p>
+                <h2 class="btn-white-outline">Join Us!</h2>
             </a>
+            <p class="text-white">Become a member.</p>
+            <p class="text-white">Unlock all videos.</p>
+            <p class="text-white">Begin your journey.</p>
+
         </div>
         {% else %}
         <div class="col-12 col-md-3 col-lg-2 order-last order-md-first crowd-image-bg py-5 mb-2">
@@ -31,7 +32,7 @@
         <div class="col-1 d-none d-md-block"></div>
 
         <div class="col-12 col-md-8 col-lg-9">
-            {% for ser in series %} 
+            {% for ser in series %}
             <div class="row mb-4">
                 <div class="col-12">
                     <h3>{{ ser.name }}</h3>

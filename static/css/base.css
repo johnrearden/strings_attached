@@ -159,6 +159,20 @@ footer i {
     font-size: 1.2em;
 }
 
+.btn-white-outline {
+    color: white;
+    border: 1px solid white;
+    font-weight: bold;
+    font-size: 1.6em;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.btn-white-outline:hover {
+    background-color: #ffffff60;
+}
+
 .quantity-input {
     height: 40px;
 }
