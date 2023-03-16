@@ -113,6 +113,35 @@ footer i {
     border-color: white;
 }
 
+.btn {
+    transition: all 0.09s ease;
+    box-shadow: 3px 3px 3px 0 #00000080;
+}
+
+.btn:hover {
+    box-shadow: 1px 1px 2px 0 #00000080;
+    transform: scale(0.95);
+}
+
+.checkout-button {
+    background-color: #000044;
+    color: #dddddd;
+    text-transform: uppercase;
+    border: 1px solid #000044;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 2.1em;
+    width: 100%;
+    transition: all 0.05s;
+    box-shadow: 4px 4px 5px 0 #00000077;
+}
+
+.checkout-button:hover {
+    color: #dddddd;
+    box-shadow: 2px 2px 2px 0 #00000077;
+    transform: scale(0.97);
+}
+
 .btn-cherry {
     color: #401c20;
     background-color: white;
@@ -121,24 +150,17 @@ footer i {
     font-size: 1.2em;
 }
 
-.btn-cherry:hover {
-    color: white;
-    background-color: #401c20;
-    border: 1px solid #401c20;
-}
-
 .btn-cherry-inverted {
     background-color: #401c20;
-    color: white;
+    color: #eeeeee;
     border: 1px solid #401c20;
     font-weight: bold;
     font-size: 1.2em;
 }
 
 .btn-cherry-inverted:hover {
-    background-color: white;
-    color: #401c20;
-    border: 1px solid #401c20;
+    color: #eeeeee;
+    transform: scale(0.97);
 }
 
 .btn-quantity {
@@ -186,21 +208,6 @@ footer i {
     height: 80px;
 }
 
-.checkout-button {
-    background-color: #000044;
-    color: white;
-    text-transform: uppercase;
-    border: 1px solid #000044;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 2.1em;
-    width: 100%;
-}
-
-.checkout-button:hover {
-    color: #000044;
-    background-color: white;
-}
 
 .checkout-panel-img {
     max-height: 70vh;
