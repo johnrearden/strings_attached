@@ -91,13 +91,13 @@
                 <p>Do you really want to delete this product?</p>
             </div>
             <div class="modal-footer">
-                <button id='refuse-delete-product-button' type="button" class="btn btn-danger"
+                <button id='refuse-delete-product-button' type="button" class="btn btn-cherry-inverted"
                     onclick="onRefuseDeleteProductClick(event)">
                     No, wait!
                 </button>
                 <form method="POST" action="{% url 'delete_product' %}" id="confirm-delete-form">
                     {% csrf_token %}
-                    <input id='confirm-delete-product-button' type="submit" class="btn btn-primary"
+                    <input id='confirm-delete-product-button' type="submit" class="btn btn-cherry-inverted"
                         onclick="onConfirmDeleteProductClick(event)" value="Go ahead and delete it">
                     <input type="hidden" id="hidden-product-id-input" name="product-id" value="">
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
