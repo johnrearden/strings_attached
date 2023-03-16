@@ -8,7 +8,7 @@
         <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 mt-2 mt-md-4">
             <h1>Add a New Product</h1>
             <hr>
-            <form method="POST" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'add_product' %}">
                 {% csrf_token %}
                 {{ form.name | as_crispy_field }}
                 {{ form.category | as_crispy_field }}
@@ -27,6 +27,7 @@
                 </div>
                 {{ form.stock_level | as_crispy_field }}
                 {{ form.reorder_threshold | as_crispy_field }}
+                {{ form.product_owner | as_crispy_field }}
                 <input type="submit" value="Add Product">
             </form>
         </div>
