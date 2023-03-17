@@ -11,21 +11,30 @@
 
     <div class="row align-items-center">
         {% if not full_access %}
-        <div class="col-12 col-md-3 col-lg-2 order-last order-md-first crowd-image-bg py-5 mb-2">
+        <div class="col-12 col-md-3 col-lg-2 order-last order-md-first  py-5 mb-2">
             <a href="{% url 'subscribe' %}">
-                <h2 class="btn-white-outline">Join Us!</h2>
+                <div class="card text-center mt-5 crowd-image-bg" style="background-color: transparent;">
+                    <div class="card-body">
+                        <h2 class="card-title text-white font-weight-bolder">Join Us</h2>
+                        <hr class="border-color: white;">
+                        <p class="text-white">Become a member.</p>
+                        <p class="text-white">Unlock all videos.</p>
+                        <p class="text-white">Begin your journey.</p>
+                    </div>
+                </div>
             </a>
-            <p class="text-white">Become a member.</p>
-            <p class="text-white">Unlock all videos.</p>
-            <p class="text-white">Begin your journey.</p>
-
         </div>
+
         {% else %}
-        <div class="col-12 col-md-3 col-lg-2 order-last order-md-first crowd-image-bg py-5 mb-2">
-            <h2 class="text-white">Practice</h2>
-            <h3 class="text-white">Makes</h3>
-            <h4 class="text-white">Perfect.</h4>
-            <p class="text-white">Enjoy your journey.</p>
+        <div class="col-12 col-md-3 col-lg-2 order-last order-md-first  py-5 mb-2">
+            <div class="card no-shrink text-center mt-5 crowd-image-bg" style="background-color: transparent;">
+                <div class="card-body">
+                    <h2 class="text-white">Practice</h2>
+                    <h3 class="text-white">Makes</h3>
+                    <h4 class="text-white">Perfect.</h4>
+                    <p class="text-white">Enjoy your journey.</p>
+                </div>
+            </div>
         </div>
         {% endif %}
 

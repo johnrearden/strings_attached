@@ -79,16 +79,6 @@ ul {
     background-image: linear-gradient(#86424d, #401c20);
 }
 
-.bg-cherry-dark {
-    background-image: linear-gradient(#2a0009, #401c20);
-}
-
-.bg-radial-cherry {
-    background-image: radial-gradient(#401c20, #86424d);
-    opacity: 0.8;
-}
-
-
 footer i {
     color: white;
 }
@@ -113,14 +103,25 @@ footer i {
     border-color: white;
 }
 
-.btn {
+.btn, .header-btn, .logo-btn {
     transition: all 0.09s ease;
-    box-shadow: 3px 3px 3px 0 #00000080;
+    box-shadow: 2px 2px 2px 0 #00000080;
 }
 
-.btn:hover {
+.btn:hover, .header-btn:hover {
     box-shadow: 1px 1px 2px 0 #00000080;
-    transform: scale(0.95);
+    transform: scale(0.96);
+}
+
+.logo-btn:hover {
+    box-shadow: 1px 1px 2px 0 #00000080;
+    transform: scale(0.98);
+}
+
+.header-btn, .logo-btn {
+    padding: 3px 10px 2px 10px;
+    border: 1px solid #32161933;
+    border-radius: 5px;
 }
 
 .checkout-button {
@@ -170,7 +171,6 @@ footer i {
 }
 
 .btn-quantity:hover {
-    background-color: #890d0d;
     color: white;
 }
 
@@ -181,22 +181,32 @@ footer i {
     font-size: 1.2em;
 }
 
+.btn-inactive:hover {
+    color: #bbbbbb;
+    transform: none;
+    box-shadow: 2px 2px 2px 0 #00000080;
+}
+
 .btn-white-outline {
     color: white;
+    background-color: #ffffff33;
     border: 1px solid white;
     font-weight: bold;
     font-size: 1.6em;
     padding: 5px;
     text-align: center;
     border-radius: 5px;
+    box-shadow: 3px 3px 3px 0 black;
 }
 
 .btn-white-outline:hover {
-    background-color: #ffffff60;
+    transform: scale(0.98);
+    box-shadow: 1px 1px 2px 0 black;
 }
 
 .quantity-input {
     height: 40px;
+    z-index: 9999;
 }
 
 .quantity-form-element {
@@ -207,7 +217,6 @@ footer i {
     width: 80px;
     height: 80px;
 }
-
 
 .checkout-panel-img {
     max-height: 70vh;
@@ -232,21 +241,23 @@ video {
 }
 
 .video-thumbnail {
-    border: 1px solid grey;
+    border: 1px solid #00000044;
     border-radius: 5px;
     width: 100%;
     height: 100%;
+    transition: all 0.09s ease;
+    box-shadow: 3px 3px 3px 0 #00000080;
 }
 
 .video-thumbnail:hover {
-    border: 1px solid orange;
-    box-shadow: 10px 10px;
-    box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 10px !important;
+    box-shadow: 1px 1px 2px 0 #00000080;
+    transform: scale(0.98);
 }
 
 .video-thumbnail-selected {
-    border: 3px solid #f16b7a;
-    border-radius: 5px;
+    border: 2px solid blue;
+    box-shadow: 1px 1px 2px 0 #00000080;
+    transform: scale(0.98);
 }
 
 .video-locked-overlay {
@@ -269,8 +280,6 @@ video {
     height: 50vh !important;
 }
 
-
-
 .max-width-card {
     max-width: 300px;
 }
@@ -286,16 +295,20 @@ video {
     background-repeat: no-repeat;
 }
 
+.card {
+    background-color: #f1f1f1;
+    transition: all 0.09s ease;
+    box-shadow: 3px 3px 3px 0 #00000080;
+}
 
+.card:hover {
+    box-shadow: 1px 1px 2px 0 #00000080;
+    transform: scale(0.99);
+}
 
-.card-body a {
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 5px 10px;
-    text-decoration: none;
-    background-color: white;
-    color: black;
-    font-size: 1.3rem;
+.non-reactive {
+    box-shadow: none !important;
+    transform: none !important;
 }
 
 /* These elements override standard bootstrap classes */
@@ -305,14 +318,6 @@ video {
 
 .card-body {
     padding: 0.8rem !important;
-}
-
-.card:hover {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
-}
-
-.card {
-    background-color: #ffffffdd;
 }
 
 .thick-border-bottom {

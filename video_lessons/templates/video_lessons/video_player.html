@@ -14,41 +14,45 @@
     <div class="row text-center mt-3">
         <div class="col">
             {% if lesson.ordinal > 1 %}
+            <!-- The previous button can be active in this case -->
             <a href="{% url 'video_player' lesson.id|add:'-1' %}">
-                <span class="btn btn-cherry d-none d-md-inline">
+                <span class="btn btn-cherry-inverted d-none d-md-inline-block">
                     <i class="fa-solid fa-chevron-left"></i>&nbsp;&nbsp;Previous
                 </span>
-                <span class="btn btn-cherry d-inline d-md-none">
+                <span class="btn btn-cherry-inverted d-inline-block d-md-none">
                     <i class="fa-solid fa-chevron-left"></i>
                 </span>
             </a>
             {% else %}
-            <span class="btn btn-inactive d-none d-md-inline">
+            <!-- This is the 1st lesson, so make the previous button inactive -->
+            <span class="btn btn-inactive d-none d-md-inline-block">
                 <i class="fa-solid fa-chevron-left"></i>&nbsp;&nbsp;Previous
             </span>
-            <span class="btn btn-inactive d-inline d-md-none">
+            <span class="btn btn-inactive d-inline-block d-md-none">
                 <i class="fa-solid fa-chevron-left"></i>
             </span>
             {% endif %}
             {% if lesson.ordinal < lesson_count %}
+            <!-- Next button is active -->
             <a href="{% url 'video_player' lesson.id|add:'1' %}">
-                <span class="btn btn-cherry d-none d-md-inline">
+                <span class="btn btn-cherry-inverted d-none d-md-inline-block">
                     Next&nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>
                 </span>
-                <span class="btn btn-cherry d-inline d-md-none">
+                <span class="btn btn-cherry-inverted d-inline-block d-md-none">
                     <i class="fa-solid fa-chevron-right"></i>
                 </span>
             </a>
             {% else %}
-            <span class="btn btn-inactive d-none d-md-inline">
+            <!-- This is the last lesson, so make the next button inactive -->
+            <span class="btn btn-inactive d-none d-md-inline-block">
                 Next&nbsp&nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>
             </span>
-            <span class="btn btn-inactive d-inline d-md-none">
+            <span class="btn btn-inactive d-inline-block d-md-none">
                 <i class="fa-solid fa-chevron-right"></i>
             </span>
             {% endif %}
             <a href="{% url 'all_lessons' %}">
-                <span class="btn btn-cherry ml-5">See All Lessons</span>
+                <span class="btn btn-cherry-inverted ml-5">See All Lessons</span>
             </a>
         </div>
     </div>
@@ -61,13 +65,13 @@
     <div class="row justify-content-center">
         {% for les in lessons_in_series %}
         <div class="col-3 col-md-2 col-xl-1 mb-2">
-            {% if not full_access and forloop.counter > 2 %}
+            {% if not full_access and forloop.counter > lesson_count %}
             <img src="{{ les.image.url }}" alt="Thumbnail image of {{ les.name }}"
                 class="video-thumbnail img-fluid">
             <img src="{{ MEDIA_URL }}video_locked_overlay.png" alt="overlay image of padlock"
                 class="video-locked-overlay img-fluid">
             {% else %}
-            <a href="{% url 'video_player' lesson.id %}">
+            <a href="{% url 'video_player' les.id %}">
                 <img src="{{ les.image.url }}" alt="Thumbnail image of {{ les.name }}" 
                     class="img-fluid video-thumbnail
                     {% if lesson.ordinal == forloop.counter %}video-thumbnail-selected{% else %}video-thumbnail{% endif %}">
@@ -78,5 +82,3 @@
     </div>
 </div>
 {% endblock %}
-
-{% if lesson.ordinal == forloop.counter %}video-thumbnail-selected{% else %}video-thumbnail{% endif %}
