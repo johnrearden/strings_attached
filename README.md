@@ -12,23 +12,15 @@ can be signed up to.
 
 ![responsivenes_screenshot](/static/doc_images/responsiveness_screenshot.png)
 
-## ECommerce Business Model
-This project is a **B2C**, where the aim is to sell directly to consumers, rather than to businesses. As the customers are free to browse online stores and buy impulsively, it is a central design principle that the customer should be able to proceed through the selection and purchase process with an absolute minimum of friction. Thus, the site contains minimal extraneous information that would distract from this process.
-
-The site offers both **products** and a **service**. The products are guitars and their associated accessories; strings, cases and cables. These are displayed in a grid layout, with the product image prominent. Selecting a card from the grid opens a full page product detail view, which is the only page that contains a significant amount of text, detailing the specific qualities of that product. A quantity of one can be added to the basket with only one button click, and the user can proceed to the checkout page with one more subsequent click, having checked that their basket contents are correct. On the checkout page, there is a form, with a checkbox enabling the user to save their information, so that subsequent purchases will only involve entering their card payment details. 
-
-The digital service offered is a **subscrition** to a selection of video lessons teaching the student the basics of how to play acoustic and electric guitar. The user can browse the courses on offer, and watch two videos from each course for free. A large clickable panel allow them to proceed to a page where they can pick the duration of their subscription, and clicking a duration card takes them straight to the Stripe payment page. Users are required to set up an account in order to subscribe, but this is the only occasion on which they need to enter PII before gaining instant access to their subscription. Payments are then taken automatically from their card at the end of each period.
-
-Both **single payment** and **subscription** payments are handled by Stripe, and no card or payment information is held on the site.
-
-## Web Marketing
-A [facebook page](https://www.facebook.com/profile.php?id=100090721180796) was set up as the initial stage of a social media marketing strategy. The page mimics the styling of the site, and a Shop Now is prominent in the page description. An introductory first post was made to the page, containing another link to the site and inviting visitors to view the products and services on offer. In case the page is taken down, screenshots are included below.
-![facebook_page1](/static/doc_images/facebook_page.png)
-![facebook_page2](/static/doc_images/facebook_page2.png)
-
 ---
 
 ## Links to content
+
+[**Purpose of Project**](#purpose-of-project)
+
+[**ECommerce Business Model**](#ecommerce-business-model)
+
+[**Web Marketing**](#web-marketing)
 
 [**Features**](#Features)
 
@@ -47,7 +39,6 @@ A [facebook page](https://www.facebook.com/profile.php?id=100090721180796) was s
 - [Manual Testing](#manual-testing)
     - [Feature Testing](#feature-testing)
     - [Responsiveness](#responsiveness)
-    - [Browser Compatibility](#browser-compatibility)
     - [Lighthouse](#lighthouse)
     - [Code Validation](#code-validation)
         - [Python](#python-code)
@@ -70,6 +61,22 @@ A [facebook page](https://www.facebook.com/profile.php?id=100090721180796) was s
 [**Credits**](#Credits)
 
 [**Acknowledgements**](#acknowledgements)
+
+---
+
+## ECommerce Business Model
+This project is a **B2C**, where the aim is to sell directly to consumers, rather than to businesses. As the customers are free to browse online stores and buy impulsively, it is a central design principle that the customer should be able to proceed through the selection and purchase process with an absolute minimum of friction. Thus, the site contains minimal extraneous information that would distract from this process.
+
+The site offers both **products** and a **service**. The products are guitars and their associated accessories; strings, cases and cables. These are displayed in a grid layout, with the product image prominent. Selecting a card from the grid opens a full page product detail view, which is the only page that contains a significant amount of text, detailing the specific qualities of that product. A quantity of one can be added to the basket with only one button click, and the user can proceed to the checkout page with one more subsequent click, having checked that their basket contents are correct. On the checkout page, there is a form, with a checkbox enabling the user to save their information, so that subsequent purchases will only involve entering their card payment details. 
+
+The digital service offered is a **subscrition** to a selection of video lessons teaching the student the basics of how to play acoustic and electric guitar. The user can browse the courses on offer, and watch two videos from each course for free. A large clickable panel allow them to proceed to a page where they can pick the duration of their subscription, and clicking a duration card takes them straight to the Stripe payment page. Users are required to set up an account in order to subscribe, but this is the only occasion on which they need to enter PII before gaining instant access to their subscription. Payments are then taken automatically from their card at the end of each period.
+
+Both **single payment** and **subscription** payments are handled by Stripe, and no card or payment information is held on the site.
+
+## Web Marketing
+A [facebook page](https://www.facebook.com/profile.php?id=100090721180796) was set up as the initial stage of a social media marketing strategy. The page mimics the styling of the site, and a Shop Now is prominent in the page description. An introductory first post was made to the page, containing another link to the site and inviting visitors to view the products and services on offer. In case the page is taken down, screenshots are included below.
+![facebook_page1](/static/doc_images/facebook_page.png)
+![facebook_page2](/static/doc_images/facebook_page2.png)
 
 ---
 
@@ -206,19 +213,6 @@ After completing this research, I returned to the project's templates, and made 
     - On the CheckoutSuccess page, the words 'video lessons' were placed within &lt;strong> tags.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Data Model
 ### Products App
 ![Entity-relationship diagram for models](docs/products_app_db_schema.png)
@@ -277,9 +271,10 @@ Also, the javascript running in [basket/static/js/quantity_buttons.js](https://g
 ## Manual Testing
 
 ### Feature Testing
-The manual testing of features is organised by app below.
+The manual testing of features is organised by app below. Testing was carried out on a 1920 x 1080 desktop screen, a Samsung tablet and an iPhone 12 Pro.
 <details>
 <summary>Basket App</summary>
+
 |Page|Feature|Action|Effect|
 |---|---|---|---|
 |/basket/view_basket/|All items appear in list|Add item to list in product_detail page|Item appears on table|
@@ -305,7 +300,9 @@ The manual testing of features is organised by app below.
 |/basket/view_basket/|Direct input of invalid quantity should be corrected|Try to type out of range number in quantity input directly|Javascript on page changes quantity input value to fall within legal range|
 </details>
 
-#### _products app_
+<details>
+<summary>Products app</summary>
+
 |Page|Feature|Action|Effect|
 |---|---|---|---|
 |/products/|Special offer banner appears|Ensure there are live special offers in DB|Banner appears correctly
@@ -331,8 +328,11 @@ The manual testing of features is organised by app below.
 |/product_detail/|Associated product cards contain link to detail page for that item|Click on information button on associated product card|User is redirected to the product_detail page for that item
 |/product_detail/|Associated product cards contain link to add item to card without redirection|Click on cart increment button on item card|Basket now contains 1 extra of this item; message displayed to user instead of redirection
 |/product_detail/|Edit product button appears for staff only|Login as staff; then logout|Button appears when logged in, and is hidden when logged out
+</details>
 
-#### _checkout app_
+<details>
+<summary>Checkout app</summary>
+
 |Page|Feature|Action|Effect|
 |---|---|---|---|
 |/checkout/|Personal details fieldset is filled if UserOrderProfile exists|Create UserOrderProfile in admin panel|Details are filled correctly
@@ -360,8 +360,11 @@ The manual testing of features is organised by app below.
 |/checkout/staff_order_detail/|Payment Failed message displayed|Attempt purchase with Stripe invalid card code, navigate to page|Payment failed message displayed below order line items.
 |/checkout/staff_order_detail/|MarkAsFulfilled button switches boolean fulfilled flag to True|Click on button, navigate back to /staff_order_list/|Order now marked as fulfilled, greyed out|
 |/checkout/staff_order_detail/|MarkAsFulfilled button does not appear if payment has failed|Attempt purchase with Stripe invalid card code and navigate to page|Button does not appear|
+</details>
 
-#### _welcome app and navbar_
+<details>
+<summary>Welcome app and navbar</summary>
+
 |Page|Feature|Action|Effect|
 |---|---|---|---|
 |/|Hero image and title appear|Navigate to page|Elements appear correctly|
@@ -378,8 +381,11 @@ The manual testing of features is organised by app below.
 |/|Navbar - staff dropdown contains working link to /stock/add_product/ form|Click dropdown button|Add product form appears correctly|
 |/|Navbar - staff dropdown contains working link to /stock/staff_product_list/all|Click dropdown button|Staff product list appears with all products displayed|
 |/|Navbar - staff dropdown contains working link to /checkout/staff_order_list/|Click dropdown button|Staff Order List appears correctly|
+</details>
 
-#### _stock app_
+<details>
+<summary>Stock app</summary>
+
 |Page|Feature|Action|Effect|
 |---|---|---|---|
 |/stock/add_product/|Staff members can create new product using a form|Navigate to page, fill out form|New product appears in admin panel|
@@ -400,8 +406,11 @@ The manual testing of features is organised by app below.
 |/stock/staff_product_list/|Click on trash icon brings up confirmation modal|Click on icon|Modal appears|
 |/stock/staff_product_list/|Click on 'No, wait!' button dismisses model without deleting product|Click button|Modal vanishes, product remains|
 |/stock/staff_product_list/|Click on 'Go ahead and delete it' button in confirmation modal deletes product and reloads page with confirmation message|Click button|Modal vanishes, product gone, message appears, page reloads|
+</details>
 
-#### _video lessons app_
+<details>
+<summary>Video lessons app</summary>
+
 |Page|Feature|Action|Effect|
 |---|---|---|---|
 |/video_lessons/all_lessons/|Page displays all available lessons in order, categorized by course|View page|All lessons are present, each in order under its own course heading|
@@ -418,15 +427,13 @@ The manual testing of features is organised by app below.
 |/video_lessons/video_player/|Only first 2 thumbnail lessons are clickable for users who are not paid-up subscribers|View page as anonymous user, as logged-in non-subscriber and as non-paid up logged in subscriber|Only first 2 videos shown|
 |/video_lessons/subscription_success/|Page has link back to /all_lessons/ page|Complete a test subscription|Link appears on page and functions correctly|
 |/video_lessons/subscription_success/|Page has working link to Stripe subscription management console|Click link|User is redirected to Stripe billing console, where they can change payment methods and cancel their subscription|
+</details>
 
-
+---
 
 ### Responsiveness
 
-### Browser Compatibility
 
-| Feature | Chrome | Firefox | Safari(mobile) |
---- | --- | --- | --- | 
 
 ### Lighthouse
 
@@ -600,15 +607,17 @@ There are (hopefully) no remaining bugs in the project.
     - Select Heroku Postgres, and click on Install Heroku Postgres.
     - Select a plan (default = Mini @ $5.00 a month, which I'm using), and select your app.
     - Return to Resources tab and click on the Heroku Postgres icon, then select the settings tab and click on Database Credentials. Copy the URI to your clipboard. Paste it to your env.py file using the key "DATABASE_URL". This will allow you to use the same database for development and production.
-5. Click the settings tab on the Dashboard, and click the button to Reveal Config Vars. Your database url should be populated here already. Add your Django secret key and your Cloudinary URL (see 1st section above) to the config variables.
-Set the PORT to 8000. I also have a GOOGLE-API-KEY config variable to enable Social-Sign-In with Google.
+5. Click the settings tab on the Dashboard, and click the button to Reveal Config Vars. Your database url should be populated here already. Add your Django secret key to the config variables, and set the PORT to 8000.
 6. In your local repository, add a Procfile to the root directory of the project, containing the following line :<br /> `web: gunicorn strings-attached.wsgi`.
 7. Add the url of your Heroku project to the `ALLOWED_HOSTS` list in `settings.py`.
-8. Set DEBUG to False, and commit your changes and push to GitHub.
-9. In Heroku, navigate to the Settings Tab, and within this the Buildpacks section, and click on Add Buildpack. Select the python buildpack, and save changes.
-10. On the Dashboard, select the Deploy tab, and under the Deployment Method heading, select the
+8. Create 2 social apps, for Facebook and Google social signin, and add their respective API-keys and SECRETS to the database. Add your application details and callback urls to the respective Google and Facebook OAuth dashboards.
+9. Open a Stripe account, and add your STRIPE_PRIVATE_KEY and STRIPE_SECRET to the config vars. Set up a webhook to hit your webhook endpoint, and copy the STRIPE_WEBHOOK_SECRET to config vars as well.
+10. Create 3 products in the Products tab of the Stripe Developer console, to match the 3 subscription durations in the project, and add their respective API-keys to their corresponding Subscription instances in the database.
+11. Set DEBUG to False, and commit your changes and push to GitHub.
+12. In Heroku, navigate to the Settings Tab, and within this the Buildpacks section, and click on Add Buildpack. Select the python buildpack, and save changes.
+13. On the Dashboard, select the Deploy tab, and under the Deployment Method heading, select the
 GitHub icon to connect your Heroku project to your GitHub repo. Enter your repository name in the text input, and click Search, and then when your repo appears, click Connect.
-11. Under the Manual deploy section, click Deploy Branch. You should receive this message - 'Your app was successfully deployed". Click view to see the app running in the browser.
+14. Under the Manual deploy section, click Deploy Branch. You should receive this message - 'Your app was successfully deployed". Click view to see the app running in the browser.
 
 ## Making a local clone
 1. Open a terminal/command prompt on your local machine.
@@ -620,12 +629,18 @@ GitHub icon to connect your Heroku project to your GitHub repo. Enter your repos
 2. Activate the virtual environment : `source venv/bin/activate`
 3. Install the project requirements : `pip3 install -r requirements.txt`
 4. Create an env.py file containing the following variables (see env.example.py in the root directory of the project for a complete list of variables necessary to run the app) :
+    - AWS_ACCESS_KEY_ID : Used to access S3 bucket for static and media files
+    - AWS_SECRET_ACCESS_KEY : As above
+    - BASE_URL : The root URL for the dev project, usually `http://localhost:8000/`
     - DATBASE_URL : This is the url generated by Heroku - see [Deploying the app](#deploying-the-app-on-heroku)
-    - SECRET_KEY : This is the Django secret key. Choose your own and add it both here and to the Heroku config vars.
-    - CLOUDINARY_URL : This is the Cloudinary url set up above.
-    - JUST-BEATS-GOOGLE-API-KEY - You need a Google cloud account to get the API key for social sign in.
-    - SELENIUM_TEST_USERNAME, SELENIUM_TEST_PASSWORD, SELENIUM_FIXTURE_USERNAME, SELENIUM_FIXTURE_PASSWORD: 
-        If you are the project assessor, these settings can be accessed through Code Institute. They are required to run the Selenium tests using the fixtures included in the project. Standard Django automated tests do not require these variables to run.
+    - DEBUG : Set to True for development work locally
+    - EMAIL_APP_PASSWORD : The email password for your email account
+    - EMAIL_APP_USER : A personal or ephemeral email account you can use to test your email functionality.
+    - PORT : Default Django port is 8000.
+    - SECRET_KEY : This is the Django secret key.
+    - STRIPE_PRIVATE_KEY : Stripe private key credential
+    - STRIPE_PUBLIC_KEY : Stripe public key credential
+    - STRIPE_WEBHOOK_SECRET : Stripe webhook signing secret
 
 [Return to top](#Strings_attached)
 
