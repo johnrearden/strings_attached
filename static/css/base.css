@@ -165,6 +165,10 @@ ul {
     background-color: #86424d;
 }
 
+.card-transparent {
+    background-color: transparent;
+}
+
 .max-width-card {
     max-width: 300px;
 }
