@@ -1,3 +1,5 @@
+/* General CSS elements applying site-wide */
+
 * {
     box-sizing: border-box;
     transition: 0.2s all;
@@ -10,8 +12,12 @@ html {
 }
 
 body {
-    padding-top: 96px;
+    padding-top: 93px;
     margin-bottom: 420px;
+}
+
+audio {
+    background-color: #401c20;
 }
 
 footer {
@@ -25,19 +31,143 @@ footer {
     overflow-y: hidden;
 }
 
+footer i {
+    color: white;
+}
+
 a,
 a:hover {
     text-decoration: none;
     color: black;
 }
 
+ul {
+    text-decoration: none;
+}
+
+.bg-cherry {
+    background-image: linear-gradient(#86424d, #401c20);
+}
+
+.text-cherry {
+    color: #401c20;
+}
+
+.text-white {
+    color: white !important;
+}
+
+.border-white {
+    border-color: white;
+}
+
+/* CSS for common site header */
+
 .site-header {
     height: 70px;
 }
 
-.bg-subtle {
-    background-color: #e6e3d388;
+.logo-image {
+    max-height: 70px;
 }
+
+.logo-image-sm {
+    max-height: 30px;
+}
+
+.logo-btn:hover {
+    box-shadow: 1px 1px 2px 0 #00000080;
+    transform: scale(0.98);
+}
+
+.btn, .header-btn, .logo-btn {
+    transition: all 0.09s ease;
+    box-shadow: 2px 2px 2px 0 #00000080;
+}
+
+.btn:hover, .header-btn:hover {
+    box-shadow: 1px 1px 2px 0 #00000080;
+    transform: scale(0.96);
+}
+
+.header-btn, .logo-btn {
+    padding: 3px 10px 2px 10px;
+    border: 1px solid #32161933;
+    border-radius: 5px;
+}
+
+.btn-cherry {
+    color: #401c20;
+    background-color: white;
+    border: 1px solid #401c20;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.btn-cherry-inverted {
+    background-color: #401c20;
+    color: #eeeeee;
+    border: 1px solid #401c20;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.btn-cherry-inverted:hover {
+    color: #eeeeee;
+    transform: scale(0.97);
+}
+
+.btn-inactive {
+    color: #bbbbbb;
+    border: 1px solid #bbbbbb;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.btn-inactive:hover {
+    color: #bbbbbb;
+    transform: none;
+    box-shadow: 2px 2px 2px 0 #00000080;
+}
+
+.card {
+    background-color: #f1f1f1;
+    transition: all 0.09s ease;
+    box-shadow: 3px 3px 3px 0 #00000080;
+}
+
+.card:hover {
+    box-shadow: 1px 1px 2px 0 #00000080;
+    transform: scale(0.99);
+}
+
+.non-reactive {
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.card-title {
+    margin-bottom: 0 !important;
+}
+
+.card-body {
+    padding: 0.8rem !important;
+}
+
+.card:hover a {
+    color: white;
+    background-color: #86424d;
+}
+
+.max-width-card {
+    max-width: 300px;
+}
+
+.ml-large {
+    margin-left: 20%;
+}
+
+/* CSS for Welcome Page */
 
 .hero-section-large-screen {
     background-image: url('/media/hero_image.webp');
@@ -63,66 +193,7 @@ a:hover {
     height: 30vh !important;
 }
 
-ul {
-    text-decoration: none;
-}
-
-.text-grey {
-    color: #888888 !important;
-}
-
-.bg-light-grey {
-    background-image: radial-gradient(#eeeeeeaa, #eeeeeedd);
-}
-
-.bg-cherry {
-    background-image: linear-gradient(#86424d, #401c20);
-}
-
-footer i {
-    color: white;
-}
-
-.logo-image {
-    max-height: 70px;
-}
-
-.logo-image-sm {
-    max-height: 30px;
-}
-
-.text-cherry {
-    color: #401c20;
-}
-
-.text-white {
-    color: white !important;
-}
-
-.border-white {
-    border-color: white;
-}
-
-.btn, .header-btn, .logo-btn {
-    transition: all 0.09s ease;
-    box-shadow: 2px 2px 2px 0 #00000080;
-}
-
-.btn:hover, .header-btn:hover {
-    box-shadow: 1px 1px 2px 0 #00000080;
-    transform: scale(0.96);
-}
-
-.logo-btn:hover {
-    box-shadow: 1px 1px 2px 0 #00000080;
-    transform: scale(0.98);
-}
-
-.header-btn, .logo-btn {
-    padding: 3px 10px 2px 10px;
-    border: 1px solid #32161933;
-    border-radius: 5px;
-}
+/* CSS for Checkout page */
 
 .checkout-button {
     background-color: #000044;
@@ -140,29 +211,32 @@ footer i {
 .checkout-button:hover {
     color: #dddddd;
     box-shadow: 2px 2px 2px 0 #00000077;
-    transform: scale(0.97);
+    transform: scale(0.98);
 }
 
-.btn-cherry {
-    color: #401c20;
-    background-color: white;
-    border: 1px solid #401c20;
+.checkout-panel-img {
+    max-height: 70vh;
+}
+
+.payment-spinner {
+    background-image: radial-gradient(#000000cc, #000000aa);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    pointer-events: none !important;
+    cursor: none !important;
+    user-select: none !important;
+    z-index: 10;
+}
+
+.spinner-icon {
+    font-size: 2rem;
     font-weight: bold;
-    font-size: 1.2em;
 }
 
-.btn-cherry-inverted {
-    background-color: #401c20;
-    color: #eeeeee;
-    border: 1px solid #401c20;
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-.btn-cherry-inverted:hover {
-    color: #eeeeee;
-    transform: scale(0.97);
-}
+/* CSS for basket page */
 
 .btn-quantity {
     color: white;
@@ -174,36 +248,6 @@ footer i {
     color: white;
 }
 
-.btn-inactive {
-    color: #bbbbbb;
-    border: 1px solid #bbbbbb;
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-.btn-inactive:hover {
-    color: #bbbbbb;
-    transform: none;
-    box-shadow: 2px 2px 2px 0 #00000080;
-}
-
-.btn-white-outline {
-    color: white;
-    background-color: #ffffff33;
-    border: 1px solid white;
-    font-weight: bold;
-    font-size: 1.6em;
-    padding: 5px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 3px 3px 3px 0 black;
-}
-
-.btn-white-outline:hover {
-    transform: scale(0.98);
-    box-shadow: 1px 1px 2px 0 black;
-}
-
 .quantity-input {
     height: 40px;
     z-index: 9999;
@@ -213,22 +257,23 @@ footer i {
     width: 150px;
 }
 
+.increment-qty {
+    border-radius: 0 50% 50% 0 !important;
+}
+
+.decrement-qty {
+    border-radius: 50% 0 0 50% !important;
+}
+
+/* CSS for Video Lessons app */
+
 .thumbnail {
     width: 80px;
     height: 80px;
 }
 
-.checkout-panel-img {
-    max-height: 70vh;
-}
-
 .large-icon {
     font-size: 2.2rem;
-}
-
-.card:hover a {
-    color: white;
-    background-color: #86424d;
 }
 
 .thumbnail-tiny {
@@ -280,44 +325,14 @@ video {
     height: 50vh !important;
 }
 
-.max-width-card {
-    max-width: 300px;
-}
 
-.ml-large {
-    margin-left: 20%;
-}
+/* CSS for Products app */
 
 .associated-products-display {
     background-image: url('/media/gig_monochrome.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
-
-.card {
-    background-color: #f1f1f1;
-    transition: all 0.09s ease;
-    box-shadow: 3px 3px 3px 0 #00000080;
-}
-
-.card:hover {
-    box-shadow: 1px 1px 2px 0 #00000080;
-    transform: scale(0.99);
-}
-
-.non-reactive {
-    box-shadow: none !important;
-    transform: none !important;
-}
-
-/* These elements override standard bootstrap classes */
-.card-title {
-    margin-bottom: 0 !important;
-}
-
-.card-body {
-    padding: 0.8rem !important;
 }
 
 .thick-border-bottom {
@@ -362,23 +377,13 @@ video {
 }
 
 .product-name {
-    height: 48px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-size: 1rem;
 }
 
-.increment-qty {
-    border-radius: 0 50% 50% 0 !important;
-}
-
-.decrement-qty {
-    border-radius: 50% 0 0 50% !important;
-}
-
-audio {
-    background-color: #401c20;
-}
-
-/* These elements style the basket page */
 .special-offer-banner {
     background-image: linear-gradient(#f79032, #fdca37);
     color: black;
@@ -423,6 +428,8 @@ audio {
     top: 0;
 }
 
+/* CSS for Staff product pages */
+
 .staff-product-title {
     cursor: pointer;
 }
@@ -464,23 +471,6 @@ audio {
     border-radius: 10px;
 }
 
-.payment-spinner {
-    background-image: radial-gradient(#000000cc, #000000aa);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    pointer-events: none !important;
-    cursor: none !important;
-    user-select: none !important;
-    z-index: 10;
-}
-
-.spinner-icon {
-    font-size: 2rem;
-    font-weight: bold;
-}
 
 /* Mailchimp styles */
 #mc_embed_signup {
@@ -492,7 +482,7 @@ audio {
     max-width: 100%;
 }
 
-/* Media queries for basket.html */
+/* Media queries site-wide */
 @media screen and (max-width:576px) {
     .quantity-form-element {
         transform: scale(0.7);

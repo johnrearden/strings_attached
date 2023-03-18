@@ -67,7 +67,7 @@
     <hr>
 
     <!-- Product display grid -->
-    <div class="row pt-3">
+    <div class="row pt-3 d-flex align-items-stretch">
         {% for product in products %}
         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
             <a href="{% url 'product_detail' product.id %}">
@@ -80,7 +80,7 @@
                     {% endif %}
                     {% endfor %}
                     <div class="card-body">
-                        <span class="card-title font-weight-bolder product-name text-cherry">{{ product.name }}</span>
+                        <span class="card-title font-weight-bolder product-name text-cherry d-block">{{ product.name }}</span>
                         <span class="card-text product-description d-block">{{ product.description }}</span>
                         <span class="card-text float-left">&euro;{{ product.get_current_price }}</span>
                         <span class="card-text text-muted float-right">
