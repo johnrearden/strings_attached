@@ -65,6 +65,12 @@ ul {
     border-color: white;
 }
 
+.hr-75 {
+    width: 75%; 
+    text-align: left; 
+    margin-left: 0;
+}
+
 .site-header {
     height: 70px;
 }
