@@ -81,11 +81,45 @@ A [facebook page](https://www.facebook.com/profile.php?id=100090721180796) was s
 ---
 
 ## Features
+The following pages are visible to all users, logged in or not.
 
+### Welcome Page (landing page)
+![Welcome Page](static/doc_images/feature_screenshots/feature_welcome.png)
 
-### Future Features
+### Product Display Page
 
+### Product Detail Page
 
+### Basket Page
+
+### Checkout Page
+
+### Checkout Success Page
+
+### Video Lessons Page
+
+### Video Player Page
+
+### Login Page
+
+### Register Page
+
+The following pages are only available to logged in users.
+### Choose Subscription Page
+
+### Logout Page
+
+The remaining pages are only accessible to staff
+### Add/Edit Product Pages
+
+### Product List Page
+
+### Order List Page
+
+---
+## Future Features
+
+---
 [Return to top](#Strings_Attached)
 # User Experience
 
