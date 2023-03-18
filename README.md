@@ -12,7 +12,17 @@ can be signed up to.
 
 ![responsivenes_screenshot](/static/doc_images/responsiveness_screenshot.png)
 
+## ECommerce Business Model
+This project is a **B2C**, where the aim is to sell directly to consumers, rather than to businesses. As the customers are free to browse online stores and buy impulsively, it is a central design principle that the customer should be able to proceed through the selection and purchase process with an absolute minimum of friction. Thus, the site contains minimal extraneous information that would distract from this process.
+
+The site offers both **products** and a **service**. The products are guitars and their associated accessories; strings, cases and cables. These are displayed in a grid layout, with the product image prominent. Selecting a card from the grid opens a full page product detail view, which is the only page that contains a significant amount of text, detailing the specific qualities of that product. A quantity of one can be added to the basket with only one button click, and the user can proceed to the checkout page with one more subsequent click, having checked that their basket contents are correct. On the checkout page, there is a form, with a checkbox enabling the user to save their information, so that subsequent purchases will only involve entering their card payment details. 
+
+The digital service offered is a **subscrition** to a selection of video lessons teaching the student the basics of how to play acoustic and electric guitar. The user can browse the courses on offer, and watch two videos from each course for free. A large clickable panel allow them to proceed to a page where they can pick the duration of their subscription, and clicking a duration card takes them straight to the Stripe payment page. Users are required to set up an account in order to subscribe, but this is the only occasion on which they need to enter PII before gaining instant access to their subscription. Payments are then taken automatically from their card at the end of each period.
+
+Both **single payment** and **subscription** payments are handled by Stripe, and no card or payment information is held on the site.
+
 ## Web Marketing
+A [facebook page](https://www.facebook.com/profile.php?id=100090721180796) was set up as the initial stage of a social media marketing strategy. The page mimics the styling of the site, and a Shop Now is prominent in the page description. An introductory first post was made to the page, containing another link to the site and inviting visitors to view the products and services on offer. In case the page is taken down, screenshots are included below.
 ![facebook_page1](/static/doc_images/facebook_page.png)
 ![facebook_page2](/static/doc_images/facebook_page2.png)
 
@@ -268,30 +278,32 @@ Also, the javascript running in [basket/static/js/quantity_buttons.js](https://g
 
 ### Feature Testing
 The manual testing of features is organised by app below.
-#### _Basket App_
+<details>
+<summary>Basket App</summary>
 |Page|Feature|Action|Effect|
 |---|---|---|---|
-|/basket/view_basket/|All items appear in list|Add item to list in product_detail page|Item appears on table
-|/basket/view_basket/|Item quantities are correct|Add n items in product_detail page|n items appear on table
-|/basket/view_basket/|Increment button increases quantity|Click increment button|Quantity increases by 1
-|/basket/view_basket/|Decrement button decreases quantity|Click decrement button|Quantity decreases by 1
-|/basket/view_basket/|Minimum quantity is 1|Decrement quantity as far as 1|Decrement button becomes inactive
-|/basket/view_basket/|Maximum quantity is 10|Increment quantity as far as 10|Increment button becomes inactive
-|/basket/view_basket/|Multiple quantity changes allowed before reload|Click incr. and decr. buttons in quick succession|Clicking the incr and decr buttons repeatedly does not reload page. After a short pause, upon ceasing clicking, page reloads.
-|/basket/view_basket/|Message is displayed when page reloads after quantity change|Click incr. button and wait for short pause|Page reloads and message displayed with new quantity
-|/basket/view_basket/|Bin icon removes item entirely|Click bin icon|Item is removed.
-|/basket/view_basket/|'You have nothing in your basket' message displayed if basket is empty|Navigate to page by clicking basket icon in navbar without any items|Message appears correctly
-|/basket/view_basket/|Shop link returns user to products page|Clicked on shop link|User is redirected to products page
-|/basket/view_basket/|Clear all link empties basket and returns user to products page|Click on 'clear all' link|User is redirected to products page, and basket is now empty
-|/basket/view_basket/|Subtotal is displayed correctly|Add 2 products to basket|Subtotal is sum of both product prices
+|/basket/view_basket/|All items appear in list|Add item to list in product_detail page|Item appears on table|
+|/basket/view_basket/|Item quantities are correct|Add n items in product_detail page|n items appear on table|
+|/basket/view_basket/|Increment button increases quantity|Click increment button|Quantity increases by 1|
+|/basket/view_basket/|Decrement button decreases quantity|Click decrement button|Quantity decreases by 1|
+|/basket/view_basket/|Minimum quantity is 1|Decrement quantity as far as 1|Decrement button becomes inactive|
+|/basket/view_basket/|Maximum quantity is 10|Increment quantity as far as 10|Increment button becomes inactive|
+|/basket/view_basket/|Multiple quantity changes allowed before reload|Click incr. and decr. buttons in quick succession|Clicking the incr and decr buttons repeatedly does not reload page. After a short pause, upon ceasing clicking, page reloads.|
+|/basket/view_basket/|Message is displayed when page reloads after quantity change|Click incr. button and wait for short pause|Page reloads and message displayed with new quantity|
+|/basket/view_basket/|Bin icon removes item entirely|Click bin icon|Item is removed.|
+|/basket/view_basket/|'You have nothing in your basket' message displayed if basket is empty|Navigate to page by clicking basket icon in navbar without any items|Message appears correctly|
+|/basket/view_basket/|Shop link returns user to products page|Clicked on shop link|User is redirected to products page|
+|/basket/view_basket/|Clear all link empties basket and returns user to products page|Click on 'clear all' link|User is redirected to products page, and basket is now empty|
+|/basket/view_basket/|Subtotal is displayed correctly|Add 2 products to basket|Subtotal is sum of both product prices|
 |/basket/view_basket/|Delivery charge displayed correctly|Add instrument to basket|No delivery charge appears
-|/basket/view_basket/|Delivery charge displayed correctly|Add non-instrument item to basket|Standard delivery charge is displayed
-|/basket/view_basket/|Item price displayed correctly|Add item to basket and compare price with that on product_detail page|Prices are equal
-|/basket/view_basket/|Special offer price displayed correctly|Add item on special offer to basket and compare price with price on product_detail page|Prices are equal
-|/basket/view_basket/|Checkout button redirects user to /checkout/ page|Click button|Page redirects appropriately
-|/basket/view_basket/|Special offer banner displays at top of screen if basket item is on offer|Add special offer item to basket| Banner displays with correct special offer price
-|/basket/view_basket/|Special offer tag appears below product name if basket item is on offer|Add special offer item to basket|Tag displays correctly
-|/basket/view_basket/|Direct input of invalid quantity should be corrected|Try to type out of range number in quantity input directly|Javascript on page changes quantity input value to fall within legal range
+|/basket/view_basket/|Delivery charge displayed correctly|Add non-instrument item to basket|Standard delivery charge is displayed|
+|/basket/view_basket/|Item price displayed correctly|Add item to basket and compare price with that on product_detail page|Prices are equal|
+|/basket/view_basket/|Special offer price displayed correctly|Add item on special offer to basket and compare price with price on product_detail page|Prices are equal|
+|/basket/view_basket/|Checkout button redirects user to /checkout/ page|Click button|Page redirects appropriately|
+|/basket/view_basket/|Special offer banner displays at top of screen if basket item is on offer|Add special offer item to basket| Banner displays with correct special offer price|
+|/basket/view_basket/|Special offer tag appears below product name if basket item is on offer|Add special offer item to basket|Tag displays correctly|
+|/basket/view_basket/|Direct input of invalid quantity should be corrected|Try to type out of range number in quantity input directly|Javascript on page changes quantity input value to fall within legal range|
+</details>
 
 #### _products app_
 |Page|Feature|Action|Effect|
