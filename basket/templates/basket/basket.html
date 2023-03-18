@@ -36,8 +36,8 @@
         </div>
     </div>
     {% if basket %}
-    <div class="row">
-        <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 mt-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8  col-lg-6 mt-3">
             <!-- Table to display each item in the basket-->
             <table class="table table-sm basket-view-table">
                 <thead class="bg-cherry text-white">
@@ -126,8 +126,8 @@
     {% endif %}
 
     {% if basket %}
-    <div class="row">
-        <div class="col-12 col-md-4 offset-md-2 order-2 order-md-1 d-flex justify-content-around align-items-center bg-light-grey">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-4 col-lg-3 order-2 order-md-1 d-flex justify-content-around align-items-center bg-light-grey">
             <a href="{% url 'product_display' %}">
                 <span class="btn btn-cherry">
                     <i class="fa-regular fa-hand-point-left"></i>&nbsp;&nbsp;Shop
@@ -144,7 +144,7 @@
 
         <!-- Display cost of items (subtotal), delivery and grand total -->
         {% if total %}
-        <div class="col-12 col-md-4 order-1 order-md-2" style="font-size: 0.7rem">
+        <div class="col-12 col-md-4 col-lg-3 order-1 order-md-2" style="font-size: 0.7rem">
             <div class="row">
                 <div class="col-4">
                     <span class="font-weight-bolder">Subtotal :</span>

@@ -13,7 +13,7 @@ html {
 
 body {
     padding-top: 93px;
-    margin-bottom: 420px;
+    margin-bottom: 450px;
 }
 
 audio {
@@ -164,11 +164,6 @@ ul {
 
 .card-body {
     padding: 0.8rem !important;
-}
-
-.card:hover a {
-    color: white;
-    background-color: #86424d;
 }
 
 .card-transparent {

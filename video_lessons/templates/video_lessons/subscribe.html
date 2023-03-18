@@ -11,13 +11,14 @@
     <div class="row">
         {% for subscription in subscriptions %}
         <div class="col-12 col-md-4">
-            <div class="card">
+            <div class="card non-reactive">
                 <img class="card-img-top img-fluid p-3" src="{{ subscription.image.url}}" alt="Card image cap">
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ subscription.name }}</h5>
                     <p class="card-text">{{ subscription.description }}</p>
-                    <a href="{% url 'create_subscription_checkout_session' subscription.id %}" class="btn btn-primary">
-                        Subscribe
+                    <a href="{% url 'create_subscription_checkout_session' subscription.id %}" 
+                        class="btn btn-cherry-inverted">
+                        <span>Subscribe</span>
                     </a>
                 </div>
             </div>

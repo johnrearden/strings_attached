@@ -3,8 +3,8 @@
 
 {% block content %}
 <div class="container mt-3">
-    <div class="row text-center mt-3">
-        <div class="col">
+    <div class="row justify-content-center mt-3">
+        <div class="col text-center">
             <h1>Subscription Successful!</h1>
             <h2>Welcome to the Strings Attached Guitar School</h2>
             <p>
@@ -13,12 +13,16 @@
                 on the Manage Subscription link below.
             </p>
             <img class="img-fluid" src="{{ MEDIA_URL }}/concert-crowd-crop.webp" alt="Image of rock concert crowd">
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-auto text-center">
             <a href="{% url 'all_lessons' %}">
-                <span class="btn btn-cherry mt-2">
+                <span class="btn btn-cherry mt-2 d-inline-block">
                     Browse Lessons
                 </span>
             </a>
-            <form id='form' method="POST" action="{% url 'subscription_success' %}">
+            <form id='form' class='form-inline d-inline-block' method="POST" action="{% url 'subscription_success' %}">
                 {% csrf_token %}
                 <button id="submit" type="submit" class="btn btn-cherry mt-2">
                     Manage Subscription

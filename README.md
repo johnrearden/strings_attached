@@ -83,38 +83,156 @@ A [facebook page](https://www.facebook.com/profile.php?id=100090721180796) was s
 ## Features
 The following pages are visible to all users, logged in or not.
 
-### Welcome Page (landing page)
+<details>
+<summary>Welcome Page (landing page)</summary>
+
+- The landing page presents the user with a choice of 2 actions:
+    - Shop for an instrument
+    - Subscribe to a lesson plan
+- The page, along with all the others, has a header which has the following elements, from left to right:
+    - Site icon, clickable, which links from any page back to this one.
+    - Search bar and button, which allows the user to search the products by keyword.
+    - Logged in user display, which shows the name of the current user (blank if anonymous)
+    - Staff dropdown selector, which gives the following options if user is a staff member
+        - Add Product
+        - Product List
+        - Order List
+    - Account dropdown selector, which gives 2 options if user is not logged in:
+        - Register
+        - Login
+    - Basket link, which takes the user directly to the View Basket page.
+- The page footer, also common to all pages, consists of a header element exhorting the user to Stay in Touch!, a link to the site's facebook promotional page, and an invitation to subscribe to a mailing list (with a MailChimp backend).
+
+
 ![Welcome Page](static/doc_images/feature_screenshots/feature_welcome.png)
+</details>
 
-### Product Display Page
+<details>
+<summary>Product Display Page</summary>
 
-### Product Detail Page
+-   This page displays the products (in tiled layout) according to one of the 5 category filters at the top of the page, or as filtered by a keyword search on the navbar.
+-   If there are any valid special offers currently, they will cycle across the top of the page (using a Bootstrap Carousel)
+-   The product tiles (Bootstrap Cards) are clickable, and link to their respective Product Detail Pages.
 
-### Basket Page
+![Product Display](static/doc_images/feature_screenshots/feature_product_display.png)
 
-### Checkout Page
+</details>
 
-### Checkout Success Page
+<details>
+<summary>Product Detail Page</summary>
 
-### Video Lessons Page
+![Product Detail](static/doc_images/feature_screenshots/feature_product_detail.png)
 
-### Video Player Page
+- This page consists of the following features:
+    - An image of the product
+    - The name and description (in full) of the product
+    - The price, category, and number available to order (this may be less than the total stock)
+    - A quantity input, range-bound (copied from the Boutique Ado project, with styling changes)
+    - A primary Add To Basket Button, which adds the quantity in the input to the user's basket
+    - Three buttons below the fold, which link respectively back to the shop, to the Edit Product page (only visible to logged in staff members), and the View Basket page.
 
-### Login Page
+</details>
 
-### Register Page
+<details>
+<summary>Basket Page</summary>
 
+- This page lists the items in the basket, once again offering the user the opportunity to change the quantity of the product being purchased (via a range-bound input), or remove the item from the basket entirely (via a button with a trash icon).
+- It also contains buttons that link back to the All Products page, and clear the entire basket contents.
+- The subtotal, delivery cost and total cost are shown in a simple table.
+- A large blue checkout button links to the Checkout Page.
+
+![Basket](static/doc_images/feature_screenshots/feature_basket.png)
+
+</details>
+
+<details>
+<summary>Checkout Page</summary>
+
+![Basket](static/doc_images/feature_screenshots/feature_checkout.png)
+
+- The Checkout page consists of 3 main sections.
+    - There is a form for the user's delivery details, at the bottom of which is a checkbox (unchecked by default) which enables them to request that their data be stored for future purchases.
+    - There is the Stripe Payment element (with errors if present) which allows the user to enter the details of their payment method.
+    - There is a concise summary of the basket contents once again, consisting of the product names, quantities and total costs, the delivery cost and the grand total.
+- There are 2 buttons at the end of the page which allow the user to 
+    - Return to the View Basket page.
+    - Cancel the entire purchase. (Returns the user to the Product Display page)
+
+</details>
+
+<details>
+<summary>Checkout Success Page</summary>
+
+![checkout success](static/doc_images/feature_screenshots/checkout_successful.png)
+
+</details>
+
+<details>
+<summary>Video Lessons Page</summary>
+
+![Video lessons](static/doc_images/feature_screenshots/feature_video_lessons.png)
+
+</details>
+
+<details>
+<summary>Video Player Page</summary>
+
+![Video Player](static/doc_images/feature_screenshots/feature_video_player.png)
+
+</details>
+
+<details>
+<summary>Login Page</summary>
+
+![Login Page](static/doc_images/feature_screenshots/feature_login.png)
+
+</details>
+
+<details>
+<summary>Register Page</summary>
+
+![Register Page](static/doc_images/feature_screenshots/feature_register.png)
+
+</details>
+
+---
 The following pages are only available to logged in users.
-### Choose Subscription Page
+<details>
+<summary>Choose Subscription Page</summary>
 
-### Logout Page
+![Subscribe](static/doc_images/feature_screenshots/feature_subscribe.png)
+
+</details>
+
+<details>
+<summary>Choose Subscription Page</summary>
+
+![Subscription Success](static/doc_images/feature_screenshots/feature_subscription_success.png)
+
+</details>
+
+---
 
 The remaining pages are only accessible to staff
-### Add/Edit Product Pages
+<details>
+<summary>Add/Edit Product Pages</summary>
 
-### Product List Page
+![Edit Product](static/doc_images/feature_screenshots/feature_edit_product.png)
+</details>
 
-### Order List Page
+<details>
+<summary>Product List Page</summary>
+
+![Product List](static/doc_images/feature_screenshots/feature_product_list.png)
+
+</details>
+
+<details>
+<summary>Order List Page</summary>
+
+![Order List](static/doc_images/feature_screenshots/feature_order_list.png)
+
+</details>
 
 ---
 ## Future Features
