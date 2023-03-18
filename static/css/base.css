@@ -35,6 +35,10 @@ footer i {
     color: white;
 }
 
+.container-max-width {
+    max-width: 1500px !important;
+}
+
 a,
 a:hover {
     text-decoration: none;
@@ -61,10 +65,12 @@ ul {
     border-color: white;
 }
 
-/* CSS for common site header */
-
 .site-header {
     height: 70px;
+}
+
+.header-dropdown-link {
+    width: 80px;
 }
 
 .logo-image {

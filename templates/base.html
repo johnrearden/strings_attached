@@ -80,11 +80,11 @@
                     </li>
                     {% endif %}
                     {% if request.user.is_staff %}
-                    <li class="list-inline-item dropdown mr-3">
+                    <li class="list-inline-item dropdown mr-1">
                         <a class="text-white nav-link" href="#" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                            <div class="text-center text-white header-btn">
-                                <div><i class="fa-solid fa-pen-to-square"></i></div>
+                            <div class="text-center text-white header-btn header-dropdown-link">
+                                <div><i class="fa-solid fa-pen-to-square fa-large"></i></div>
                                 <span class="text-center">Staff</span>
                             </div>
                         </a>
@@ -95,10 +95,10 @@
                         </div>
                     </li>
                     {% endif %}
-                    <li class="list-inline-item dropdown mr-3">
+                    <li class="list-inline-item dropdown mr-1">
                         <a class="text-white nav-link" href="#" id="account" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                            <div class="text-center text-white header-btn">
+                            <div class="text-center text-white header-btn header-dropdown-link">
                                 <div><i class="fa-regular fa-user fa-lg text-white"></i></div>
                                 <span class="text-center">Account</span>
                             </div>
@@ -114,7 +114,7 @@
                     </li>
                     <li class="list-inline-item">
                         <a href="{% url 'view_basket' %}">
-                            <div class="text-center text-white header-btn">
+                            <div class="text-center text-white header-btn header-dropdown-link">
                                 <div><i class="fa-solid fa-cart-shopping fa-lg"></i></div>
                                 <span>
                                     {% if total %}
