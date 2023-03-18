@@ -66,6 +66,8 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Search bar and button -->
                 <form method="GET" action="{% url 'product_display' %}" class="form-inline my-2 my-lg-0 mx-auto">
                     <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search all products"
                         aria-label="Search input">
@@ -73,12 +75,18 @@
                         <i class="fa-solid fa-magnifying-glass button-icon text-white"></i>
                     </button>
                 </form>
+
+                
                 <ul class="navbar-nav ml-auto mr-5 align-items-center">
+                    
+                    <!-- Logged in user display -->
                     {% if request.user.is_authenticated %}
                     <li class="nav-item mr-3 text-white">
                         Logged in as <strong><em>{{ request.user.username|title }}</em></strong>
                     </li>
                     {% endif %}
+                    
+                    <!-- Staff dropdown icon and menu; only visible to staff members -->
                     {% if request.user.is_staff %}
                     <li class="list-inline-item dropdown mr-1">
                         <a class="text-white nav-link" href="#" data-toggle="dropdown" aria-haspopup="true"
@@ -95,6 +103,8 @@
                         </div>
                     </li>
                     {% endif %}
+
+                    <!-- Account dropdown icon and menu-->
                     <li class="list-inline-item dropdown mr-1">
                         <a class="text-white nav-link" href="#" id="account" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
@@ -112,6 +122,8 @@
                             {% endif %}
                         </div>
                     </li>
+
+                    <!-- Basket link -->
                     <li class="list-inline-item">
                         <a href="{% url 'view_basket' %}">
                             <div class="text-center text-white header-btn header-dropdown-link">
