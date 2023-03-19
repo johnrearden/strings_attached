@@ -165,12 +165,17 @@ The following pages are visible to all users, logged in or not.
 
 ![checkout success](static/doc_images/feature_screenshots/checkout_successful.png)
 
+- The Checkout Success page shows a Payment Successful message to the user at the top, and then summarizes both the order and the delivery details. The lower half of the page consists of a call to action - encouraging the user to browse the video lesson section of the site with a view to subscribing to the full selection of content.
+
 </details>
 
 <details>
 <summary>Video Lessons Page</summary>
 
 ![Video lessons](static/doc_images/feature_screenshots/feature_video_lessons.png)
+
+- This page consists of a panel in the left hand column of the screen, which displays either a Practice makes Perfect slogan (if the user has already successfully subscribed), or a Subscribe link (if not).
+- The rest of the page consists of the available lessons, categorized by course. The first two lessons are available to all users, but the remainder on each course have a padlock icon on them and are not selectable unless the user is a paid up subscriber.
 
 </details>
 
@@ -179,6 +184,8 @@ The following pages are visible to all users, logged in or not.
 
 ![Video Player](static/doc_images/feature_screenshots/feature_video_player.png)
 
+- Most of this page is taken up with the &lt;video> element. Below this are three buttons: Previous, Next and All Lessons. The previous and next buttons are disabled when the user has selected the first and last lessons respectively. At the bottom of the page is a series of thumbnails for the other lessons in the series, so that the user can navigate directly to one of them without having to press the Next and Previous buttons repeatedly.
+
 </details>
 
 <details>
@@ -186,12 +193,16 @@ The following pages are visible to all users, logged in or not.
 
 ![Login Page](static/doc_images/feature_screenshots/feature_login.png)
 
+- This is the standard allauth login page, styled with the site styling, and including social login links for Google and Facebook.
+
 </details>
 
 <details>
 <summary>Register Page</summary>
 
 ![Register Page](static/doc_images/feature_screenshots/feature_register.png)
+
+- This is the standard allauth signup page, with fields for email, username, and password + password confirmation. All fields are required.
 
 </details>
 
@@ -202,12 +213,20 @@ The following pages are only available to logged in users.
 
 ![Subscribe](static/doc_images/feature_screenshots/feature_subscribe.png)
 
+- This page presents the user with a straighforward choice between three subscription options - 1 month, 3 month or yearly. Each links to the Stripe subscription page.
+
 </details>
 
 <details>
-<summary>Choose Subscription Page</summary>
+<summary>Subscription Success Page</summary>
 
 ![Subscription Success](static/doc_images/feature_screenshots/feature_subscription_success.png)
+
+- This page displays a Subscription Successful message, with a large image of a rock concert.
+- Below this are two buttons.
+    - The first links to the All Lessons Page, where the subscriber can immediately browse the content 
+    that they have just unlocked.
+    - The second links to the Stripe Subscription Management page, where a subscriber can change their payment details, or cancel their subscription. In the event of cancellation, the content will remain accessible until the next payment due date.
 
 </details>
 
@@ -218,12 +237,25 @@ The remaining pages are only accessible to staff
 <summary>Add/Edit Product Pages</summary>
 
 ![Edit Product](static/doc_images/feature_screenshots/feature_edit_product.png)
+
+- This page consists of a form which allow the staff member to add a new product, or edit an existing one.
+- The form contains 2 preview elements; one for the audio clip (if present), and one for the product image.
 </details>
 
 <details>
 <summary>Product List Page</summary>
 
 ![Product List](static/doc_images/feature_screenshots/feature_product_list.png)
+
+- This page consists of a table listing each product. The table header elements are clickable, and result
+in the following filtering and ordering behaviours:
+    - Click on Product heading : Products are ordered alternately alphabetically and reverse alphabetically
+    - Click on Category : Products ordered alternately by category name forwards and reverse.
+    - Click on Price : Products ordered alternately by price ascending and descending. This is current price, i.e. inclusive of any special offers that currently apply.
+    - Clicking on Stock Low will bring the out-of-stock and stock-low products to the top of the table.
+- Each table row has a trash icon as the last element, which opens a confirmation dialog allowing the staff member to either change their mind and retain the product, or go ahead and delete it. Deletion is permanent.
+- Clicking on any table row will open the Edit Product page for that product.
+
 
 </details>
 
@@ -232,10 +264,27 @@ The remaining pages are only accessible to staff
 
 ![Order List](static/doc_images/feature_screenshots/feature_order_list.png)
 
+- This page consists of a table, where every order in the database is displayed. Unfulfilled orders appear first, followed by already-fulfilled orders below, with a text-muted class attribute. Clicking on any row opens the Order Detail page for that order.
+
+</details>
+
+<details>
+<summary>Order Detail Page</summary>
+
+![Order List](static/doc_images/feature_screenshots/feature_order_detail.png)
+
+- This page consists of 2 cards, displaying the delivery details and the order line items and their quantities. A large bar at the bottom of the right-hand card (lower card on mobile) shows whether the payment for this order has succeeded or failed. 
+- If the payment has succeeded, and the order is not yet fulfilled, a Mark As Fulfilled button appears at the bottom of the screen, which will set the fulfilled flag on the order to True, and cause the order to descend to the lower half of the Order List page. 
+- A Back button leads back to the Order List page.
+
 </details>
 
 ---
 ## Future Features
+
+- It would be useful for staff to be able to track volume of sales of different product across different timeframes. A good feature here would be a dashboard, maybe using Plotly to display sales by product and time period.
+- A feature with added benefit for subscribers would be the ability to share videos of their progress with each other, and like and comment on the videos. This would need to be moderated to ensure subscribers did not become discouraged by harsh/unfair criticism and leave the site.
+- Another future feature, which I considered implementing here, is an embedded video-calling functionality, which would enable subscribers to jam with each other, or connect with real teachers for lessons and tips to help them improve their playing. Unfortunately, there wasn't enough time available to try to implement this in this version of the project.
 
 ---
 [Return to top](#Strings_Attached)
@@ -413,10 +462,9 @@ Also, the javascript running in [basket/static/js/quantity_buttons.js](https://g
 
 # Testing
 - Manual testing
-- Automated testing
-- In-app testing
-- User story testing
 - Validator testing
+- User story testing
+- Automated testing
 
 ---
 
@@ -598,6 +646,11 @@ The lighthouse best practices tab returned a lower than ideal value due to the p
     - _jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution. If an unsanitized source object contained an enumerable __proto__ property, it could extend the native Object.prototype._
 
 jQuery is used in this project only as a dependency of Bootstrap 4.3.1, and without going through the Bootstrap source code, I can't be confident that these functions are not used by the Bootstrap JavaScript-based components. Unfortunately, I only discovered these vulnerabilities late in the project, and would prefer not to run the risk of using a more recent version of Bootstrap at this late stage, which might break various elements in the project. In any future projects, I'll be using Bootstrap 5, which has the added benefit of no longer depending on jQuery at all.
+
+Accordingly, while I have included the Best Practices result on the Welcome Page, I have left it off the rest of the pages, as there is no great need to repeat bad news a dozen times!
+
+- Welcome Page
+
 
 
 ![loop_rating_page](media/docs/create_review_lighthouse_report.png)
