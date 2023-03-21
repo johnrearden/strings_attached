@@ -105,7 +105,8 @@
                             <form method="POST" action="{% url 'remove_from_basket' item.product.id %}"
                                 class="form-inline d-inline ml-3">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-cherry">
+                                <button type="submit" class="btn btn-cherry"
+                                    aria-label="delete item">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
                                 <input type="hidden" name="redirect_url" value="{{ request.path }}">
