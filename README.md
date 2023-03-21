@@ -676,6 +676,17 @@ Accordingly, while I have included the Best Practices result on the Welcome Page
 
 ![checkout success lighthouse](static/doc_images/lighthouse_reports/checkout_success_lighthouse.png)
 
+- All Video Lessons Page
+
+![video lessons lighthouse](static/doc_images/lighthouse_reports/video_lessons_lighthouse.png)
+
+- Video Player Page
+
+![video player lighthouse](static/doc_images/lighthouse_reports/video_player_lighthouse.png)
+
+- Subscription Success Page
+
+![subscription success lighthouse](static/doc_images/lighthouse_reports/subscription_success_lighthouse.png)
 </details>
 
 ---
