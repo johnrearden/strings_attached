@@ -343,7 +343,7 @@ video {
 }
 
 .crowd-image-bg {
-    background-image: url('/media/crowd_tall_colour.png');
+    background-image: url('/media/crowd_tall_colour.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

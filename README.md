@@ -664,11 +664,21 @@ Accordingly, while I have included the Best Practices result on the Welcome Page
 
 ![product detail lighthouse](static/doc_images/lighthouse_reports/prod_detail_lighthouse.png)
 
+- Basket Page
+
+![basket lighthouse](static/doc_images/lighthouse_reports/basket_lighthouse.png)
+
+- Checkout Page
+
+![checkout lighthouse](static/doc_images/lighthouse_reports/checkout_lighthouse.png)
+
+- Checkout Success Page
+
+![checkout success lighthouse](static/doc_images/lighthouse_reports/checkout_success_lighthouse.png)
+
 </details>
-- Welcome Page
 
-
-
+---
 
 ### Code Validation
 
