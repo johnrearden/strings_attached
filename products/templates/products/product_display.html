@@ -32,8 +32,8 @@
                     <input type="hidden" name="quantity" value="1">
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                 </form>
-                <a href="{% url 'product_detail' offer.product.id %}">
-                    <span class="btn btn-cherry-inverted ml-2" aria-label="View product">
+                <a href="{% url 'product_detail' offer.product.id %}" aria-label="View product">
+                    <span class="btn btn-cherry-inverted ml-2">
                         <i class="fa-regular fa-eye"></i>
                     </span>
                 </a>
@@ -83,7 +83,7 @@
                         <span class="card-title font-weight-bolder product-name text-cherry d-block">{{ product.name }}</span>
                         <span class="card-text product-description d-block">{{ product.description }}</span>
                         <span class="card-text float-left">&euro;{{ product.get_current_price }}</span>
-                        <span class="card-text text-muted float-right">
+                        <span class="card-text float-right">
                             <i class="fas fa-tag mr-2"></i>{{ product.category.friendly_name }}
                         </span>
                     </div>

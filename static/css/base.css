@@ -547,7 +547,7 @@ video {
 
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     body {
         padding-top: 56px;
     }

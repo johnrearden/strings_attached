@@ -49,8 +49,6 @@
 
     {% block extrajs %}
     {% endblock %}
-
-    <title>Strings Attached {% block extra_title %}{% endblock %}</title>
 </head>
 
 <body>
@@ -61,8 +59,9 @@
                     class="logo-image d-none d-md-block">
                 <img src="{{ MEDIA_URL }}logo_image_small.png" alt="logo image" class="logo-image-sm d-md-none">
             </a>
-            <button class="navbar-toggler btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler btn" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -72,21 +71,22 @@
                 <form method="GET" action="{% url 'product_display' %}" class="form-inline my-2 my-lg-0 mx-auto">
                     <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search all products"
                         aria-label="Search input">
-                    <button class="header-btn px-3 py-2" type="submit" aria-label="Search button" style="background-color: transparent;">
+                    <button class="header-btn px-3 py-2" type="submit" aria-label="Search button"
+                        style="background-color: transparent;">
                         <i class="fa-solid fa-magnifying-glass button-icon text-white"></i>
                     </button>
                 </form>
 
-                
+
                 <ul class="navbar-nav ml-auto mr-5 align-items-center">
-                    
+
                     <!-- Logged in user display -->
                     {% if request.user.is_authenticated %}
                     <li class="nav-item mr-3 text-white">
                         Logged in as <strong><em>{{ request.user.username|title }}</em></strong>
                     </li>
                     {% endif %}
-                    
+
                     <!-- Staff dropdown icon and menu; only visible to staff members -->
                     {% if request.user.is_staff %}
                     <li class="list-inline-item dropdown mr-1">
@@ -204,7 +204,7 @@
                                         <!-- <label for="mce-EMAIL">Email Address <span class="asterisk">*</span>
                                         </label> -->
                                         <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"
-                                            require placeholder="email address *">
+                                            required placeholder="email address *">
                                         <span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span>
                                     </div>
                                     <div id="mce-responses" class="clear foot">
@@ -239,9 +239,25 @@
 
     {% block postloadjs %}
     <script src="{% static 'js/message_dismisser.js' %}"></script>
-    <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
-    <script
-        type='text/javascript'>(function ($) { window.fnames = new Array(); window.ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[0] = 'email'; fnames[1] = 'FNAME'; ftypes[1] = 'text'; fnames[2] = 'LNAME'; ftypes[2] = 'text'; fnames[3] = 'ADDRESS'; ftypes[3] = 'address'; fnames[4] = 'PHONE'; ftypes[4] = 'phone'; fnames[5] = 'BIRTHDAY'; ftypes[5] = 'birthday'; }(jQuery)); var $mcj = jQuery.noConflict(true);</script>
+    <script src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+    <script>
+        (function ($) {
+            window.fnames = new Array();
+            window.ftypes = new Array();
+            fnames[0] = 'EMAIL';
+            ftypes[0] = 'email';
+            fnames[1] = 'FNAME';
+            ftypes[1] = 'text';
+            fnames[2] = 'LNAME';
+            ftypes[2] = 'text';
+            fnames[3] = 'ADDRESS';
+            ftypes[3] = 'address';
+            fnames[4] = 'PHONE';
+            ftypes[4] = 'phone';
+            fnames[5] = 'BIRTHDAY';
+            ftypes[5] = 'birthday';
+        }(jQuery)); var $mcj = jQuery.noConflict(true);
+    </script>
     {% endblock %}
 </body>
 

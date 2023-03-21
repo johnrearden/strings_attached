@@ -56,7 +56,7 @@
                                 <div class="input-group-prepend">
                                     <button class="decrement-qty btn btn-quantity" 
                                         data-item_id="{{ product.id }}"
-                                        id="decrement-{{ product.id }}">
+                                        id="decrement-{{ product.id }}" aria-label="Decrement quantity">
                                         <span class="icon">
                                             <i class="fas fa-minus"></i>
                                         </span>
@@ -65,10 +65,11 @@
                                 <input class="form-control quantity-input text-center" type="text"
                                     name="quantity" value="1" data-min="1" data-max="{{ max_quantity }}" 
                                     data-item_id="{{ product.id }}"
-                                    data-should_submit="false" id="quantity-input-{{ product.id }}">
+                                    data-should_submit="false" id="quantity-input-{{ product.id }}"
+                                    aria-label="product quantity">
                                 <div class="input-group-append">
                                     <button class="increment-qty btn btn-quantity" data-item_id="{{ product.id }}"
-                                        id="increment-{{ product.id }}">
+                                        id="increment-{{ product.id }}"  aria-label="Increment quantity">
                                         <span class="icon">
                                             <i class="fas fa-plus"></i>
                                         </span>
@@ -91,7 +92,7 @@
                 <div class="col-12 col-md-6">
                     {% if product.audio_clip %}
                     <div class="text-center border p-2 text-cherry mt-2">
-                        <h1 class="text-center"><i class="fa-solid fa-headphones"></i></h1>
+                        <span class="text-center large-icon"><i class="fa-solid fa-headphones"></i></span>
                         <h2>Listen</h2>
                         <audio src="{{ product.audio_clip.url }}" class="w-100" controls></audio>
                     </div>
@@ -103,16 +104,16 @@
             <hr>
             <div class="row justify-content-center mt-4">
                 <a href="{% url 'product_display' %}">
-                    <span class="btn btn-cherry mx-2">Back to Shop</span>
+                    <span class="btn btn-cherry mx-2 mb-2">Back to Shop</span>
                 </a>
                 {% if request.user.is_staff %}
                 <a href="{% url 'update_product' product.id %}">
-                    <span class="btn btn-cherry mx-2">Edit product</span>
+                    <span class="btn btn-cherry mx-2 mb-2">Edit product</span>
                 </a>
                 {% endif %}
                 
                 <a href="{% url 'view_basket' %}">
-                    <span class="btn btn-cherry mx-2">
+                    <span class="btn btn-cherry mx-2 mb-2">
                         View Basket
                     </span>
                 </a>
