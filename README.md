@@ -649,11 +649,26 @@ jQuery is used in this project only as a dependency of Bootstrap 4.3.1, and with
 
 Accordingly, while I have included the Best Practices result on the Welcome Page, I have left it off the rest of the pages, as there is no great need to repeat bad news a dozen times!
 
+<details>
+<summary>Lighthouse results by page</summary>
+
+- Welcome Page
+
+![welcome_page_lighthouse](static/doc_images/lighthouse_reports/welcome_lighthouse.png)
+
+- Product Display Page
+
+![product display lighthouse](static/doc_images/lighthouse_reports/prod_display_lighthouse.png)
+
+- Product Detail Page
+
+![product detail lighthouse](static/doc_images/lighthouse_reports/prod_detail_lighthouse.png)
+
+</details>
 - Welcome Page
 
 
 
-![loop_rating_page](media/docs/create_review_lighthouse_report.png)
 
 ### Code Validation
 
