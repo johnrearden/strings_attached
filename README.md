@@ -633,7 +633,8 @@ The manual testing of features is organised by app below. Testing was carried ou
 
 ### Responsiveness
 
-
+All pages on the live site were tested with the default list of devices in Chrome Devtools.
+It should be noted that the three pages only accessible to staff (Product List, Order List and Order Detail) contain large amounts of data in tabular form, and are more usefully viewed on small devices in landscape mode. A note to that effect appears at the top of each of these three pages, on small screens only. Various non-essential columns are hidden on medium screens, but a minimum number of columns is necessary to make the pages useful, and these would not fit on a small screen in portrait mode. As these pages are not consumer-facing, I judge that this is an acceptable compromise.
 
 ### Lighthouse
 
@@ -687,6 +688,31 @@ Accordingly, while I have included the Best Practices result on the Welcome Page
 - Subscription Success Page
 
 ![subscription success lighthouse](static/doc_images/lighthouse_reports/subscription_success_lighthouse.png)
+
+- Product List Page
+
+![product list lighthouse](static/doc_images/lighthouse_reports/product_list_lighthouse.png)
+
+- Order List Page
+
+![order list lighthouse](static/doc_images/lighthouse_reports/order_list_lighthouse.png)
+
+- Order Detail Page
+
+![order detail lighthouse](static/doc_images/lighthouse_reports/order_detail_lighthouse.png)
+
+- Add/Edit Product Page
+
+![add edit product lighthouse](static/doc_images/lighthouse_reports/add_edit_product_lighthouse.png)
+
+- Login Page
+
+![signin lighthouse](static/doc_images/lighthouse_reports/signin_lighthouse.png)
+
+- Register Page 
+
+![register lighthouse](static/doc_images/lighthouse_reports/resister_lighthouse.png)
+
 </details>
 
 ---
