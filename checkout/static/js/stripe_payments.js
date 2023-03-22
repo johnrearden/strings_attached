@@ -1,5 +1,26 @@
 /* eslint-disable no-undef */
 
+// Utility function to display a message from Javascript instead of reloading the page
+// to avail of the Django messaging framework.
+const displayPaymentFailureMessage = (message) => {
+  const alertHTML = `
+          <div class="alert alert-dismissible fade show"
+              id="msg" role="alert">
+          <h3>Sorry!</h3>
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+          </div>`;
+  const messageHolder = document.getElementById('message-holder');
+  messageHolder.innerHTML = alertHTML;
+  setTimeout(() => {
+    const messages = document.getElementById('msg');
+    if (messages) {
+      const alert = new bootstrap.Alert(messages);
+      alert.close();
+    }
+  }, 3000);
+};
+
 const stripePublicKey = document.getElementById('id_stripe_public_key').text.slice(1, -1);
 const stripeClientSecret = document.getElementById('id_stripe_client_secret').text.slice(1, -1);
 
@@ -100,7 +121,6 @@ form.addEventListener('submit', (event) => {
     .then((result) => {
       // Handle any errors.
       if (result.error) {
-        console.log('Stripe error returned');
         const html = `
                         <span class="icon" role="alert">
                             <i class="fas fa-times"></i>
@@ -144,8 +164,7 @@ form.addEventListener('submit', (event) => {
     .then(() => {
       window.location = `/checkout/checkout_succeeded/${pid}`;
     })
-    .catch((response) => {
-      console.log('Errors : ');
-      console.log(response);
+    .catch(() => {
+      displayPaymentFailureMessage('There was a problem with your payment. Please try re-entering your card details');
     });
 });
