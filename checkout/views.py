@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.contrib import messages
 from django.views import View
 from django.conf import settings
-from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from django.contrib.auth.mixins import UserPassesTestMixin
 from rest_framework import status
@@ -16,7 +15,6 @@ from basket.contexts import basket_contents
 
 import stripe
 import json
-import time
 
 
 class CheckoutView(View):
@@ -65,7 +63,15 @@ class CheckoutView(View):
                 }
                 order_form = OrderForm(initial=data)
             else:
-                order_form = OrderForm()
+                # Prepopulate the email field if the user has one.
+                if request.user.email:
+                    data = {
+                        'email': request.user.email,
+                    }
+                    order_form = OrderForm(initial=data)
+                else:
+                    order_form = OrderForm()
+                
         template = 'checkout/checkout.html'
         context = {
             'order_form': order_form,
