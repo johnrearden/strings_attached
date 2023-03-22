@@ -52,7 +52,7 @@ class Product(models.Model):
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(upload_to='product_images/', null=True,
                               blank=True,
-                              default='product_images/noimage.png')
+                              default='product_images/noimage.webp')
     audio_url = models.URLField(max_length=1024, null=True, blank=True)
     audio_clip = models.FileField(upload_to='product_audio_clips', null=True,
                                   blank=True)

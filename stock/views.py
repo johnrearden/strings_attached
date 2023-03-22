@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.db.models import F, Q
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from .forms import ProductAddForm
 from products.models import Product, SpecialOffer
@@ -10,11 +11,12 @@ from itertools import chain
 from datetime import datetime
 
 
-class ProductAddView(UserPassesTestMixin, FormView):
+class ProductAddView(UserPassesTestMixin, SuccessMessageMixin, FormView):
     """ A form to allow staff to add a new product """
     template_name = 'stock/product_add_form.html'
     form_class = ProductAddForm
     success_url = '/stock/staff_product_list/all'
+    success_message = "%(name)s was added successfully"
 
     def form_valid(self, form):
         form.save()
@@ -28,7 +30,7 @@ class ProductAddView(UserPassesTestMixin, FormView):
         return self.request.user.is_staff
 
 
-class ProductUpdateView(UserPassesTestMixin, UpdateView):
+class ProductUpdateView(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     """ A form to allow staff to update an existing product """
     model = Product
     template_name = 'stock/product_update_form.html'
@@ -36,6 +38,7 @@ class ProductUpdateView(UserPassesTestMixin, UpdateView):
               'audio_clip', 'stock_level', 'reorder_threshold',
               'product_owner']
     success_url = '/stock/staff_product_list/all'
+    success_message = "%(name)s was edited successfully"
 
     def form_valid(self, form):
         form.save()
