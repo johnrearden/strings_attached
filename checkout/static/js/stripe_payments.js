@@ -46,8 +46,6 @@ const form = document.getElementById('payment-form');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  
-
   // Disable all interactive elements on page while payment is processing
   paymentElement.update({ readOnly: true });
   document.getElementById('submit-button').disabled = true;
@@ -100,9 +98,9 @@ form.addEventListener('submit', (event) => {
       },
     )
     .then((result) => {
-      pid = result.paymentIntent.id;
       // Handle any errors.
       if (result.error) {
+        console.log('Stripe error returned');
         const html = `
                         <span class="icon" role="alert">
                             <i class="fas fa-times"></i>
@@ -126,6 +124,7 @@ form.addEventListener('submit', (event) => {
       }
       // If there are no errors, make a POST request to the payment
       // confirmed view, and then redirect as indicated by the view.
+      pid = result.paymentIntent.id;
       const confirmURL = '/checkout/payment_confirmed/';
       const payload = {
         payment_confirmed: 'True',
@@ -144,5 +143,9 @@ form.addEventListener('submit', (event) => {
     })
     .then(() => {
       window.location = `/checkout/checkout_succeeded/${pid}`;
+    })
+    .catch((response) => {
+      console.log('Errors : ');
+      console.log(response);
     });
 });
