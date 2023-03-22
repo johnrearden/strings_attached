@@ -247,7 +247,7 @@ class CheckoutSucceededView(View):
     details.
     """
     def get(self, request, pid):
-        order = Order.objects.get(pid=pid)
+        order = Order.objects.filter(pid=pid).first()
         line_items = OrderLineItem.objects.filter(order=order)
         item_count = sum([item.quantity for item in line_items])
         context = {
