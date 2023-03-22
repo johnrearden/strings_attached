@@ -377,12 +377,12 @@ video {
 /* Styling for the messages div */
 .message-container {
     position: fixed;
-    top: 30px;
+    top: 100px;
     right: 50px;
     width: 300px;
-    background-color: #f1f1f1;
+    background-color: #702f2f;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
-    color: black;
+    color: white;
     font-weight: bold;
     border-radius: 10px;
     z-index: 10000;
