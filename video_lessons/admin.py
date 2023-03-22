@@ -9,8 +9,8 @@ class LessonSeriesAdmin(admin.ModelAdmin):
 
 
 class VideoLessonAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'series', 'video_file', 'image',)
-    list_editable = ('name', 'series', 'video_file', 'image',)
+    list_display = ('id', 'ordinal', 'name', 'series', 'video_file', 'image',)
+    list_editable = ('ordinal', 'name', 'series', 'video_file', 'image',)
 
 
 class UserLearningProfileAdmin(admin.ModelAdmin):

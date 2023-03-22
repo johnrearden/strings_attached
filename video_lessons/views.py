@@ -64,7 +64,7 @@ class VideoPlayer(View):
 
         lesson = VideoLesson.objects.get(pk=id)
         series = lesson.series
-        lessons = VideoLesson.objects.filter(series=series)
+        lessons = VideoLesson.objects.filter(series=series).order_by('ordinal')
         lesson_count = len(lessons) if full_access else settings.FREE_LESSONS
         context = {
             'lesson': lesson,
