@@ -17,8 +17,7 @@ class ProductDisplay(View):
     def get(self, request):
         offers = None
         categories = Category.objects.all()
-        products = Product.objects.all().order_by('category')\
-                          .order_by('-stock_level')
+        products = Product.objects.all().order_by('category')
         if 'category' in request.GET:
             selection = request.GET['category'].split(',')
             if 'all' not in selection:
