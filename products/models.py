@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.validators import MinValueValidator
@@ -17,18 +17,25 @@ class Category(models.Model):
 
 class SpecialOffer(models.Model):
     """ Represents a time-limited price reduction on a product."""
+
+    def return_default_end_date():
+        """ This method returns the datetime at the time of invocation
+            plus 2 weeks """
+        now = datetime.now()
+        return now + timedelta(days=14)
+
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE,
                                 related_name='products')
     reduced_price = models.DecimalField(max_digits=6, decimal_places=2,
                                         validators=[MinValueValidator(0), ])
-    start_date = models.DateField(null=True, blank=True)
-    end_date = models.DateField(null=True, blank=True)
+    start_date = models.DateField(default=datetime.now)
+    end_date = models.DateField(default=return_default_end_date)
 
     def is_live(self):
         """ Returns true if the current date falls between the special offer
             start and end dates"""
-        now = datetime.now()
-        return self.start_date < now < self.end_date
+        right_now = datetime.now()
+        return self.start_date < right_now < self.end_date
 
     def __str__(self):
         return (f'Offer : {self.product} available at {self.reduced_price} '
@@ -38,7 +45,7 @@ class SpecialOffer(models.Model):
         """ Prevents a staff member inadvertently creating an invalid offer
             date range"""
         if self.start_date > self.end_date:
-            raise ValidationError('Start date can\'t be after end date!')
+            raise ValidationError('Start date can\'t be after end date!')  
 
 
 class Product(models.Model):
