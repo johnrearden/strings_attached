@@ -53,6 +53,8 @@
                         {% csrf_token %}
                         <div class="form-group text-center quantity-form-element mr-3 mt-md-2">
                             <div class="input-group">
+                                
+                                <!-- Decrement button -->
                                 <div class="input-group-prepend">
                                     <button class="decrement-qty btn btn-quantity" 
                                         data-item_id="{{ product.id }}"
@@ -62,11 +64,15 @@
                                         </span>
                                     </button>
                                 </div>
+
+                                <!-- Quantity input -->
                                 <input class="form-control quantity-input text-center" type="text"
                                     name="quantity" value="1" data-min="1" data-max="{{ max_quantity }}" 
                                     data-item_id="{{ product.id }}"
                                     data-should_submit="false" id="quantity-input-{{ product.id }}"
                                     aria-label="product quantity">
+
+                                <!-- Increment button -->
                                 <div class="input-group-append">
                                     <button class="increment-qty btn btn-quantity" data-item_id="{{ product.id }}"
                                         id="increment-{{ product.id }}"  aria-label="Increment quantity">

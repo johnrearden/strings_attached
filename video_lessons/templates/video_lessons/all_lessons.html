@@ -11,6 +11,8 @@
 
     <div class="row align-items-center">
         {% if not full_access %}
+
+        <!-- Display a link div that redirects user to subscription page -->
         <div class="col-12 col-md-3 col-lg-2 order-last order-md-first  py-5 mb-2">
             <a href="{% url 'subscribe' %}">
                 <div class="card text-center mt-5 crowd-image-bg card-transparent">
@@ -26,6 +28,8 @@
         </div>
 
         {% else %}
+
+        <!-- Display a div encouraging the user to practice instead -->
         <div class="col-12 col-md-3 col-lg-2 order-last order-md-first py-5 mb-2">
             <div class="card no-shrink text-center mt-5 crowd-image-bg non-reactive card-transparent">
                 <div class="card-body">
@@ -40,6 +44,7 @@
 
         <div class="col-1 d-none d-md-block"></div>
 
+        <!-- Thumbnails for all available lessons, organized by lesson series -->
         <div class="col-12 col-md-8 col-lg-9">
             {% for ser in series %}
             <div class="row mb-4">

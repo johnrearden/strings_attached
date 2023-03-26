@@ -14,6 +14,7 @@
     <div class="row text-center mt-3">
         <div class="col">
             {% if lesson.ordinal > 1 %}
+
             <!-- The previous button can be active in this case -->
             <a href="{% url 'video_player' lesson.id|add:'-1' %}">
                 <span class="btn btn-cherry-inverted d-none d-md-inline-block">
@@ -24,6 +25,7 @@
                 </span>
             </a>
             {% else %}
+
             <!-- This is the 1st lesson, so make the previous button inactive -->
             <span class="btn btn-inactive d-none d-md-inline-block">
                 <i class="fa-solid fa-chevron-left"></i>&nbsp;&nbsp;Previous
@@ -33,6 +35,7 @@
             </span>
             {% endif %}
             {% if lesson.ordinal < lesson_count %}
+
             <!-- Next button is active -->
             <a href="{% url 'video_player' lesson.id|add:'1' %}">
                 <span class="btn btn-cherry-inverted d-none d-md-inline-block">
@@ -43,6 +46,7 @@
                 </span>
             </a>
             {% else %}
+            
             <!-- This is the last lesson, so make the next button inactive -->
             <span class="btn btn-inactive d-none d-md-inline-block">
                 Next&nbsp&nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i>

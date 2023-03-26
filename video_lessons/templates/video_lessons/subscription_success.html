@@ -35,23 +35,5 @@
 
 {% block postloadjs %}
 {{ block.super }}
-<script>
-    const form = document.getElementById('form');
-    const csrfToken = document.getElementByName('csrfmiddlewaretoken');
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        url = 'video_lessons/subscription_succeeded/';
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken,
-            },
-        }).then((response) => {
-            window.location = response.url;
-        });
-    });
-
-</script>
+<script src="static js/manage_subscription.js"></script>
 {% endblock %}

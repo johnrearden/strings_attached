@@ -71,7 +71,7 @@ class CheckoutView(View):
                     order_form = OrderForm(initial=data)
                 else:
                     order_form = OrderForm()
-                
+
         template = 'checkout/checkout.html'
         context = {
             'order_form': order_form,

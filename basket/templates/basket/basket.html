@@ -38,6 +38,7 @@
     {% if basket %}
     <div class="row justify-content-center">
         <div class="col-12 col-md-8  col-lg-6 mt-3">
+
             <!-- Table to display each item in the basket-->
             <table class="table table-sm basket-view-table">
                 <thead class="bg-cherry text-white">
@@ -67,6 +68,8 @@
                                 {% csrf_token %}
                                 <div class="form-group text-center my-auto">
                                     <div class="input-group">
+
+                                        <!-- Decrement Button -->
                                         <div class="input-group-prepend">
                                             <button class="decrement-qty btn btn-quantity"
                                                 data-item_id="{{ item.product.id }}"
@@ -77,12 +80,16 @@
                                                 </span>
                                             </button>
                                         </div>
+
+                                        <!-- Quantity Input -->
                                         <input class="form-control quantity-input text-center" type="text"
                                             name="quantity" value="{{ item.quantity }}" data-min="1"
                                             data-max="{{ item.quantity_available }}" 
                                             data-item_id="{{ item.product.id }}" data-should_submit="true"
                                             id="quantity-input-{{ item.product.id }}"
                                             aria-label="product quantity">
+
+                                        <!-- Increment button -->
                                         <div class="input-group-append">
                                             <button class="increment-qty btn btn-quantity"
                                                 data-item_id="{{ item.product.id }}"
