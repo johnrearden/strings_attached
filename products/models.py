@@ -49,14 +49,12 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=7, decimal_places=2,
                                 validators=[MinValueValidator(0)],)
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(upload_to='product_images/', null=True,
                               blank=True,
                               default='product_images/noimage.webp')
-    audio_url = models.URLField(max_length=1024, null=True, blank=True)
     audio_clip = models.FileField(upload_to='product_audio_clips', null=True,
                                   blank=True)
-    stock_level = models.IntegerField(default=20,
+    stock_level = models.IntegerField(default=0,
                                       validators=[MinValueValidator(0)],)
     reorder_threshold = models.IntegerField(default=5,
                                             validators=[MinValueValidator(0)],)
@@ -104,6 +102,11 @@ class ProductAssociation(models.Model):
                                      related_name='from_product')
     associated_product = models.ForeignKey(Product, on_delete=models.CASCADE,
                                            related_name='associated_products')
+
+    # The weight field was originally intended to track products that were
+    # bought together, possibly by incrementing the weight each time the
+    # products were associated, but this was not in the end implemented in
+    # the project.
     weight = models.IntegerField(default=1,
                                  validators=[MinValueValidator(1), ])
 
