@@ -54,7 +54,7 @@ ul {
 }
 
 .text-cherry {
-    color: #401c20;
+    color: #401c20 !important;
 }
 
 .text-white {
@@ -219,6 +219,14 @@ ul {
     height: 30vh !important;
 }
 
+.fixed-height-card {
+    height: 200px;
+}
+
+.max-width-card {
+    max-width: 300px;
+}
+
 /* CSS for Checkout page */
 
 .checkout-button {
@@ -293,7 +301,7 @@ ul {
 
 /* CSS for Video Lessons app */
 
-.thumbnail {
+.thumbnail-medium {
     width: 80px;
     height: 80px;
 }

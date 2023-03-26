@@ -118,14 +118,6 @@ else:
     EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_APP_PASSWORD")
     DEFAULT_FROM_USER = os.environ.get("EMAIL_APP_USER")
 
-
-""" MESSAGE_TAGS = {
-    messages.DEBUG: 'alert-info',
-    messages.INFO: 'alert-info',
-    messages.SUCCESS: 'alert-success',
-    messages.WARNING: 'alert-warning',
-    messages.ERROR: 'alert-danger',
-} """
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
