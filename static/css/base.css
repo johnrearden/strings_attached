@@ -519,7 +519,7 @@ video {
 /* Media queries site-wide */
 @media screen and (max-width:576px) {
     .quantity-form-element {
-        transform: scale(0.7);
+        transform: scale(0.9);
     }
 
     .thumbnail {
