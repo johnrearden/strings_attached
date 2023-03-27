@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.validators import MinValueValidator
