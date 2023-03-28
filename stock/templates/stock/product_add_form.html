@@ -8,7 +8,7 @@
         <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 mt-2 mt-md-4">
             <h1>Add a New Product</h1>
             <hr>
-            <form method="POST" action="{% url 'add_product' %}">
+            <form method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.name | as_crispy_field }}
                 {{ form.category | as_crispy_field }}
@@ -20,7 +20,6 @@
                     <!-- Preview form image -->
                     <img width="200" class="" id="image-preview" src="{{ MEDIA_URL }}{{form.image.value}}" 
                         alt="Product image">
-                    <span>{{ form.image.value }}</span>
                 </div>
                 <div class="border p-2 my-3">
                     {{ form.audio_clip | as_crispy_field }}
