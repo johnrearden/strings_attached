@@ -274,7 +274,7 @@ class TestPaymentConfirmedView(TestCase):
             description='A cool guitar.',
             price=cls.test_standard_price,
             stock_level=10,
-            reorder_threshold=10,
+            reorder_threshold=5,
             product_owner=cls.test_user)
         cls.test_user_profile = UserOrderProfile.objects.create(
             user=cls.test_user,
