@@ -9,197 +9,192 @@
 
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/accounts/signup/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/accounts/login/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/basket/view_basket/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/products/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/video_lessons/all_lessons/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/accounts/google/login/?process=login</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/accounts/facebook/login/?process=login</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/accounts/password/reset/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/?category=all</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/?category=Instruments</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/?category=Cables</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/?category=Strings</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/?category=Cases</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/products/8/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/products/9/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/10/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/11/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/12/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/13/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/14/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/16/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/17/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/19/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/21/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/23/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/products/15/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://strings-attached-jr.herokuapp.com/products/22/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <loc>https://strings-attached-jr.herokuapp.com/products/53/</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/?category=all</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/?category=Instruments</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/?category=Cables</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/?category=Strings</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/?category=Cases</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/14/</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/12/</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/11/</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/13/</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/10/</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/16/</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/17/</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/19/</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://strings-attached-jr.herokuapp.com/products/21/</loc>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/products/20/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/products/18/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/accounts/login/?next=/video_lessons/subscribe/</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/video_lessons/video_player/1</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/video_lessons/video_player/2</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/video_lessons/video_player/9</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/video_lessons/video_player/10</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/accounts/signup/?next=%2Fvideo_lessons%2Fsubscribe%2F</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/accounts/google/login/?process=login&amp;next=%2Fvideo_lessons%2Fsubscribe%2F</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/accounts/facebook/login/?process=login&amp;next=%2Fvideo_lessons%2Fsubscribe%2F</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://strings-attached-jr.herokuapp.com/accounts/login/?next=%2Fvideo_lessons%2Fsubscribe%2F</loc>
-  <lastmod>2023-03-12T11:36:55+00:00</lastmod>
+  <lastmod>2023-03-29T07:06:32+00:00</lastmod>
   <priority>0.41</priority>
 </url>
 

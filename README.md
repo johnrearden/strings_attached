@@ -951,6 +951,9 @@ https://stackoverflow.com/questions/31284622/mock-stripe-methods-in-python-for-t
 Prevent a table cell event listener from also firing its table row event listener
 https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
 
+Creating an xml sitemap
+https://www.xml-sitemaps.com/
+
 
 # Acknowledgements
 
