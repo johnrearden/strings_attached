@@ -1,5 +1,5 @@
 # Strings_Attached
-An online shop and community for music students 
+An online shop and lesson hub guitarists. 
 
 Source code can be found [here](https://github.com/johnrearden/strings_attached)
 
@@ -69,7 +69,7 @@ This project is a **B2C**, where the aim is to sell directly to consumers, rathe
 
 The site offers both **products** and a **service**. The products are guitars and their associated accessories; strings, cases and cables. These are displayed in a grid layout, with the product image prominent. Selecting a card from the grid opens a full page product detail view, which is the only page that contains a significant amount of text, detailing the specific qualities of that product. A quantity of one can be added to the basket with only one button click, and the user can proceed to the checkout page with one more subsequent click, having checked that their basket contents are correct. On the checkout page, there is a form, with a checkbox enabling the user to save their information, so that subsequent purchases will only involve entering their card payment details. 
 
-The digital service offered is a **subscrition** to a selection of video lessons teaching the student the basics of how to play acoustic and electric guitar. The user can browse the courses on offer, and watch two videos from each course for free. A large clickable panel allow them to proceed to a page where they can pick the duration of their subscription, and clicking a duration card takes them straight to the Stripe payment page. Users are required to set up an account in order to subscribe, but this is the only occasion on which they need to enter PII before gaining instant access to their subscription. Payments are then taken automatically from their card at the end of each period.
+The digital service offered is a **subscription** to a selection of video lessons teaching the student the basics of how to play acoustic and electric guitar. The user can browse the courses on offer, and watch two videos from each course for free. A large clickable panel allow them to proceed to a page where they can pick the duration of their subscription, and clicking a duration card takes them straight to the Stripe payment page. Users are required to set up an account in order to subscribe, but this is the only occasion on which they need to enter PII before gaining instant access to their subscription. Payments are then taken automatically from their card at the end of each period.
 
 Both **single payment** and **subscription** payments are handled by Stripe, and no card or payment information is held on the site.
 
@@ -849,7 +849,7 @@ There are (hopefully) no remaining bugs in the project.
 4. [Github](https://github.com/)
     - Github was used to store the projects after being pushed from Git and its cloud service [Github Pages](https://pages.github.com/) was used to serve the project on the web. GitHub Projects was used to track the User Stories, User Epics, bugs and other issues during the project.
 5. [Visual Studio Code](https://code.visualstudio.com/)
-    - VS Code was used locally as the main IDE environment, with the JSHint and Flake8 linters installed for JavaScript and Python code validation respectively.
+    - VS Code was used locally as the main IDE environment, with the ESLint and Flake8 linters installed for JavaScript and Python code validation respectively.
 6. [pytest](https://docs.pytest.org/en/7.1.x/)
     - Pytest was used for automated testing.
 7. [GIMP](https://www.gimp.org/)
@@ -862,7 +862,29 @@ There are (hopefully) no remaining bugs in the project.
 
 # Deployment
 
-## Setting up a cloudinary account for static storage.
+## Using an AWS S3 bucket for static storage.
+The project stores all of its static and media files (including images and audio clips uploaded when adding products by staff) in an S3 bucket, which is publicly accessible for downloading files to facilitate this use. Detailed instructions are available [here](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3) on how to set up and configure the S3 bucket on the AWS side.
+
+On the Django side, the following lines in the project's settings.py file are necessary : 
+
+    AWS_STORAGE_BUCKET_NAME = '{PROJECT NAME}'
+    AWS_S3_REGION_NAME = '{REGION}'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # Static and Media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+
+Replace the PROJECT_NAME and REGION placeholders with the appropriate values for your project.
+
 
 ## Deploying the app on Heroku
 1. Log into Heroku and navigate to the Dashboard.
