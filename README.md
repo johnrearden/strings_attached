@@ -1,5 +1,5 @@
 # Strings_Attached
-An online shop and lesson hub guitarists. 
+An online shop and lesson hub for guitarists. 
 
 Source code can be found [here](https://github.com/johnrearden/strings_attached)
 
