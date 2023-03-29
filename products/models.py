@@ -59,7 +59,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product_images/', null=True,
                               blank=True,
                               default='product_images/noimage.webp')
-    audio_clip = models.FileField(upload_to='product_audio_clips', null=True,
+    audio_clip = models.FileField(upload_to='product_audio_clips/', null=True,
                                   blank=True)
     stock_level = models.IntegerField(default=0,
                                       validators=[MinValueValidator(0)],)
