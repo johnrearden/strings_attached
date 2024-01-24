@@ -1,6 +1,5 @@
 asgiref==3.6.0
 autopep8==2.0.1
-backports.zoneinfo==0.2.1
 boto3==1.26.59
 botocore==1.29.59
 certifi==2022.12.7
